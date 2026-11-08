@@ -3,6 +3,9 @@
 A Logo turtle-graphics interpreter written in **Ditty Lisp**, with a
 **Tapestry** TUI and terminal graphics designed for **portty**.
 
+"Logo" is a programming language originally developed at MIT. This
+project is not affiliated with or endorsed by MIT or the Logo Foundation.
+
 The author learned Logo in Danish public school on a **Regnecentralen
 RC759 Piccoline (1984–1989)** — Danish-designed, 8-bit-era school
 computers with a 9-inch green-phosphor screen. This project is a love
