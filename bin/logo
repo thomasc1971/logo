@@ -1,0 +1,20 @@
+#!/bin/sh
+# bin/logo - Launch the Logo interpreter.
+#
+# Resolves the repository root relative to this script and puts lisp/ on
+# DITTY_LISP_PATH so `(require 'logo)` works without installation.
+# Dependencies (Ditty itself, and Tapestry for the interactive TUI) are
+# resolved through Ditty's library search path; add their locations via
+# DITTY_LISP_PATH in your environment if they are not installed.
+set -eu
+
+ROOT=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
+
+LISP_PATH="$ROOT/lisp"
+if [ -n "${DITTY_LISP_PATH:-}" ]; then
+	LISP_PATH="$LISP_PATH:$DITTY_LISP_PATH"
+fi
+
+export DITTY_LISP_PATH="$LISP_PATH"
+
+exec ditty "$ROOT/logo-main.lisp" -- "$@"

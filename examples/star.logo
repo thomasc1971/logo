@@ -1,0 +1,7 @@
+\ star.logo - five-pointed star (every second vertex of a pentagon)
+TO STAR :S
+  REPEAT 5 [FD :S RT 144]
+END
+
+STAR 100
+PRINT "star done"

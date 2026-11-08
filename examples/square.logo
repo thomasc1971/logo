@@ -1,0 +1,7 @@
+\ square.logo - the classic first Logo drawing
+TO SQUARE :S
+  REPEAT 4 [FD :S RT 90]
+END
+
+SQUARE 100
+PRINT "square done"

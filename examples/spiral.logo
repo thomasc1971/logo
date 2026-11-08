@@ -1,0 +1,8 @@
+\ spiral.logo - growing steps outward
+MAKE :S 10
+REPEAT 12 [
+  FD :S
+  RT 90
+  MAKE :S SUM [:S 10]
+]
+PRINT "spiral done"

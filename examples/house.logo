@@ -1,0 +1,11 @@
+\ house.logo - a square with a triangular roof
+TO SQUARE :S
+  REPEAT 4 [FD :S RT 90]
+END
+
+SQUARE 80
+RT 45
+FD 57
+RT 90
+FD 57
+PRINT "house done"

@@ -1,0 +1,24 @@
+# Logo is pure Lisp on Ditty: there is no C code and no build step, so
+# there are no compiled artefacts to ignore. This file covers editor
+# and OS noise only. Personal AI-agent config stays in the local-only
+# .git/info/exclude, not in this shared file.
+
+# Byte-compiled Emacs Lisp (emacs/logo-mode.el)
+*.elc
+
+# Emacs lock files and auto-saves
+.#*
+#*#
+
+# Editor backups and swap files
+*~
+*.bak
+*.swp
+*.swo
+
+# Run / test output artefacts (see `make clean`)
+*.out
+
+# OS files
+.DS_Store
+Thumbs.db

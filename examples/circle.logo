@@ -1,0 +1,7 @@
+\ circle.logo - a circle approximated by a 36-gon
+TO CIRCLE :R
+  REPEAT 36 [FD :R RT 10]
+END
+
+CIRCLE 10
+PRINT "circle done"
