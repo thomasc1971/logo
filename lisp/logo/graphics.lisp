@@ -8,16 +8,19 @@
 ;;   sixel    DCS sixel bitmap (binary alpha, palette). Implemented here.
 ;;            portty (via coffer) decodes it; see
 ;;            portty/docs/inline-image-architecture.md.
-;;   kitty    Kitty graphics protocol (APC G, PNG payload). PLANNED:
-;;            needs a PNG encoder (zlib + base64), which Ditty does not
-;;            provide yet. See docs/UPSTREAM.md.
-;;   iterm2   iTerm2 inline images (OSC 1337, base64 PNG). PLANNED, same
-;;            PNG pipeline as kitty.
+;;   kitty    Kitty graphics protocol (APC G). PLANNED: raw RGB(A) pixels
+;;            (f=24/32) as base64, so no PNG is needed. Ditty 0.8 has
+;;            base64-encode for byte vectors. See docs/UPSTREAM.md #6.
+;;   iterm2   iTerm2 inline images (OSC 1337, base64 of an image file).
+;;            PLANNED, same base64 need as kitty plus a simple image
+;;            encoder (PNG stored blocks or BMP). iTerm2 may also render
+;;            the sixel backend.
 ;;
 ;; Capability detection is environment-based (PORTTY=1 is set by portty's
 ;; PTY layer, KITTY_WINDOW_ID by kitty, TERM_PROGRAM by iTerm2). A DA1 /
-;; XTSMGRAPHICS query would be more robust; that needs a Ditty builtin to
-;; read query replies, proposed in docs/UPSTREAM.md.
+;; XTSMGRAPHICS query would be more robust. It is doable in a TTY with
+;; set-terminal-raw + read-byte-timeout; a round-trip builtin is proposed
+;; in docs/UPSTREAM.md #5.
 ;;
 ;; Internal file: loaded by logo.lisp into the `logo` package.
 (provide 'logo-graphics)

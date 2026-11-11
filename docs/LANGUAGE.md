@@ -37,11 +37,18 @@ to end of line.
 `XCOR`, `YCOR`, `HEADING`, `PENDOWNP` (0 args);
 `SUM`, `PRODUCT`, `COUNT`, `FIRST`, `LAST`, `BUTLAST`, `ABS`, `RANDOM`
 (1 arg; `SUM`/`PRODUCT` take a list or a bare number);
-`DIFFERENCE`, `QUOTIENT`, `REMAINDER`, `GREATER?`, `LESS?`, `EQUAL?`
-(2 args). Queries can be used as arguments: `PRINT SUM [1 2 3]`.
+`DIFFERENCE`, `QUOTIENT`, `REMAINDER`, `MODULO`, `GREATER?`, `LESS?`,
+`EQUAL?` (2 args). Queries can be used as arguments: `PRINT SUM [1 2 3]`.
 
-`RANDOM n` returns an integer in `[0, n)` (deterministic LCG;
-`logo-srand` in Lisp, not Logo — seeding from Logo is planned).
+`QUOTIENT` truncates toward zero and returns an integer (`QUOTIENT 7 2`
+is `3`); `REMAINDER` keeps the dividend's sign (`REMAINDER -7 2` is
+`-1`); `MODULO` keeps the divisor's sign (`MODULO -7 2` is `1`). All
+three take floats (`REMAINDER 7.5 2` is `1.5`) and satisfy
+`a = b * QUOTIENT a b + REMAINDER a b`.
+
+`RANDOM n` returns an integer in `[0, n)`; `n` must be positive.
+Seeding is from Lisp with Ditty's `random-seed`; a Logo `SEED`
+primitive is planned.
 
 ## Special forms
 

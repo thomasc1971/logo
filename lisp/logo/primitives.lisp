@@ -126,19 +126,14 @@
 (logo-define-value-primitive "DIFFERENCE" 2
  (lambda (t args) (- (car args) (cadr args))))
 (logo-define-value-primitive "QUOTIENT" 2
- (lambda (t args) (/ (car args) (cadr args))))
+ (lambda (t args) (quotient (car args) (cadr args))))
 (logo-define-value-primitive "REMAINDER" 2
- (lambda (t args)
-   (let* ((a (car args))
-          (b (cadr args)))
-     (- a (* b (logo-real-floor (/ a b)))))))
-(logo-define-value-primitive "ABS" 1 (lambda (t args) (logo-abs (car args))))
+ (lambda (t args) (remainder (car args) (cadr args))))
+(logo-define-value-primitive "MODULO" 2
+ (lambda (t args) (modulo (car args) (cadr args))))
+(logo-define-value-primitive "ABS" 1 (lambda (t args) (abs (car args))))
 (logo-define-value-primitive "RANDOM" 1
- (lambda (t args)
-   (let* ((n (car args)))
-     (if (<= n 0)
-       0
-       (floor (* (logo-random) n) 1)))))
+ (lambda (t args) (floor (random (car args)))))
 (logo-define-value-primitive "GREATER?" 2
  (lambda (t args) (if (> (car args) (cadr args)) #t #f)))
 (logo-define-value-primitive "LESS?" 2

@@ -29,7 +29,7 @@
          "SETPC" "SETPENCOLOR" "SETBG" "PRINT" "PR" "SHOW"
          "XCOR" "YCOR" "HEADING" "PENDOWNP" "SUM" "PRODUCT" "COUNT"
          "FIRST" "LAST" "BUTLAST" "ABS" "RANDOM" "DIFFERENCE" "QUOTIENT"
-         "REMAINDER" "GREATER?" "LESS?" "EQUAL?"
+         "REMAINDER" "MODULO" "GREATER?" "LESS?" "EQUAL?"
          "TO" "END" "OUTPUT" "STOP" "REPEAT" "IF" "IFELSE" "RUN"
          "MAKE" "THING" "LOCAL")
        'words))

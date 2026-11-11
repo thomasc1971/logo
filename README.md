@@ -22,7 +22,7 @@ SQUARE 100
 
 ## Quick start
 
-Prerequisites: [Ditty](https://github.com/chestso/ditty) 0.6+ on your
+Prerequisites: [Ditty](https://github.com/chestso/ditty) 0.8+ on your
 `PATH` (for the interactive TUI also [Tapestry](https://github.com/chestso/tapestry)).
 Install both from source (`./autogen.sh`, configure, `make`, `make install`);
 Ditty's library search path (XDG data dirs, `DITTY_LISP_PATH`) then resolves
@@ -53,8 +53,8 @@ The interactive TUI (Tapestry Elm application):
   independent canvas (segment list) rasterized by Bresenham.
 - **Graphics backends** (`graphics.lisp`): `canvas` (Braille U+2800,
   works in every terminal), `sixel` (DCS bitmap, decoded by portty via
-  coffer), `kitty` / `iterm2` (planned — need a PNG pipeline, see
-  [docs/UPSTREAM.md](docs/UPSTREAM.md)).
+  coffer), `kitty` / `iterm2` (planned — Ditty 0.8 provides
+  `base64-encode`; see [docs/UPSTREAM.md](docs/UPSTREAM.md)).
 - **TUI** (`tui.lisp`): Tapestry Elm app mirroring the Piccoline's
   split screen — picture above, work area below.
 
@@ -71,7 +71,7 @@ bin/logo              launcher (sets DITTY_LISP_PATH, execs ditty)
 logo-main.lisp        CLI entry point (also the ditty script)
 lisp/logo.lisp        public API: package, module loader, exports
 lisp/logo/
-  math.lisp           sin/cos/sqrt/abs/random in pure Lisp (Ditty lacks them)
+  math.lisp           logo-pi, degrees/radians, heading wrap (Ditty has the math)
   canvas.lisp         segment canvas, Bresenham rasterizer, Braille output
   turtle.lisp         pure turtle state and motion
   primitives.lisp     command + value-primitive registries

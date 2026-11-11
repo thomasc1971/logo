@@ -29,7 +29,7 @@
    "backend is a known symbol"))
 
 ;; Sixel encoder: DCS intro, Pan/Pad raster attributes, ST terminator
-;; (substring comparison: Ditty's string-prefix? is unreliable)
+;; (exact substring comparisons; string-prefix? would also work)
 (let* ((c (canvas-add-segment (canvas-make 100 100) -50 -50 50 50 nil))
        (sixel (logo-render-sixel c 60 60)))
   (assert-equal "\033P" (substring sixel 0 2) "sixel starts with DCS")

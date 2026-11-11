@@ -59,8 +59,8 @@
 (defun turtle-forward (t dist)
   "Move turtle T forward DIST units. Draws a segment if the pen is down."
   (let* ((rad (logo-deg->rad (turtle-heading t)))
-         (nx (+ (turtle-x t) (* dist (logo-sin rad))))
-         (ny (+ (turtle-y t) (* dist (logo-cos rad)))))
+         (nx (+ (turtle-x t) (* dist (sin rad))))
+         (ny (+ (turtle-y t) (* dist (cos rad)))))
     (turtle-move-to t nx ny)))
 
 (defun turtle-move-to (t nx ny)

@@ -14,7 +14,7 @@ How Logo is put together and why. For the language itself see
               ┌───────────────────┬───────────────────────┴───────────────┐
               ▼                   ▼                                       ▼
         Braille text        sixel encoder                          (kitty/iterm2:
-        (always works)      (DCS bitmap → portty/coffer)           planned, PNG)
+        (always works)      (DCS bitmap → portty/coffer)           planned, base64)
               │                   │
               ▼                   ▼
         Tapestry TUI panes    terminal (portty, kitty, iTerm2, xterm…)
@@ -29,7 +29,7 @@ Tapestry view — both thin.
 | File                         | Role                                                                                                        |
 | ---------------------------- | ----------------------------------------------------------------------------------------------------------- |
 | `lisp/logo.lisp`             | Entry point. Defines the `logo` package, loads modules in order (Tapestry pattern), exports the public API. |
-| `lisp/logo/math.lisp`        | `sin`/`cos`/`sqrt`/`abs`/random in pure Lisp. Ditty has floats but no transcendentals (see below).          |
+| `lisp/logo/math.lisp`        | `logo-pi`, degree↔radian conversion, heading wrap. Numerics come from Ditty (see below).                    |
 | `lisp/logo/canvas.lisp`      | Segment-list canvas, Bresenham rasterizer, Braille renderer. Zero terminal knowledge.                       |
 | `lisp/logo/turtle.lisp`      | Turtle state as an alist; every op returns a new state.                                                     |
 | `lisp/logo/primitives.lisp`  | Two registries: commands `(turtle args) -> turtle'`, queries `(turtle args) -> value`.                      |
@@ -41,15 +41,17 @@ Tapestry view — both thin.
 
 ## Key design decisions
 
-### Ditty has no transcendentals — math.lisp fills the gap
+### Numerics come from Ditty; math.lisp keeps the angle convention
 
-Ditty Lisp has float literals and `+ - * /`, but no `sin`, `cos`,
-`sqrt`, `abs`, `expt`, or `random`. Turtle graphics cannot live without
-them, so they are implemented in pure Lisp: Taylor-series `sin`/`cos`
-with range reduction, Newton `sqrt`, an LCG for `random`. Ditty's
-`floor` also truncates float arguments to integers before dividing, so
-`logo-real-floor` wraps it for float floor. A `float-math` builtin set
-in Ditty would let this module shrink to aliases (docs/UPSTREAM.md).
+Ditty Lisp (0.8+) ships the numeric tower: `abs`, `sqrt`, `sin`, `cos`,
+`tan`, `atan`/`atan2`, `exp`, `log`, `expt`, `float`, unary and
+float-aware `floor`/`ceiling`/`round`/`truncate`, truncating
+`quotient`, `remainder`, `modulo`, and a seedable `random`. Logo calls
+these directly — there are no `logo-*` aliases, so a numeric fix lands
+once, upstream. `math.lisp` therefore only holds what is
+Logo-specific: `logo-pi`, degrees↔radians (`logo-deg->rad`,
+`logo-rad->deg`) and the `[0, 360)` heading wrap
+(`logo-normalize-heading`). See docs/UPSTREAM.md #1/#2.
 
 ### Ditty errors are values; condition-case substitutes and resumes
 
@@ -107,14 +109,17 @@ and Lottie (APC). Logo's backends:
   attributes (`"1;1;WxH`) so coffer clamps to the declared size
   instead of rounding up to 6-row bands (portty's documented gotcha).
   Detected via `PORTTY=1` (set by portty's PTY layer).
-- **kitty / iterm2** — planned. Both need a PNG payload (zlib +
-  base64), which Ditty does not provide. Tracked in docs/UPSTREAM.md
-  as a Ditty builtin request; a pure-Lisp PNG encoder is the fallback.
+- **kitty / iterm2** — planned. Ditty 0.8's `base64-encode` covers
+  the payload (it takes a byte vector, since Ditty strings cannot hold
+  NUL bytes). Kitty accepts raw RGB(A) pixels, so only base64 is
+  needed; iTerm2 additionally needs an image file (PNG stored blocks
+  or BMP), which is pure Lisp. See docs/UPSTREAM.md #6.
 
 Capability detection is environment-based (`PORTTY`, `KITTY_WINDOW_ID`,
 `TERM_PROGRAM`, `TERM`). A terminal query (DA1 `4` for sixel,
-XTSMGRAPHICS) would be more robust but needs a Ditty builtin to read
-query replies — also in docs/UPSTREAM.md.
+XTSMGRAPHICS) would be more robust. It is doable in a TTY today with
+`set-terminal-raw` + `read-byte-timeout`; a round-trip builtin is
+proposed in docs/UPSTREAM.md #5.
 
 ## Invariants
 

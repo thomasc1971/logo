@@ -130,12 +130,12 @@
   (let* ((tokens (logo-tokenize source))
          (procs (logo-scan-procedures tokens))
          (vec (list->vector tokens)))
-    (let* ((parsed (logo-parse-program vec 0 (length tokens) procs)))
+    (let* ((parsed (logo-parse-program vec 0 (length vec) procs)))
       (if (error? parsed) parsed (car parsed)))))
 
 (defun list->vector (xs)
   "Convert list XS to a vector."
-  (let* ((v (make-vector (length xs))))
+  (let* ((v (make-vector (length xs) 0)))
     (let loop ((rest xs)
                (i 0))
       (if (null? rest)

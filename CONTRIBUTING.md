@@ -4,7 +4,7 @@
 
 Prerequisites:
 
-- [Ditty](https://github.com/chestso/ditty) 0.6+ (`ditty` on `PATH`) —
+- [Ditty](https://github.com/chestso/ditty) 0.8+ (`ditty` on `PATH`) —
   the interpreter. Pure-Lisp project: nothing to compile.
 - [Tapestry](https://github.com/chestso/tapestry) — only for the
   interactive TUI and `tests/test-tui.lisp`. Install it normally
@@ -51,13 +51,15 @@ DITTY_LISP_PATH="$PWD/lisp" ditty tests/test-parser.lisp
     Use `let*` for sequential bindings. Named loops use `let loop`.
   - `set!`, not `setq`. `do`, not `dolist`. `progn`, not `begin`.
     `#t` as the `cond` default, not `t`.
-  - No `vector-length`, `float`, `abs`, `string`, `sin`/`cos`/`sqrt` —
-    use `length` on the source list, `logo-abs`, `char->string`, and
-    the `math.lisp` implementations. `floor` truncates float args;
-    use `logo-real-floor` for floats.
+  - Numerics are Ditty builtins (`abs`, `sqrt`, `sin`, `cos`, `expt`,
+    `floor`, `quotient`, `remainder`, `modulo`, `random`, …) — call
+    them directly; there are no `logo-*` aliases. `string` is still
+    missing: use `char->string`. There is no `vector-length`; `length`
+    works on lists, strings and vectors.
   - `make-vector` without a fill argument creates an _empty_ vector —
     always pass the fill: `(make-vector n 0)`.
-  - `string-prefix?` is unreliable in Ditty — compare with `substring`.
+  - `string-prefix?` takes `(PREFIX STRING)`:
+    `(string-prefix? "he" "hello")` is `#t`.
 - **Errors**: Ditty errors are values. Never destructure a sub-call
   result without an `error?` check, and never let a `condition-case`
   handler produce data that flows into destructuring code (handlers

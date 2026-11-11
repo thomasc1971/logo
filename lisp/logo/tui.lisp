@@ -216,9 +216,9 @@
       (tapestry:center
        (format nil "backend: ~a   turtle: (~a, ~a) heading ~a"
         backend
-        (floor (turtle-x turtle) 1)
-        (floor (turtle-y turtle) 1)
-        (floor (turtle-heading turtle) 1))
+        (floor (turtle-x turtle))
+        (floor (turtle-y turtle))
+        (floor (turtle-heading turtle)))
        width))
      (map
       (lambda (line)

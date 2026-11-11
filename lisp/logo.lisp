@@ -26,9 +26,7 @@
 
 (export
  ;; math.lisp
- 'logo-pi 'logo-abs 'logo-sqrt 'logo-sin 'logo-cos 'logo-real-floor
- 'logo-deg->rad 'logo-rad->deg 'logo-normalize-heading
- 'logo-srand 'logo-random
+ 'logo-pi 'logo-deg->rad 'logo-rad->deg 'logo-normalize-heading
  ;; canvas.lisp
  'canvas-make 'canvas-width 'canvas-height 'canvas-segments
  'canvas-background 'canvas-add-segment 'canvas-clear 'canvas-bounds

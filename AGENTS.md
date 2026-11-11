@@ -17,7 +17,7 @@ Ditty is the runtime.
 bin/logo                        # interactive TUI (needs Tapestry + TTY)
 bin/logo examples/star.logo     # headless run, prints Braille picture
 bin/logo -e 'FD 100 RT 90'      # one-liner
-make check                      # test suite (headless, 133 assertions)
+make check                      # test suite (headless, 134 assertions)
 make run EXAMPLE=examples/spiral.logo
 ```
 
@@ -64,11 +64,15 @@ source -> parser (arity-driven, 2-pass) -> AST -> interpreter
    must return the error object itself, never data that flows into
    destructuring code. `OUTPUT`/`STOP` are explicit signal values
    (`(logo-output STATE . VALUE)`), not exceptions.
-3. **Missing Ditty builtins** (implement, don't assume): `sin cos sqrt
-abs expt random vector-length float string` — see `math.lisp`.
-   `floor` truncates float args to int first; use `logo-real-floor`.
-   `(make-vector n)` with no fill is an _empty_ vector. `let`/`progn`
-   do not check error propagation. `string-prefix?` is unreliable.
+3. **Ditty builtins** (v0.8+ ships the numeric tower): call `abs`,
+   `sqrt`, `sin`, `cos`, `tan`, `asin`, `acos`, `atan`, `atan2`,
+   `exp`, `log`, `expt`, `float`, `floor`, `round`, `truncate`,
+   `ceiling`, `quotient`, `remainder`, `modulo`, `random` and
+   `random-seed` directly — there are no `logo-*` math aliases.
+   `string` is still missing (use `char->string`). `length` works on
+   vectors (there is no `vector-length`). `(make-vector n)` with no
+   fill is an _empty_ vector. `let`/`progn` do not check error
+   propagation. `string-prefix?` is `(string-prefix? PREFIX STRING)`.
 4. **Tapestry symbols**: use qualified `tapestry:...` in `tui.lisp`;
    `use-package` inside a function body does not reliably extend the
    defining package. Headless code must load without Tapestry.

@@ -76,7 +76,7 @@
    The canvas is scaled to fit, preserving aspect, centred."
   (let* ((w (canvas-width c))
          (h (canvas-height c))
-         (grid (make-vector rows)))
+         (grid (make-vector rows 0)))
     (do ((r 0 (+ r 1))) ((>= r rows))
       (vector-set! grid r (make-vector cols 0)))
     (let* ((scale (min (/ (- cols 1) (max w 1)) (/ (- rows 1) (max h 1)))))
@@ -84,17 +84,17 @@
         (if (null? segs)
           grid
           (let* ((s (car segs))
-                 (x1 (floor (+ (* (car s) scale) (/ (- cols 1) 2)) 1))
-                 (y1 (floor (+ (* (cadr s) scale) (/ (- rows 1) 2)) 1))
-                 (x2 (floor (+ (* (car (cddr s)) scale) (/ (- cols 1) 2)) 1))
-                 (y2 (floor (+ (* (cadr (cddr s)) scale) (/ (- rows 1) 2)) 1)))
+                 (x1 (floor (+ (* (car s) scale) (/ (- cols 1) 2))))
+                 (y1 (floor (+ (* (cadr s) scale) (/ (- rows 1) 2))))
+                 (x2 (floor (+ (* (car (cddr s)) scale) (/ (- cols 1) 2))))
+                 (y2 (floor (+ (* (cadr (cddr s)) scale) (/ (- rows 1) 2)))))
             (canvas-plot-line grid cols rows x1 y1 x2 y2)
             (loop (cdr segs))))))))
 
 (defun canvas-plot-line (grid cols rows x1 y1 x2 y2)
   "Plot a Bresenham line into GRID. Mutates the row vectors."
-  (let* ((dx (logo-abs (- x2 x1)))
-         (dy (logo-abs (- y2 y1)))
+  (let* ((dx (abs (- x2 x1)))
+         (dy (abs (- y2 y1)))
          (sx (if (< x1 x2) 1 -1))
          (sy (if (< y1 y2) 1 -1))
          (err (- dx dy)))

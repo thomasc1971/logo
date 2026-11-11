@@ -23,7 +23,7 @@
   (assert-equal #t (if actual #t #f) description))
 
 (defun assert-close (expected actual tolerance description)
-  (if (< (logo-abs (- expected actual)) tolerance)
+  (if (< (abs (- expected actual)) tolerance)
     (progn (format #t "PASS: ~a~%" description) (set! passed (+ passed 1)))
     (progn
       (format #t "FAIL: ~a (expected ~a, got ~a)~%" description expected actual)
@@ -100,6 +100,22 @@
 (let ((t (run-turtle "RUN [FD 10 RT 90 FD 10]")))
   (assert-equal 2 (length (canvas-segments (turtle-canvas t)))
    "RUN draws 2 segments"))
+
+;; Arithmetic queries: delegated to Ditty's numeric builtins
+(assert-equal '("3") (turtle-output (run-turtle "PRINT QUOTIENT 7 2"))
+ "QUOTIENT truncates")
+(assert-equal '("3") (turtle-output (run-turtle "PRINT QUOTIENT 7.5 2"))
+ "QUOTIENT truncates floats")
+(assert-equal '("-1") (turtle-output (run-turtle "PRINT REMAINDER -7 2"))
+ "REMAINDER takes the dividend's sign")
+(assert-equal '("1") (turtle-output (run-turtle "PRINT MODULO -7 2"))
+ "MODULO takes the divisor's sign")
+(assert-equal '("5") (turtle-output (run-turtle "PRINT ABS -5")) "ABS")
+(assert-equal '("0") (turtle-output (run-turtle "PRINT RANDOM 1"))
+ "RANDOM 1 is 0")
+
+(assert-true (error? (logo-run "PRINT RANDOM 0"))
+ "RANDOM 0 is an error value")
 
 ;; Errors are values: logo-run / logo-run-file return error objects
 ;; (which the CLI reports) instead of raising uncaught Ditty errors.
