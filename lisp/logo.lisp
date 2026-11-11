@@ -11,6 +11,14 @@
 ;;
 ;; Internal modules (math, canvas, turtle, primitives, parser, interpreter,
 ;; graphics, tui) are loaded here and are not meant to be loaded directly.
+;;
+;; Ditty's `terminal` library (graphics capability detection) ships with
+;; Ditty, so it is required here: headless code may use it, unlike Tapestry.
+;; The require must precede reading any file that mentions `terminal:` —
+;; Ditty's reader resolves package-qualified symbols against packages that
+;; exist at read time.
+(require 'terminal)
+
 (in-package "logo")
 
 (define *logo-dir* (or (file-name-directory *load-pathname*) "./"))
@@ -45,7 +53,9 @@
  'logo-eval-program 'logo-truthy?
  ;; graphics.lisp
  'logo-graphics-capabilities 'logo-graphics-backend 'logo-render
- 'logo-render-sixel
+ 'logo-render-sixel 'logo-graphics-capabilities-from
+ 'logo-graphics-backend-from 'logo-graphics-cell-size
+ 'logo-graphics-pixel-size
  ;; tui.lisp
  'logo-tui-main 'logo-repl-eval)
 

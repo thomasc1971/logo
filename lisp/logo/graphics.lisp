@@ -16,38 +16,60 @@
 ;;            encoder (PNG stored blocks or BMP). iTerm2 may also render
 ;;            the sixel backend.
 ;;
-;; Capability detection is environment-based (PORTTY=1 is set by portty's
-;; PTY layer, KITTY_WINDOW_ID by kitty, TERM_PROGRAM by iTerm2). A DA1 /
-;; XTSMGRAPHICS query would be more robust. It is doable in a TTY with
-;; set-terminal-raw + read-byte-timeout; a round-trip builtin is proposed
-;; in docs/UPSTREAM.md #5.
+;; Capability detection is delegated to Ditty's `terminal` library, which
+;; probes the terminal (DA1, XTSMGRAPHICS, CSI 14/16 t) and folds in the
+;; environment (PORTTY=1 is set by portty's PTY layer, KITTY_WINDOW_ID by
+;; kitty, TERM_PROGRAM by iTerm2). Inside the TUI the answer arrives as a
+;; `capabilities` message and the model keeps the alist; headless code uses
+;; the env-only fallback `terminal-capabilities-from-replies` with no
+;; replies, which does no I/O. Logo never queries or polls the terminal
+;; itself; see docs/UPSTREAM.md #5.
 ;;
 ;; Internal file: loaded by logo.lisp into the `logo` package.
 (provide 'logo-graphics)
 
+;; ---------------------------------------------------------------------------
+;; Capabilities (pure functions over a Ditty capabilities alist)
+;; ---------------------------------------------------------------------------
+;; A Ditty capabilities alist (terminal-capabilities-from-replies) has the
+;; keys sixel kitty-graphics iterm2-images kitty-keyboard pixel-size
+;; cell-size source. These helpers translate it to/from Logo's own shape so
+;; the TUI and headless paths share one code path.
+(defun logo-graphics-capabilities-from (caps)
+  "Return Logo's graphics capability alist from CAPS, a Ditty terminal
+   capabilities alist:
+   (:sixel . #t/#f) (:kitty . #t/#f) (:iterm2 . #t/#f) (:canvas . #t)"
+  (list (cons 'sixel (if (cdr (assoc 'sixel caps)) #t #f))
+   (cons 'kitty (if (cdr (assoc 'kitty-graphics caps)) #t #f))
+   (cons 'iterm2 (if (cdr (assoc 'iterm2-images caps)) #t #f))
+   (cons 'canvas #t)))
+
+(defun logo-graphics-backend-from (caps)
+  "Return the best graphics backend symbol for CAPS, a Ditty terminal
+   capabilities alist. Prefers sixel (real pixels in portty), else canvas."
+  (if (cdr (assoc 'sixel caps)) 'sixel 'canvas))
+
+(defun logo-graphics-cell-size (caps)
+  "Return the terminal cell size (width . height) in pixels from CAPS,
+   or nil when the terminal does not report one."
+  (cdr (assoc 'cell-size caps)))
+
+(defun logo-graphics-pixel-size (caps)
+  "Return the terminal size (width . height) in pixels from CAPS, or nil
+   when the terminal does not report one."
+  (cdr (assoc 'pixel-size caps)))
+
 (defun logo-graphics-capabilities ()
   "Return an alist of graphics capabilities for the current terminal:
-   (:sixel . #t/#f) (:kitty . #t/#f) (:iterm2 . #t/#f) (:canvas . #t)"
-  (let* ((portty (getenv "PORTTY"))
-         (kitty (getenv "KITTY_WINDOW_ID"))
-         (term-program (getenv "TERM_PROGRAM"))
-         (term (getenv "TERM")))
-    (list
-     (cons 'sixel
-      (if
-        (or (equal? portty "1")
-            (and term (string-contains? (string-downcase term) "sixel")))
-        #t
-        #f))
-     (cons 'kitty (if kitty #t #f))
-     (cons 'iterm2 (if (equal? term-program "iTerm.app") #t #f))
-     (cons 'canvas #t))))
+   (:sixel . #t/#f) (:kitty . #t/#f) (:iterm2 . #t/#f) (:canvas . #t)
+   Pure and I/O-free: the environment only, no terminal query."
+  (logo-graphics-capabilities-from
+   (terminal:terminal-capabilities-from-replies nil)))
 
 (defun logo-graphics-backend ()
   "Return the best graphics backend symbol for this terminal.
-   Prefers sixel (real pixels in portty), else canvas."
-  (let* ((caps (logo-graphics-capabilities)))
-    (if (cdr (assoc 'sixel caps)) 'sixel 'canvas)))
+   Prefers sixel (real pixels in portty), else canvas. Pure: no I/O."
+  (logo-graphics-backend-from (terminal:terminal-capabilities-from-replies nil)))
 
 (defun logo-render (canvas backend cols rows &optional pixel-w pixel-h)
   "Render CANVAS with BACKEND. COLS/ROWS are character cells for canvas;

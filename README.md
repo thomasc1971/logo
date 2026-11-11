@@ -22,8 +22,10 @@ SQUARE 100
 
 ## Quick start
 
-Prerequisites: [Ditty](https://github.com/chestso/ditty) 0.8+ on your
-`PATH` (for the interactive TUI also [Tapestry](https://github.com/chestso/tapestry)).
+Prerequisites: [Ditty](https://github.com/chestso/ditty) 0.9+? — the
+release whose `terminal` library detects graphics capabilities — on your
+`PATH` (for the interactive TUI also
+[Tapestry](https://github.com/chestso/tapestry)).
 Install both from source (`./autogen.sh`, configure, `make`, `make install`);
 Ditty's library search path (XDG data dirs, `DITTY_LISP_PATH`) then resolves
 `(require 'logo)` and `(require 'tapestry)` for `bin/logo` and `make check`.

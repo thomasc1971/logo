@@ -28,6 +28,34 @@
   (assert-true (member (logo-graphics-backend) '(canvas sixel kitty iterm2))
    "backend is a known symbol"))
 
+;; Pure translation from a Ditty capabilities alist (as delivered by the
+;; TUI's `capabilities` message, or by the headless env-only fallback)
+(define *fake-caps*
+  (list (cons 'sixel #t) (cons 'kitty-graphics nil) (cons 'iterm2-images nil)
+   (cons 'kitty-keyboard 1) (cons 'pixel-size (cons 800 600))
+   (cons 'cell-size (cons 10 20)) (cons 'source "query")))
+
+(define *empty-caps*
+  (list (cons 'sixel nil) (cons 'kitty-graphics nil) (cons 'iterm2-images nil)
+   (cons 'kitty-keyboard nil) (cons 'pixel-size nil) (cons 'cell-size nil)
+   (cons 'source "none")))
+
+(let ((caps (logo-graphics-capabilities-from *fake-caps*)))
+  (assert-equal 'sixel (logo-graphics-backend-from *fake-caps*)
+   "backend-from picks sixel")
+  (assert-equal #t (cdr (assoc 'sixel caps)) "capabilities-from maps sixel")
+  (assert-equal #f (cdr (assoc 'kitty caps)) "capabilities-from maps kitty")
+  (assert-equal #t (cdr (assoc 'canvas caps)) "capabilities-from keeps canvas"))
+
+(assert-equal (cons 10 20) (logo-graphics-cell-size *fake-caps*)
+ "cell size comes from cell-size")
+(assert-equal (cons 800 600) (logo-graphics-pixel-size *fake-caps*)
+ "pixel size comes from pixel-size")
+(assert-equal nil (logo-graphics-cell-size *empty-caps*)
+ "cell size is nil when unreported")
+(assert-equal 'canvas (logo-graphics-backend-from *empty-caps*)
+ "backend-from falls back to canvas")
+
 ;; Sixel encoder: DCS intro, Pan/Pad raster attributes, ST terminator
 ;; (exact substring comparisons; string-prefix? would also work)
 (let* ((c (canvas-add-segment (canvas-make 100 100) -50 -50 50 50 nil))

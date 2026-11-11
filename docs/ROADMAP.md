@@ -7,7 +7,7 @@
 - Pure turtle + segment canvas, Bresenham rasterizer, Braille backend.
 - Sixel encoder for portty/coffer.
 - Tapestry Elm TUI with persistent REPL state, history, transcript.
-- Headless test suite (134 assertions), examples, docs, MIT licence.
+- Headless test suite (142 assertions), examples, docs, MIT licence.
 
 ## v0.2 — language completeness
 
@@ -27,9 +27,10 @@
 - Kitty + iTerm2 backends: Ditty 0.8's `base64-encode` supplies the
   payload; kitty takes raw RGBA, so no PNG is required. iTerm2 also
   needs a simple image encoder (BMP or stored-block PNG).
-- Pixel-accurate canvas sizing from `terminal-pixel-size`
-  (UPSTREAM.md #4); capability queries (#5) are doable from Lisp with
-  `set-terminal-raw` + `read-byte-timeout`.
+- Pixel-accurate canvas sizing from the capabilities alist
+  (`logo-graphics-pixel-size`, UPSTREAM.md #4); capability detection
+  (#5) now comes from Ditty as a `capabilities` message, and the sixel
+  backend just needs to consume the reported size.
 - Turtle glyph rendering (the little triangle) in Braille/sixel.
 
 ## v1.0 — polish

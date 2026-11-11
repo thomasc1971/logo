@@ -53,26 +53,35 @@ list; that is no longer required and can be simplified.
 because `terminal-size` returns only `(rows . cols)`.
 **Now:** `(terminal-pixel-size)` returns `(width . height)` from
 `ws_xpixel`/`ws_ypixel`, and `nil` when they are 0 (many terminals
-report 0). Logo does not use it yet; when the sixel backend switches
-over, the `CSI 16 t` query stays the fallback for terminals that
-report no pixel size.
+report 0). Logo exposes both sizes through
+`logo-graphics-pixel-size` and `logo-graphics-cell-size`, which read
+them out of the capabilities alist (`pixel-size`, `cell-size`); the
+sixel backend still draws at its fixed 480×360. When it switches over,
+the `CSI 16 t` query stays the fallback for terminals that report no
+pixel size.
 
-### 5. Graphics capability query (DA1 `4` / XTSMGRAPHICS) + reply reading
+### ~~5. Graphics capability query (DA1 `4` / XTSMGRAPHICS) + reply reading~~ (landed in Ditty as the event loop's `capabilities` event)
 
-**Need:** robust sixel detection instead of environment heuristics.
-**Workaround:** `PORTTY` / `KITTY_WINDOW_ID` / `TERM_PROGRAM` env vars
-in `logo-graphics-capabilities`.
-**Today:** this is doable in Lisp without upstream changes, in a TTY:
-`set-terminal-raw`, `princ` the query (it flushes), read the reply
-byte by byte with `read-byte-timeout` until the final byte, then
-`restore-terminal`. Limits: `set-terminal-raw` silently succeeds on a
-non-TTY and the reads then return nothing, so treat a timeout as "no
-answer" and fall back to the env heuristics. Raw mode also disables
-output post-processing (`\n` no longer returns the carriage), so keep
-the query window short.
-**Ideal:** a small builtin that does the whole write-query /
-read-reply round-trip with a timeout, so scripts need not manage raw
-mode themselves.
+**Was:** robust sixel detection needed a terminal round-trip, and
+Ditty could only offer `set-terminal-raw` + `read-byte-timeout` in
+Lisp. Logo therefore guessed from the environment (`PORTTY`,
+`KITTY_WINDOW_ID`, `TERM_PROGRAM`, `TERM`) in
+`logo-graphics-capabilities`, and shipped with a "query would be more
+robust" caveat.
+**Now:** the round-trip lives in Ditty's `terminal` library, in Lisp
+(no C builtin): `terminal-capabilities` is the blocking form for
+scripts, and inside `terminal-event-loop` the `:probe` option sends
+`*terminal-probe*` once at startup and delivers a `capabilities`
+event — `terminal-wait` keeps the loop poll-free. Tapestry passes that
+event to the app's `update` as `((type . capabilities) (caps . ALIST))`;
+Logo stores the alist under `'caps` in its model and picks its backend
+from it, so the footer flips from `canvas` to `sixel` when the answer
+arrives, and a terminal that never answers simply keeps the env-only
+fallback. Headless code calls the pure
+`terminal-capabilities-from-replies` with no replies (no I/O). The
+kitty keyboard protocol is detected (and enabled) by the loop as well.
+Logo's `getenv` heuristics are gone; the same rules live in Ditty's
+`terminal-env-capabilities`.
 
 ### ~~6. Base64 over byte vectors (for kitty + iTerm2 backends)~~ (landed in v0.8.0 as `base64-encode`)
 
@@ -102,6 +111,22 @@ The original report most likely had the arguments reversed; it does
 not reproduce on v0.7.4 (repo build or installed binary). Logo may use
 `string-prefix?` normally; the `substring` workaround in
 `tests/test-graphics.lisp` is unnecessary.
+
+### 10. Multi-byte (UTF-8) keyboard input in `terminal-read-event`
+
+**Need:** Logo's TUI input line accepts any one-character key _name_ as
+typed text (`(and (= (length key) 1) …)`), so a non-ASCII letter such
+as the `å` in `PRINT "blåbær` should arrive as one key named by that
+character.
+**Today:** `terminal-read-event` decodes input one byte at a time, so a
+UTF-8 sequence arrives as several one-byte key events and the letter
+inserts as two or three wrong characters. Workaround: none; the TUI
+input line is ASCII-only. (On Windows, `read-byte` additionally
+truncates wide characters.)
+**Ideal:** the event parser assembles UTF-8 continuation bytes into a
+single key whose name is the decoded character, so Logo's "one-character
+key name means typed text" rule keeps working. Tracked in Ditty's
+`TODO.md` under "Terminal input" ("Decode UTF-8 in the event parser").
 
 ## portty / coffer
 

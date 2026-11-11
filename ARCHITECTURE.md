@@ -35,7 +35,7 @@ Tapestry view — both thin.
 | `lisp/logo/primitives.lisp`  | Two registries: commands `(turtle args) -> turtle'`, queries `(turtle args) -> value`.                      |
 | `lisp/logo/parser.lisp`      | Tokenizer + two-pass parser (scan `TO` arities, then arity-driven descent).                                 |
 | `lisp/logo/interpreter.lisp` | State-threading evaluator; `OUTPUT`/`STOP` as explicit signal values.                                       |
-| `lisp/logo/graphics.lisp`    | Capability detection (`PORTTY`, `KITTY_WINDOW_ID`, `TERM_PROGRAM`), canvas + sixel encoders.                |
+| `lisp/logo/graphics.lisp`    | Capability helpers over Ditty's `terminal` alist, canvas + sixel encoders.                                  |
 | `lisp/logo/tui.lisp`         | Tapestry Elm app: model/update/view mirroring the RC759 split screen.                                       |
 | `logo-main.lisp`             | CLI dispatch on `*command-line-args*` (TUI / file / `-e`).                                                  |
 
@@ -108,18 +108,24 @@ and Lottie (APC). Logo's backends:
 - **sixel** — implemented. Single-colour palette, Pan/Pad raster
   attributes (`"1;1;WxH`) so coffer clamps to the declared size
   instead of rounding up to 6-row bands (portty's documented gotcha).
-  Detected via `PORTTY=1` (set by portty's PTY layer).
+  Detected by Ditty's capability probe (DA1 `4`), with `PORTTY=1`
+  (set by portty's PTY layer) as the environment fallback.
 - **kitty / iterm2** — planned. Ditty 0.8's `base64-encode` covers
   the payload (it takes a byte vector, since Ditty strings cannot hold
   NUL bytes). Kitty accepts raw RGB(A) pixels, so only base64 is
   needed; iTerm2 additionally needs an image file (PNG stored blocks
   or BMP), which is pure Lisp. See docs/UPSTREAM.md #6.
 
-Capability detection is environment-based (`PORTTY`, `KITTY_WINDOW_ID`,
-`TERM_PROGRAM`, `TERM`). A terminal query (DA1 `4` for sixel,
-XTSMGRAPHICS) would be more robust. It is doable in a TTY today with
-`set-terminal-raw` + `read-byte-timeout`; a round-trip builtin is
-proposed in docs/UPSTREAM.md #5.
+Capability detection is delegated to Ditty's `terminal` library, which
+probes the terminal once (kitty keyboard flags, `CSI 14/16 t`, DA1 `4`
+for sixel) and folds in the environment. There is no query and no
+blocking wait on Logo's side: in the TUI the answer arrives as a
+`capabilities` message (`((type . capabilities) (caps . ALIST))`), the
+model stores the alist under `'caps`, and the backend is recomputed
+from it; headless code calls the pure
+`terminal-capabilities-from-replies` with no replies, i.e. the
+environment-only fallback. A terminal that never answers DA1 keeps the
+fallback and simply stays on Braille. See docs/UPSTREAM.md #5.
 
 ## Invariants
 

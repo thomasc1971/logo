@@ -31,14 +31,18 @@
 ;; Model
 ;; ---------------------------------------------------------------------------
 (defun logo-model-make ()
-  "Create the initial TUI model."
-  (list (cons 'state (logo-interp-make 200 200))
-   (cons 'input "")
-   (cons 'history nil)
-   (cons 'hist-index nil)
-   (cons 'transcript (list "Type Logo commands, e.g. FD 100 RT 90 FD 100"))
-   (cons 'backend (logo-graphics-backend))
-   (cons 'error nil)))
+  "Create the initial TUI model.
+   CAPS comes from Ditty's env-only fallback (no I/O, no query); the app
+   loop replaces it with the `capabilities` message when the probe answers."
+  (let* ((caps (terminal:terminal-capabilities-from-replies nil)))
+    (list (cons 'state (logo-interp-make 200 200))
+     (cons 'input "")
+     (cons 'history nil)
+     (cons 'hist-index nil)
+     (cons 'transcript (list "Type Logo commands, e.g. FD 100 RT 90 FD 100"))
+     (cons 'caps caps)
+     (cons 'backend (logo-graphics-backend-from caps))
+     (cons 'error nil))))
 
 (defun logo-model-state (m) (cdr (assoc 'state m)))
 
@@ -135,6 +139,14 @@
     ((tapestry:focus-event? msg)
      (when (equal? (cdr (assoc 'focus msg)) 'out) (tapestry:app-quit))
      model)
+    ((and (pair? msg) (equal? (cdr (assoc 'type msg)) 'capabilities))
+     ;; Tapestry's loop probes the terminal once at startup and delivers the
+     ;; answer here (the view re-renders right after). The probe may never
+     ;; answer on a terminal that ignores DA1, so the env-only fallback from
+     ;; logo-model-make stays in charge until this arrives.
+     (let* ((caps (cdr (assoc 'caps msg)))
+            (m (logo-model-with model 'caps caps)))
+       (logo-model-with m 'backend (logo-graphics-backend-from caps))))
     (#t model)))
 
 (defun logo-tui-submit (model)

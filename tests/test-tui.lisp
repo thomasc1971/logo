@@ -36,6 +36,44 @@
   (assert-true (> (length (logo-model-transcript m)) 0)
    "model has welcome transcript"))
 
+;; Capabilities: the model carries Ditty's alist and a backend derived from it
+(define *fake-caps*
+  (list (cons 'sixel #t) (cons 'kitty-graphics nil) (cons 'iterm2-images nil)
+   (cons 'kitty-keyboard 1) (cons 'pixel-size (cons 800 600))
+   (cons 'cell-size (cons 10 20)) (cons 'source "query")))
+
+(let* ((m (logo-model-make))
+       (caps (cdr (assoc 'caps m)))
+       (backend (cdr (assoc 'backend m))))
+  (assert-true (pair? caps) "model stores a caps alist")
+  (assert-true (member backend '(sixel canvas))
+   "model backend is sixel or canvas"))
+
+;; The `capabilities` message from Tapestry's probe updates caps and backend
+(let* ((m (logo-model-make))
+       (m2
+        (logo-tui-update m
+         (list (cons 'type 'capabilities) (cons 'caps *fake-caps*)))))
+  (assert-equal 'sixel (cdr (assoc 'backend m2))
+   "capabilities message selects sixel")
+  (assert-equal *fake-caps* (cdr (assoc 'caps m2))
+   "capabilities message stores the caps alist"))
+
+;; Tick and reply messages are ignored
+(let ((m (logo-model-make)))
+  (assert-equal m (logo-tui-update m (list (cons 'type 'tick)))
+   "tick leaves the model unchanged")
+  (assert-equal m
+   (logo-tui-update m (list (cons 'type 'reply) (cons 'replies nil)))
+   "reply leaves the model unchanged"))
+
+;; Only a one-character key name is typed text; modified keys are not
+(let* ((m (logo-model-make))
+       (typed (logo-tui-update m (list (cons 'type 'key) (cons 'key "a"))))
+       (modified (logo-tui-update m (list (cons 'type 'key) (cons 'key "M-x")))))
+  (assert-equal "a" (logo-model-input typed) "one-character key types text")
+  (assert-equal "" (logo-model-input modified) "modified key does not type"))
+
 ;; Typing: printable key events append to the input
 (let* ((m (logo-model-make))
        (m2 (logo-tui-update m (list (cons 'type 'key) (cons 'key "F"))))

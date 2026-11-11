@@ -17,7 +17,7 @@ Ditty is the runtime.
 bin/logo                        # interactive TUI (needs Tapestry + TTY)
 bin/logo examples/star.logo     # headless run, prints Braille picture
 bin/logo -e 'FD 100 RT 90'      # one-liner
-make check                      # test suite (headless, 134 assertions)
+make check                      # test suite (headless, 142 assertions)
 make run EXAMPLE=examples/spiral.logo
 ```
 
@@ -64,7 +64,8 @@ source -> parser (arity-driven, 2-pass) -> AST -> interpreter
    must return the error object itself, never data that flows into
    destructuring code. `OUTPUT`/`STOP` are explicit signal values
    (`(logo-output STATE . VALUE)`), not exceptions.
-3. **Ditty builtins** (v0.8+ ships the numeric tower): call `abs`,
+3. **Ditty builtins** (Ditty 0.9+?, which ships the numeric tower and
+   the `terminal` library — TODO: pin the exact minimum): call `abs`,
    `sqrt`, `sin`, `cos`, `tan`, `asin`, `acos`, `atan`, `atan2`,
    `exp`, `log`, `expt`, `float`, `floor`, `round`, `truncate`,
    `ceiling`, `quotient`, `remainder`, `modulo`, `random` and
@@ -79,6 +80,14 @@ source -> parser (arity-driven, 2-pass) -> AST -> interpreter
 5. **Paren debugging**: extract defuns with `sed -n 'A,Bp'` and load
    each with ditty; external paren counters mishandle `#\(` char
    literals and docstrings.
+6. **Terminal capabilities are Ditty's job.** `lisp/logo.lisp` requires
+   Ditty's `terminal` library _before_ any file that mentions
+   `terminal:` (the reader resolves package-qualified symbols at read
+   time). In the TUI the capabilities arrive as a `capabilities`
+   message and live in the model under `'caps`; headless code uses the
+   pure `terminal-capabilities-from-replies` env-only fallback. Never
+   block or poll for terminal replies, and never add `getenv`
+   heuristics to Logo — they belong in Ditty's `terminal` library.
 
 ## Conventions
 
