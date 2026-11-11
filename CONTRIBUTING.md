@@ -4,8 +4,10 @@
 
 Prerequisites:
 
-- [Ditty](https://github.com/chestso/ditty) 0.8+ (`ditty` on `PATH`) —
-  the interpreter. Pure-Lisp project: nothing to compile.
+- [Ditty](https://github.com/chestso/ditty) 0.9.0+ (`ditty` on
+  `PATH`) — the interpreter; it must include the `terminal` library
+  (graphics capability detection). Pure-Lisp project: nothing to
+  compile.
 - [Tapestry](https://github.com/chestso/tapestry) — only for the
   interactive TUI and `tests/test-tui.lisp`. Install it normally
   (`make install`) so `(require 'tapestry)` resolves via Ditty's
@@ -89,7 +91,7 @@ LISP_FMT=/path/to/lisp-fmt.lisp` overrides), `emacs/*.el` with Emacs
 ## Adding a graphics backend
 
 1. Add `logo-render-<name>` in `lisp/logo/graphics.lisp`, dispatch in
-   `logo-render`, capability in `logo-graphics-capabilities`.
+   `logo-render`, capability in `logo-graphics-capabilities-from`.
 2. Backends consume the canvas (`canvas-rasterize` gives you a 0/1
    grid); they must not mutate it.
 3. The CLI `--backend` flag lives in `logo-main.lisp`.

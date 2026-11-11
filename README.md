@@ -22,7 +22,7 @@ SQUARE 100
 
 ## Quick start
 
-Prerequisites: [Ditty](https://github.com/chestso/ditty) 0.9+? — the
+Prerequisites: [Ditty](https://github.com/chestso/ditty) 0.9.0+ — the
 release whose `terminal` library detects graphics capabilities — on your
 `PATH` (for the interactive TUI also
 [Tapestry](https://github.com/chestso/tapestry)).

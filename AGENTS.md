@@ -64,8 +64,8 @@ source -> parser (arity-driven, 2-pass) -> AST -> interpreter
    must return the error object itself, never data that flows into
    destructuring code. `OUTPUT`/`STOP` are explicit signal values
    (`(logo-output STATE . VALUE)`), not exceptions.
-3. **Ditty builtins** (Ditty 0.9+?, which ships the numeric tower and
-   the `terminal` library — TODO: pin the exact minimum): call `abs`,
+3. **Ditty builtins** (Ditty 0.9.0+ ships the numeric tower and the
+   `terminal` library): call `abs`,
    `sqrt`, `sin`, `cos`, `tan`, `asin`, `acos`, `atan`, `atan2`,
    `exp`, `log`, `expt`, `float`, `floor`, `round`, `truncate`,
    `ceiling`, `quotient`, `remainder`, `modulo`, `random` and

@@ -4,7 +4,7 @@ Features this project needs from Ditty, portty, and coffer, with the
 workaround in use today. When one lands upstream, the workaround
 should be removed and the entry struck through.
 
-Last reviewed against Ditty v0.8.0. Entry numbers are stable (other
+Last reviewed against Ditty v0.9.0. Entry numbers are stable (other
 docs cite them), so withdrawn and landed entries keep their number.
 
 ## Ditty
@@ -60,7 +60,7 @@ sixel backend still draws at its fixed 480×360. When it switches over,
 the `CSI 16 t` query stays the fallback for terminals that report no
 pixel size.
 
-### ~~5. Graphics capability query (DA1 `4` / XTSMGRAPHICS) + reply reading~~ (landed in Ditty as the event loop's `capabilities` event)
+### ~~5. Graphics capability query (DA1 `4` / XTSMGRAPHICS) + reply reading~~ (landed in v0.9.0 as the event loop's `capabilities` event)
 
 **Was:** robust sixel detection needed a terminal round-trip, and
 Ditty could only offer `set-terminal-raw` + `read-byte-timeout` in

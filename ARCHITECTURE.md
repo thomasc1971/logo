@@ -43,13 +43,13 @@ Tapestry view — both thin.
 
 ### Numerics come from Ditty; math.lisp keeps the angle convention
 
-Ditty Lisp (0.8+) ships the numeric tower: `abs`, `sqrt`, `sin`, `cos`,
-`tan`, `atan`/`atan2`, `exp`, `log`, `expt`, `float`, unary and
-float-aware `floor`/`ceiling`/`round`/`truncate`, truncating
-`quotient`, `remainder`, `modulo`, and a seedable `random`. Logo calls
-these directly — there are no `logo-*` aliases, so a numeric fix lands
-once, upstream. `math.lisp` therefore only holds what is
-Logo-specific: `logo-pi`, degrees↔radians (`logo-deg->rad`,
+Ditty Lisp (0.9.0+, the supported minimum) ships the numeric tower:
+`abs`, `sqrt`, `sin`, `cos`, `tan`, `atan`/`atan2`, `exp`, `log`,
+`expt`, `float`, unary and float-aware `floor`/`ceiling`/`round`/
+`truncate`, truncating `quotient`, `remainder`, `modulo`, and a seedable
+`random`. Logo calls these directly — there are no `logo-*` aliases, so
+a numeric fix lands once, upstream. `math.lisp` therefore only holds
+what is Logo-specific: `logo-pi`, degrees↔radians (`logo-deg->rad`,
 `logo-rad->deg`) and the `[0, 360)` heading wrap
 (`logo-normalize-heading`). See docs/UPSTREAM.md #1/#2.
 
