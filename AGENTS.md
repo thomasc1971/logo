@@ -11,6 +11,30 @@ kitty/iTerm2 planned). Inspired by the Regnecentralen RC759 Piccoline
 (1984–1989) school computer. MIT licensed. No C code, no build step —
 Ditty is the runtime.
 
+## Guiding specification
+
+[`docs/PICCOLINE_Mikro-Logo_Brugervejledning_apr1985.pdf`](docs/PICCOLINE_Mikro-Logo_Brugervejledning_apr1985.pdf)
+— A/S Regnecentralen's *PICCOLINE – Mikro-Logo – Brugervejledning*
+(April 1985) — is the **guiding specification for this project**. When
+this repo does not answer a design or behavior question, follow the
+manual: screen layout, command-line semantics (one line, executed whole
+on Return, `;` between statements), the modal `lær`/`ret` procedure
+editor with `begynd` … `slut`, Danish command words, error messages,
+and limits such as one statement per line and at most 21 lines per
+procedure.
+
+Known deviations (English `TO`/`END` keywords, a one-line REPL with no
+procedure editor, etc.) are gaps to close, not precedents: do not invent
+behavior that contradicts the manual. Deviations must be deliberate and
+documented, and modern platform limits (Ditty, Tapestry, the terminal)
+take precedence only where the RC759 hardware has no analogue.
+
+The PDF is a scan of a Danish manual; extract text with
+`pdftotext -layout`. Provenance:
+<https://rc700.dk/documentation.php> (MD5
+`8984ca01a444ca733fa5d86aec5600d1`). The dialect actually implemented
+is documented in [docs/LANGUAGE.md](docs/LANGUAGE.md).
+
 ## Build & run
 
 ```sh
