@@ -6,8 +6,9 @@ Prerequisites:
 
 - [Ditty](https://github.com/chestso/ditty) 0.9.0+ (`ditty` on
   `PATH`) — the interpreter; it must include the `terminal` library
-  (graphics capability detection). Pure-Lisp project: nothing to
-  compile.
+  (graphics capability detection). The interactive TUI needs 0.9.0.14+
+  because Tapestry's row-diff renderer uses `terminal-write`, `:on-idle`
+  and `:no-wrap`. Pure-Lisp project: nothing to compile.
 - [Tapestry](https://github.com/chestso/tapestry) — only for the
   interactive TUI and `tests/test-tui.lisp`. Install it normally
   (`make install`) so `(require 'tapestry)` resolves via Ditty's

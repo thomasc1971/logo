@@ -163,7 +163,11 @@ source -> parser (arity-driven, 2-pass) -> AST -> interpreter
    for word characters; do not call the Ditty versions on user text.
 4. **Tapestry symbols**: use qualified `tapestry:...` in `tui.lisp`;
    `use-package` inside a function body does not reliably extend the
-   defining package. Headless code must load without Tapestry.
+   defining package. Headless code must load without Tapestry. Tapestry
+   treats the view as one string per screen row (no newlines), repaints
+   only the rows that changed, and drops rows past the screen bottom;
+   call `tapestry:app-invalidate` after writing to the terminal outside
+   the view.
 5. **Paren debugging**: extract defuns with `sed -n 'A,Bp'` and load
    each with ditty; external paren counters mishandle `#\(` char
    literals and docstrings.

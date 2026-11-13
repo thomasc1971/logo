@@ -138,6 +138,28 @@
   (assert-true (> (length lines) 5) "view returns lines")
   (assert-true (string-contains? (car lines) "Logo") "view header names Logo"))
 
+;; The view follows Tapestry's row contract: no embedded newlines, every
+;; row fits the screen width, and the command line stays the last row even
+;; when the screen is too short for the usual transcript. Tapestry drops
+;; rows past the bottom and repaints only the rows that changed.
+(let ((lines (logo-tui-view (logo-model-make) (cons 24 80))))
+  (assert-equal 0
+   (length (filter (lambda (line) (string-contains? line "\n")) lines))
+   "view rows contain no newlines")
+  (assert-equal 0
+   (length
+    (filter (lambda (line) (> (tapestry:display-width line) 80)) lines))
+   "view rows fit the screen width")
+  (assert-true
+   (string-prefix? "? " (tapestry:strip-ansi (car (reverse lines))))
+   "the command line is the last view row"))
+(let ((lines (logo-tui-view (logo-model-make) (cons 10 40))))
+  (assert-true (<= (length lines) 10)
+   "a short screen keeps every view row on screen")
+  (assert-true
+   (string-prefix? "? " (tapestry:strip-ansi (car (reverse lines))))
+   "a short screen keeps the command line"))
+
 ;; ---------------------------------------------------------------------------
 ;; Mikro-Logo editor
 ;; ---------------------------------------------------------------------------
@@ -253,8 +275,8 @@
         (logo-tui-view (logo-model-with-input (logo-model-make 'mikro) "frem")))
        (logo-view
         (logo-tui-view (logo-model-with-input (logo-model-make 'logo) "FD")))
-       (mikro-line (list-ref mikro (- (length mikro) 2)))
-       (logo-line (list-ref logo-view (- (length logo-view) 2))))
+       (mikro-line (car (reverse mikro)))
+       (logo-line (car (reverse logo-view))))
   (assert-true (string-contains? mikro-line "LOGO> ")
    "the Mikro command line starts with LOGO>")
   (assert-true (string-contains? logo-line "? ")
@@ -290,7 +312,12 @@
    "editor view fills a 24-row screen")
   (assert-true
    (string-contains? (list-ref (logo-tui-view m1) 22) "A4")
-   "editor status line names A4"))
+   "editor status line names A4")
+  (let ((short (logo-tui-view m1 (cons 10 40))))
+    (assert-equal 10 (length short) "editor view fills a short screen")
+    (assert-true
+     (string-prefix? "LOGO> " (tapestry:strip-ansi (car (reverse short))))
+     "the editor keeps its command line")))
 
 ;; Type a complete procedure, A4, then run it.
 (let* ((m (logo-model-make 'mikro))

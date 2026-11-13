@@ -140,13 +140,13 @@ and the TUI backend-agnostic.
 
 The interactive app is an Elm Architecture program (`model/update/view`)
 on Tapestry's `app-run`: raw terminal, alt screen, mouse/focus/paste
-management, and resize handling belong to Tapestry. Logo owns only the
-model (interpreter state + input + transcript) and the view layout.
-Tapestry symbols are referenced qualified (`tapestry:...`) because
-`use-package` inside a function body does not reliably extend the
-defining package; and the CLI requires Tapestry _before_ Logo on the
-interactive path because Ditty resolves `pkg:symbol` against packages
-existing at read time.
+management, resize handling, and row-diff rendering belong to Tapestry.
+Logo owns only the model (interpreter state + input + transcript) and
+the view layout. Tapestry symbols are referenced qualified
+(`tapestry:...`) because `use-package` inside a function body does not
+reliably extend the defining package; and the CLI requires Tapestry
+_before_ Logo on the interactive path because Ditty resolves
+`pkg:symbol` against packages existing at read time.
 
 ## Graphics backends and portty
 
@@ -177,13 +177,20 @@ from it; headless code calls the pure
 environment-only fallback. A terminal that never answers DA1 keeps the
 fallback and simply stays on Braille. See docs/UPSTREAM.md #5.
 
+Tapestry addresses view rows absolutely and repaints only the rows that
+changed. A future sixel canvas in the TUI therefore writes its DCS
+sequence outside the view and calls `tapestry:app-invalidate`, which
+makes the next render clear the screen and repaint the text rows; the
+headless sixel path is unaffected.
+
 The boundary is deliberate: Tapestry owns terminal mechanics and
-rendering (`key-text`/`printable-key?` for insertable input, one
-newline _between_ view lines so a full-screen view does not scroll),
-while Logo owns policy (F5/F6, `LÆR`/`RET`, A1–A4, the 21-line limit,
-compile errors). The editor buffer and Mikro front end stay in Logo so
-they remain headless-testable; only generic text-editing primitives
-would move upstream if a second Tapestry app needed them.
+rendering (`key-text`/`printable-key?` for insertable input, one string
+per screen row, repainting only the rows that changed in one
+synchronized write), while Logo owns policy (F5/F6, `LÆR`/`RET`, A1–A4,
+the 21-line limit, compile errors). The editor buffer and Mikro front
+end stay in Logo so they remain headless-testable; only generic
+text-editing primitives would move upstream if a second Tapestry app
+needed them.
 
 ## Invariants
 

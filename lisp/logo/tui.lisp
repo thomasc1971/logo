@@ -306,13 +306,13 @@
 
 (defun logo-tui-key-text (msg key)
   "Return insertable text for MSG, falling back to a one-character KEY.
-   The fallback keeps synthetic key events in tests working."
-  (let* ((text (tapestry:key-text msg)))
-    (if (string? text)
-      text
-      (if (and (= (length key) 1) (>= (char-code (string-ref key 0)) 32))
-        key
-        nil))))
+   Tapestry's printable-key? keeps modified and named keys out; the
+   fallback keeps synthetic key events in tests working."
+  (if (tapestry:printable-key? msg)
+    (tapestry:key-text msg)
+    (if (and (= (length key) 1) (>= (char-code (string-ref key 0)) 32))
+      key
+      nil)))
 
 ;; ---------------------------------------------------------------------------
 ;; Update
@@ -402,9 +402,9 @@
      model)
     ((and (pair? msg) (equal? (cdr (assoc 'type msg)) 'capabilities))
      ;; Tapestry's loop probes the terminal once at startup and delivers the
-     ;; answer here (the view re-renders right after). The probe may never
-     ;; answer on a terminal that ignores DA1, so the env-only fallback from
-     ;; logo-model-make stays in charge until this arrives.
+     ;; answer here; the footer row is repainted on the next idle. The probe
+     ;; may never answer on a terminal that ignores DA1, so the env-only
+     ;; fallback from logo-model-make stays in charge until this arrives.
      (let* ((caps (cdr (assoc 'caps msg)))
             (m (logo-model-with model 'caps caps)))
        (logo-model-with m 'backend (logo-graphics-backend-from caps))))
@@ -511,15 +511,16 @@
          (left (if (>= col (- width 2)) (- col (- width 2)) 0)))
     (logo-tui-cursor-line text col width left)))
 
-(defun logo-tui-editor-view (model)
-  "Full-screen editor view: message, 21-line page, status, command line."
-  (let* ((size (tapestry:app-screen-size))
+(defun logo-tui-editor-view (model &optional size)
+  "Full-screen editor view: message, 21-line page, status, command line.
+   SIZE is (rows . cols), defaulting to Tapestry's current screen size."
+  (let* ((size (or size (tapestry:app-screen-size)))
          (width (if size (cdr size) 80))
          (height (if size (car size) 24))
          (editor (logo-model-editor model))
          (row (logo-editor-row editor))
          (col (logo-editor-col editor))
-         (body-rows (min *logo-editor-lines* (max 1 (- height 3))))
+         (body-rows (min *logo-editor-lines* (max 0 (- height 3))))
          (top0 (logo-editor-top editor))
          (top
           (cond
@@ -560,11 +561,15 @@
      page (list status)
      (list (logo-tui-command-line-view model width)))))
 
-(defun logo-tui-view (model)
-  "Elm view function: returns a list of lines for the terminal."
+(defun logo-tui-view (model &optional size)
+  "Elm view function: returns a list of lines for the terminal.
+   SIZE is (rows . cols), defaulting to Tapestry's current screen size.
+   Tapestry repaints only the rows that changed and drops rows past the
+   bottom of the screen, so the view keeps the command line as its last
+   row and gives the transcript only the rows that are left over."
   (if (not (null? (logo-model-editor model)))
-    (logo-tui-editor-view model)
-    (let* ((size (tapestry:app-screen-size))
+    (logo-tui-editor-view model size)
+    (let* ((size (or size (tapestry:app-screen-size)))
            (width (if size (cdr size) 80))
            (height (if size (car size) 24))
            (canvas-cols (- width 4))
@@ -574,13 +579,20 @@
             (canvas->braille-lines (turtle-canvas turtle)
              canvas-cols canvas-rows))
            (transcript (logo-model-transcript model))
+           (message (logo-model-message model))
+           ;; Header (2), box bottom + turtle status (2), rule + command
+           ;; line (2); the message, when present, takes one more. The
+           ;; transcript gets what is left, up to four lines, so a short
+           ;; screen loses transcript lines rather than the command line.
+           (transcript-rows
+            (max 0 (- height canvas-rows 6 (if (null? message) 0 1))))
+           (shown-count (min 4 (length transcript) transcript-rows))
            (shown
-            (if (> (length transcript) 4)
+            (if (> (length transcript) shown-count)
               (let drop ((rest transcript))
-                (if (> (length rest) 4) (drop (cdr rest)) rest))
+                (if (> (length rest) shown-count) (drop (cdr rest)) rest))
               transcript))
-           (backend (cdr (assoc 'backend model)))
-           (message (logo-model-message model)))
+           (backend (cdr (assoc 'backend model))))
       (let* ((body
               (append
                (list
@@ -605,8 +617,7 @@
                    (tapestry:truncate-to-width line width) width))
                 shown)
                (list (tapestry:hr width)
-                (logo-tui-command-line-view model width)
-                ""))))
+                (logo-tui-command-line-view model width)))))
         (if (null? message)
           body
           (cons

@@ -44,8 +44,10 @@ See [docs/ROADMAP.md](docs/ROADMAP.md) for the milestones on both tracks.
 
 Prerequisites: [Ditty](https://github.com/chestso/ditty) 0.9.0+ — the
 release whose `terminal` library detects graphics capabilities — on your
-`PATH` (for the interactive TUI also
-[Tapestry](https://github.com/chestso/tapestry)).
+`PATH`. The interactive TUI also needs
+[Tapestry](https://github.com/chestso/tapestry) and Ditty 0.9.0.14+
+(Tapestry's row-diff renderer uses `terminal-write`, `:on-idle` and
+`:no-wrap`); headless runs work with 0.9.0.
 Install both from source (`./autogen.sh`, configure, `make`, `make install`);
 Ditty's library search path (XDG data dirs, `DITTY_LISP_PATH`) then resolves
 `(require 'logo)` and `(require 'tapestry)` for `bin/logo` and `make check`.
@@ -65,6 +67,8 @@ The interactive TUI (Tapestry Elm application):
 - picture pane (Braille canvas, boxed) · transcript pane (PRINT output
   and errors) · `? ` prompt line with history (`↑`/`↓`); in Mikro mode
   the prompt is `LOGO>`, with a movable block cursor instead
+- Tapestry repaints only the rows that changed, in one synchronized
+  write, so typing does not clear and redraw the whole screen
 - type Logo commands, press Enter; `q` or Esc on an empty line quits
   (English dialect)
 - UTF-8 input: a non-ASCII letter such as `å` in `PRINT "blåbær"` arrives
