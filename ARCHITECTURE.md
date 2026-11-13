@@ -79,6 +79,27 @@ ends; procedure arities are unknown until seen, so pass 1 scans for
 `TO ... END` to collect them, pass 2 does the arity-driven descent.
 Unknown words are errors (catch typos early, like the RC759 did).
 
+### Two dialects over one core; Mikro-Logo is the fidelity target
+
+The interpreter core is dialect-agnostic: keyword matching, primitive
+names and messages come from a dialect layer rather than being
+hard-coded in the evaluator. Two dialects share the core:
+
+- `logo` (English, UCBLogo tradition) — broad standard Logo support
+  and the current default.
+- `mikro` — complete RC759 Mikro-Logo from the April 1985 manual:
+  Danish vocabulary, `;`-separated single-line command line, the modal
+  `LÆR`/`RET` procedure editor, `:=` assignment, disk commands, limits
+  and messages.
+
+`mikro` is the project's fidelity target: "complete" means the whole
+manual system, not a themed subset. `logo` must not shrink to that
+subset; broader Logo coverage is a separate, ongoing goal. Never fork
+the parser or interpreter to achieve either — mode-specific behavior
+belongs in dialect tables and interpreter state/options, and shared
+core changes must keep both dialects passing. Editor/dialog state lives
+in the TUI model, so it stays headless-testable.
+
 ### Canvas, not pixels, as the interchange format
 
 The turtle records segments, not pixels. Backends rasterize as they

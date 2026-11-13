@@ -14,7 +14,7 @@ Ditty is the runtime.
 ## Guiding specification
 
 [`docs/PICCOLINE_Mikro-Logo_Brugervejledning_apr1985.pdf`](docs/PICCOLINE_Mikro-Logo_Brugervejledning_apr1985.pdf)
-— A/S Regnecentralen's *PICCOLINE – Mikro-Logo – Brugervejledning*
+— A/S Regnecentralen's _PICCOLINE – Mikro-Logo – Brugervejledning_
 (April 1985) — is the **guiding specification for this project**. When
 this repo does not answer a design or behavior question, follow the
 manual: screen layout, command-line semantics (one line, executed whole
@@ -23,17 +23,45 @@ editor with `begynd` … `slut`, Danish command words, error messages,
 and limits such as one statement per line and at most 21 lines per
 procedure.
 
-Known deviations (English `TO`/`END` keywords, a one-line REPL with no
-procedure editor, etc.) are gaps to close, not precedents: do not invent
-behavior that contradicts the manual. Deviations must be deliberate and
-documented, and modern platform limits (Ditty, Tapestry, the terminal)
-take precedence only where the RC759 hardware has no analogue.
+Known deviations **in Mikro-Logo mode** (English `TO`/`END` keywords
+there, a one-line REPL with no procedure editor, etc.) are gaps to
+close, not precedents: do not invent behavior that contradicts the
+manual. Deviations must be deliberate and documented, and modern
+platform limits (Ditty, Tapestry, the terminal) take precedence only
+where the RC759 hardware has no analogue.
+
+**Two product goals, one core.**
+
+1. **Complete Mikro-Logo.** The RC759 system must be implemented in
+   full — Danish vocabulary, the single-line command line, the modal
+   `LÆR`/`RET` procedure editor, disk commands, messages and the
+   manual's limits — so that using it feels like sitting at a
+   Piccoline, not like using a lookalike. "Close enough" is not done.
+2. **Broader Logo.** The English, UCBLogo-style dialect must remain
+   available and keep growing. Mikro-Logo fidelity must never become a
+   cap on general Logo support.
+
+Implement these as two dialects/modes over the shared parser,
+interpreter and canvas core — not as a fork. `docs/ROADMAP.md` tracks
+Mikro-Logo completion separately from broader Logo work.
 
 The PDF is a scan of a Danish manual; extract text with
 `pdftotext -layout`. Provenance:
 <https://rc700.dk/documentation.php> (MD5
-`8984ca01a444ca733fa5d86aec5600d1`). The dialect actually implemented
-is documented in [docs/LANGUAGE.md](docs/LANGUAGE.md).
+`8984ca01a444ca733fa5d86aec5600d1`). The dialects are documented in
+[docs/LANGUAGE.md](docs/LANGUAGE.md).
+
+## Documentation map
+
+- `README.md` — human-facing overview and quick start.
+- `ARCHITECTURE.md` — module map, invariants, design decisions.
+- `docs/LANGUAGE.md` — language reference (`logo` dialect, `mikro`
+  plan).
+- `docs/ROADMAP.md` — Mikro-Logo completion and broader Logo tracks.
+- `docs/UPSTREAM.md` — needs that belong in Ditty/portty/coffer.
+- `docs/PICCOLINE_Mikro-Logo_Brugervejledning_apr1985.pdf` —
+  authoritative Mikro-Logo specification.
+- `CONTRIBUTING.md` — development setup, formatting, PR rules.
 
 ## Build & run
 
@@ -41,7 +69,7 @@ is documented in [docs/LANGUAGE.md](docs/LANGUAGE.md).
 bin/logo                        # interactive TUI (needs Tapestry + TTY)
 bin/logo examples/star.logo     # headless run, prints Braille picture
 bin/logo -e 'FD 100 RT 90'      # one-liner
-make check                      # test suite (headless, 142 assertions)
+make check                      # full test suite (TUI tests need Tapestry)
 make run EXAMPLE=examples/spiral.logo
 ```
 
@@ -62,8 +90,27 @@ DITTY_LISP_PATH="$PWD/lisp" ditty tests/test-parser.lisp
   `*load-pathname*`-relative path, define local assert helpers, print
   PASS/FAIL, `(exit 1)` on failure. All must run headlessly.
 - `tests/test-tui.lisp` needs Tapestry; it exercises the Elm model
-  functions directly, never `app-run`.
+  functions directly, never `app-run`. If Tapestry is not installed in
+  Ditty's library path, point `DITTY_LISP_PATH` at both trees:
+  `DITTY_LISP_PATH="$PWD/lisp:/path/to/tapestry/lisp" make check`.
 - `tests/test-examples.lisp` runs every `examples/*.logo`.
+- Add or update tests for every behavior change; a bug fix without a
+  regression test is incomplete.
+
+## Code style
+
+Follow [CONTRIBUTING.md](CONTRIBUTING.md) for the full rules and run
+`make format-check`. The essentials:
+
+- 2-space indent, kebab-case names; internal helpers use the `logo-`
+  prefix; public API is exported from `lisp/logo.lisp`.
+- Ditty Lisp, not Common Lisp: `set!` not `setq`, `progn` not `begin`,
+  `#t` as the `cond` default, `let*` for sequential bindings.
+- Keep interpreter/turtle/canvas code pure where possible and thread
+  state explicitly; never hide terminal or Tapestry dependencies in
+  headless modules.
+- Errors are values: check `error?` before destructuring any result
+  (see gotcha 2 below).
 
 ## Architecture (short version)
 
@@ -115,6 +162,10 @@ source -> parser (arity-driven, 2-pass) -> AST -> interpreter
 
 ## Conventions
 
+- State which track a change serves: **Mikro-Logo parity** (cite the
+  manual section) or **broader Logo**. Update `docs/ROADMAP.md` and,
+  for language changes, `docs/LANGUAGE.md`; shared-core changes must
+  keep both dialects passing.
 - Modules are internal files loaded by `lisp/logo.lisp` into the
   `logo` package (Tapestry pattern); public API is exported there.
   Add new public functions to the export list.
@@ -123,3 +174,15 @@ source -> parser (arity-driven, 2-pass) -> AST -> interpreter
 - New backends: `graphics.lisp` + CLI flag in `logo-main.lisp`.
 - Upstream needs (Ditty/portty/coffer) go in `docs/UPSTREAM.md`, not
   as TODOs scattered in code.
+
+## Commits and pull requests
+
+- Before committing, `make check` and `make format-check` must pass.
+- Commit subjects use a module prefix and imperative mood:
+  `parser: ...`, `interpreter: ...`, `tui: ...`, `docs: ...`,
+  `deps: ...`.
+- Explain _why_ in the body, name the track the change serves, and
+  cite the manual section for Mikro-Logo parity work.
+- Keep docs in sync in the same commit: `docs/ROADMAP.md` for track
+  progress, `docs/LANGUAGE.md` for language changes, and
+  `docs/UPSTREAM.md` for requests to Ditty/portty/coffer.

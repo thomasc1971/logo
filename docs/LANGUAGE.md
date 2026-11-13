@@ -5,6 +5,23 @@ classic school Logo, tuned for turtle graphics in a terminal. Words
 are case-insensitive (uppercased by the reader). `\` starts a comment
 to end of line.
 
+## Dialects
+
+One shared core, two dialects:
+
+- **`logo`** (English, documented below) — the UCBLogo-style dialect
+  this document specifies. It remains first-class and keeps growing.
+- **`mikro`** — complete RC759 Mikro-Logo from Regnecentralen's April
+  1985 manual ([PDF](PICCOLINE_Mikro-Logo_Brugervejledning_apr1985.pdf)):
+  Danish vocabulary, the `;`-separated single-line command line, the
+  modal `LÆR`/`RET` procedure editor, `:=` assignment, disk commands
+  and the manual's messages and limits. Using it should feel like
+  sitting at a Piccoline.
+
+The Mikro-Logo mode is not implemented yet; [ROADMAP.md](ROADMAP.md)
+tracks its completion separately from broader Logo support. The manual
+is authoritative for `mikro`; this file is authoritative for `logo`.
+
 ## Coordinates and heading
 
 - Origin at canvas centre, `x` right, `y` up.
@@ -81,8 +98,12 @@ See `examples/`: `square.logo`, `house.logo`, `spiral.logo`,
 
 ## Not yet implemented (planned)
 
-- Danish aliases (`FREM`, `HØJRE`, …) from the RC759 era — the
-  registry makes these cheap; a locale table is planned.
-- `SEED`/`RANDOM` seeding from Logo, `LABEL`/`GPRINT`, text output
-  on the canvas (`SETPC` is recorded but not yet rendered per-colour),
-  multi-turtle, `BYE`.
+- **Mikro-Logo (`mikro`) dialect** — the complete RC759 system: Danish
+  vocabulary (`FREM`, `HØJRE`, `BEGYND`/`SLUT`, …), `;`-separated
+  command lines, the modal `LÆR`/`RET` editor, `:=` assignment, disk
+  commands and the manual's messages and limits. See
+  [ROADMAP.md](ROADMAP.md) and the
+  [manual](PICCOLINE_Mikro-Logo_Brugervejledning_apr1985.pdf).
+- Broader Logo: `SEED`/`RANDOM` seeding from Logo, `LABEL`/`GPRINT`,
+  text output on the canvas (`SETPC` is recorded but not yet rendered
+  per-colour), multi-turtle, `BYE`.

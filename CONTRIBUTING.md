@@ -13,6 +13,20 @@ Prerequisites:
   (`make install`) so `(require 'tapestry)` resolves via Ditty's
   library search path (XDG data dirs, `DITTY_LISP_PATH`).
 
+## Compatibility targets
+
+- **Mikro-Logo parity** is the primary track: complete the RC759
+  Mikro-Logo from the [April 1985
+  manual](docs/PICCOLINE_Mikro-Logo_Brugervejledning_apr1985.pdf), so
+  that using it feels like sitting at a Piccoline. Cite the manual
+  section in PRs and update the matching [ROADMAP.md](docs/ROADMAP.md)
+  item.
+- **Broader Logo** is the other track: English/UCBLogo-style support
+  must remain first-class and keep growing. Never solve a Logo problem
+  by narrowing the dialect to the RC759 subset.
+- State which track a change serves. Shared parser/interpreter/canvas
+  changes must keep both dialects passing.
+
 ## Running
 
 ```sh
@@ -99,6 +113,8 @@ LISP_FMT=/path/to/lisp-fmt.lisp` overrides), `emacs/*.el` with Emacs
 ## Pull requests
 
 - `make check` must pass; `make format-check` must pass.
-- Update `docs/LANGUAGE.md` for language changes, `docs/UPSTREAM.md`
-  for requests to Ditty/portty/coffer.
-- Clear commit messages explaining _why_.
+- Update [docs/ROADMAP.md](docs/ROADMAP.md) for progress on either
+  track, `docs/LANGUAGE.md` for language changes, and
+  `docs/UPSTREAM.md` for requests to Ditty/portty/coffer.
+- Clear commit messages explaining _why_, including which track the
+  change serves and the manual section for Mikro-Logo parity work.

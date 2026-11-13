@@ -20,6 +20,26 @@ END
 SQUARE 100
 ```
 
+## Goals
+
+Two goals guide the project:
+
+1. **A complete RC759 Mikro-Logo.** The guiding specification is
+   Regnecentralen's _PICCOLINE – Mikro-Logo – Brugervejledning_
+   (April 1985), kept in the repository at
+   [`docs/PICCOLINE_Mikro-Logo_Brugervejledning_apr1985.pdf`](docs/PICCOLINE_Mikro-Logo_Brugervejledning_apr1985.pdf).
+   Mikro-Logo mode is not a themed subset: it must implement the whole
+   system — Danish command words, the single-line command line with
+   `;`, the modal `lær`/`ret` procedure editor, disk commands,
+   messages and limits — so that using it feels like sitting at a
+   Piccoline.
+2. **Broader Logo.** The English `TO`/`END` dialect remains
+   first-class, and support for standard/UCBLogo-style Logo keeps
+   growing. The RC759 vocabulary and limits are a mode, not a cap on
+   the interpreter.
+
+See [docs/ROADMAP.md](docs/ROADMAP.md) for the milestones on both tracks.
+
 ## Quick start
 
 Prerequisites: [Ditty](https://github.com/chestso/ditty) 0.9.0+ — the
@@ -44,13 +64,18 @@ The interactive TUI (Tapestry Elm application):
 - picture pane (Braille canvas, boxed) · transcript pane (PRINT output
   and errors) · `? ` prompt line with history (`↑`/`↓`)
 - type Logo commands, press Enter; `q` or Esc on an empty line quits
-- `TO ... END` definitions and `MAKE` variables persist across lines
+- single-line input: `MAKE` variables and turtle state persist across
+  lines, but a `TO ... END` definition must be called in the same
+  submission (procedure definitions in earlier submissions are not yet
+  visible to the parser; see [docs/ROADMAP.md](docs/ROADMAP.md))
 
 ## What it is
 
 - **Interpreter** (`lisp/logo/`): tokenizer + arity-driven parser,
   evaluator with procedures, `REPEAT`/`IF`/`RUN`, `MAKE`/`THING`,
-  recursion via `OUTPUT`/`STOP`. Pure Lisp on Ditty — no C code.
+  recursion via `OUTPUT`/`STOP`. One shared core serves two dialects:
+  the English `logo` dialect and a planned, complete RC759
+  `mikro` dialect. Pure Lisp on Ditty — no C code.
 - **Turtle + canvas**: pure functional turtle state; a backend-
   independent canvas (segment list) rasterized by Bresenham.
 - **Graphics backends** (`graphics.lisp`): `canvas` (Braille U+2800,
@@ -58,12 +83,16 @@ The interactive TUI (Tapestry Elm application):
   coffer), `kitty` / `iterm2` (planned — Ditty 0.8 provides
   `base64-encode`; see [docs/UPSTREAM.md](docs/UPSTREAM.md)).
 - **TUI** (`tui.lisp`): Tapestry Elm app mirroring the Piccoline's
-  split screen — picture above, work area below.
+  split screen — picture above, work area below. The modal
+  `lær`/`ret` procedure editor and the rest of the Piccoline screen
+  behaviour are roadmap goals, not optional polish.
 
-The Logo dialect is documented in
-[docs/LANGUAGE.md](docs/LANGUAGE.md); where this project needs features
-from Ditty or portty/coffer, they are tracked in
-[docs/UPSTREAM.md](docs/UPSTREAM.md) and
+The `logo` dialect is documented in
+[docs/LANGUAGE.md](docs/LANGUAGE.md); the April 1985 manual is the
+reference for the `mikro` dialect
+([PDF](docs/PICCOLINE_Mikro-Logo_Brugervejledning_apr1985.pdf)). Where
+this project needs features from Ditty or portty/coffer, they are
+tracked in [docs/UPSTREAM.md](docs/UPSTREAM.md) and
 [docs/ROADMAP.md](docs/ROADMAP.md).
 
 ## Layout
@@ -83,7 +112,7 @@ lisp/logo/
   tui.lisp            Tapestry Elm application
 examples/*.logo       square, house, spiral, star, circle
 tests/test-*.lisp     headless test suites (make check)
-docs/                 LANGUAGE, UPSTREAM, ROADMAP
+docs/                 LANGUAGE, UPSTREAM, ROADMAP, Mikro-Logo manual
 emacs/logo-mode.el    Emacs major mode (font-lock)
 ```
 
