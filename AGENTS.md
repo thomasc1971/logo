@@ -145,6 +145,10 @@ source -> parser (arity-driven, 2-pass) -> AST -> interpreter
    vectors (there is no `vector-length`). `(make-vector n)` with no
    fill is an _empty_ vector. `let`/`progn` do not check error
    propagation. `string-prefix?` is `(string-prefix? PREFIX STRING)`.
+   Case folding and character classes are ASCII-only
+   (`string-upcase`, `char-upcase`, `char-alphabetic?` leave `æ`/`ø`/`å`
+   alone). Use `logo-upcase` for Danish words and `logo-letter?`
+   for word characters; do not call the Ditty versions on user text.
 4. **Tapestry symbols**: use qualified `tapestry:...` in `tui.lisp`;
    `use-package` inside a function body does not reliably extend the
    defining package. Headless code must load without Tapestry.

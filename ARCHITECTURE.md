@@ -26,21 +26,22 @@ Tapestry view — both thin.
 
 ## Module map
 
-| File                         | Role                                                                                                        |
-| ---------------------------- | ----------------------------------------------------------------------------------------------------------- |
-| `lisp/logo.lisp`             | Entry point. Defines the `logo` package, loads modules in order (Tapestry pattern), exports the public API. |
-| `lisp/logo/math.lisp`        | `logo-pi`, degree↔radian conversion, heading wrap. Numerics come from Ditty (see below).                    |
-| `lisp/logo/canvas.lisp`      | Segment-list canvas, Bresenham rasterizer, Braille renderer. Zero terminal knowledge.                       |
-| `lisp/logo/turtle.lisp`      | Turtle state as an alist; every op returns a new state.                                                     |
-| `lisp/logo/primitives.lisp`  | Two registries: commands `(turtle args) -> turtle'`, queries `(turtle args) -> value`.                      |
-| `lisp/logo/parser.lisp`      | English tokenizer + two-pass parser (scan `TO` arities, then arity-driven descent).                         |
-| `lisp/logo/mikro.lisp`       | Mikro front end: line-aware tokenizer, infix expressions, block forms, procedure compiler.                  |
-| `lisp/logo/interpreter.lisp` | State-threading evaluator; `OUTPUT`/`STOP` as explicit signal values; procedure source store.               |
-| `lisp/logo/repl.lisp`        | Headless one-line evaluation shared by the TUI and tests; dialect dispatch and output diffing.              |
-| `lisp/logo/editor.lisp`      | Headless 21-line procedure-editor buffer and cursor/line operations; no Tapestry or terminal dependency.    |
-| `lisp/logo/graphics.lisp`    | Capability helpers over Ditty's `terminal` alist, canvas + sixel encoders.                                  |
-| `lisp/logo/tui.lisp`         | Tapestry Elm app: model/update/view mirroring the RC759 split screen, key mapping, editor view.             |
-| `logo-main.lisp`             | CLI dispatch on `*command-line-args*` (TUI / file / `-e`, `--dialect`).                                     |
+| File                          | Role                                                                                                        |
+| ----------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| `lisp/logo.lisp`              | Entry point. Defines the `logo` package, loads modules in order (Tapestry pattern), exports the public API. |
+| `lisp/logo/math.lisp`         | `logo-pi`, degree↔radian conversion, heading wrap. Numerics come from Ditty (see below).                    |
+| `lisp/logo/canvas.lisp`       | Segment-list canvas, Bresenham rasterizer, Braille renderer. Zero terminal knowledge.                       |
+| `lisp/logo/turtle.lisp`       | Turtle state as an alist; every op returns a new state.                                                     |
+| `lisp/logo/primitives.lisp`   | Two registries: commands `(turtle args) -> turtle'`, queries `(turtle args) -> value`.                      |
+| `lisp/logo/parser.lisp`       | English tokenizer + two-pass parser (scan `TO` arities, then arity-driven descent).                         |
+| `lisp/logo/mikro.lisp`        | Mikro front end: line-aware tokenizer, infix expressions, block forms, procedure compiler.                  |
+| `lisp/logo/interpreter.lisp`  | State-threading evaluator; `OUTPUT`/`STOP` as explicit signal values; procedure source store.               |
+| `lisp/logo/repl.lisp`         | Headless one-line evaluation shared by the TUI and tests; dialect dispatch and output diffing.              |
+| `lisp/logo/editor.lisp`       | Headless 21-line procedure-editor buffer and cursor/line operations; no Tapestry or terminal dependency.    |
+| `lisp/logo/command-line.lisp` | Headless command-line buffer (text + cursor) and the manual §3 editing operations; no Tapestry dependency.  |
+| `lisp/logo/graphics.lisp`     | Capability helpers over Ditty's `terminal` alist, canvas + sixel encoders.                                  |
+| `lisp/logo/tui.lisp`          | Tapestry Elm app: model/update/view mirroring the RC759 split screen, key mapping, editor view.             |
+| `logo-main.lisp`              | CLI dispatch on `*command-line-args*` (TUI / file / `-e`, `--dialect`).                                     |
 
 ## Key design decisions
 
@@ -117,9 +118,12 @@ canvas are untouched.
 
 `editor.lisp` owns only the fixed 21-line page and cursor-editing
 semantics. It has no Tapestry or terminal dependency, so its tests run
-without a TTY. `tui.lisp` is the adapter: it maps Tapestry key names to
-editor operations and renders the page with an inverse-video block
-cursor (Tapestry hides the hardware cursor). The interpreter state keeps
+without a TTY. `command-line.lisp` is the same idea for the single
+command line: a `(text . cursor)` pair and the manual §3 operations
+(left/right/start/end, TEGN IND, SLET TEGN, backspace, A1). `tui.lisp`
+is the adapter: it maps Tapestry key names to these operations and
+renders both buffers with an inverse-video block cursor (Tapestry hides
+the hardware cursor). The interpreter state keeps
 canonical source text in a `sources` hash, which is what `RET` reopens.
 A failed A4 stores the draft in the TUI model and sets a `blocked`
 message in interpreter state; `logo-call-procedure` refuses to run any

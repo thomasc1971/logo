@@ -127,8 +127,8 @@
   (cond
     ((and (pair? expr) (eq? (car expr) ':var)) (cadr expr))
     ((and (pair? expr) (eq? (car expr) ':word)) (cadr expr))
-    ((and (pair? expr) (eq? (car expr) ':string)) (string-upcase (cadr expr)))
-    ((string? expr) (string-upcase expr))
+    ((and (pair? expr) (eq? (car expr) ':string)) (logo-upcase (cadr expr)))
+    ((string? expr) (logo-upcase expr))
     (#t (error (format nil "not a variable name: ~a" expr)))))
 
 ;; ---------------------------------------------------------------------------
@@ -310,7 +310,7 @@
              (cons (car result)
               (logo-lookup (car result)
                (if (string? (cdr result))
-                 (string-upcase (cdr result))
+                 (logo-upcase (cdr result))
                  (cdr result)))))))))
     ((eq? (car expr) ':word)
      ;; Bare word: variable value, zero-arg procedure call, else the word

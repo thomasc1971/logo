@@ -35,6 +35,12 @@
  '((:word "FREM") (:num 10) (:semicolon) (:word "VENSTRE") (:num 90))
  (logo-mikro-tokenize "frem 10; venstre 90")
  "tokenizer keeps line and command boundaries")
+(assert-equal "LÆR" (logo-upcase "lær")
+ "Danish upcasing folds æ, ø and å")
+(assert-equal '((:word "LÆR")) (logo-mikro-tokenize "lær")
+ "tokenizer uppercases Danish command words")
+(assert-equal '((:word "HJØRNE")) (logo-mikro-tokenize "hjørne")
+ "tokenizer accepts Danish letters in names")
 (assert-equal
  '((cmd "FD" 10) (cmd "LT" 90) (cmd "FD" 10))
  (logo-mikro-parse "frem 10; venstre 90; frem 10" 'command-line)
@@ -181,6 +187,13 @@ spiral 2 90
 (define no-slut (logo-mikro-compile-lines (list "begynd x" "frem 1")))
 
 (assert-equal 'ok (car no-slut) "compiler accepts a body without SLUT")
+
+(define danish
+  (logo-mikro-compile-lines (list "begynd hjørne side" "frem side" "slut")))
+
+(assert-equal 'ok (car danish) "compiler accepts a Danish procedure name")
+(assert-equal "HJØRNE" (cadr danish)
+ "compiler folds æ, ø and å in procedure names")
 
 (define too-long
   (logo-mikro-compile-lines

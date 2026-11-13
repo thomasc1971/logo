@@ -32,6 +32,7 @@
 (load (concat *logo-dir* "logo/interpreter.lisp"))
 (load (concat *logo-dir* "logo/repl.lisp"))
 (load (concat *logo-dir* "logo/editor.lisp"))
+(load (concat *logo-dir* "logo/command-line.lisp"))
 (load (concat *logo-dir* "logo/graphics.lisp"))
 (load (concat *logo-dir* "logo/tui.lisp"))
 
@@ -50,7 +51,7 @@
  ;; primitives.lisp
  'logo-primitive-arity
  ;; parser.lisp
- 'logo-tokenize 'logo-parse
+ 'logo-tokenize 'logo-parse 'logo-upcase 'logo-letter?
  ;; mikro.lisp
  'logo-mikro-parse 'logo-mikro-compile-lines
  ;; editor.lisp
@@ -61,6 +62,13 @@
  'logo-editor-insert-text 'logo-editor-insert-space 'logo-editor-backspace
  'logo-editor-delete 'logo-editor-kill-to-end 'logo-editor-delete-line
  'logo-editor-insert-line 'logo-editor-return 'logo-editor-text
+ ;; command-line.lisp
+ 'logo-command-line-make 'logo-command-line-text 'logo-command-line-cursor
+ 'logo-command-line-set 'logo-command-line-left 'logo-command-line-right
+ 'logo-command-line-start 'logo-command-line-finish
+ 'logo-command-line-insert-text 'logo-command-line-insert-space
+ 'logo-command-line-backspace 'logo-command-line-delete
+ 'logo-command-line-kill-to-end
  ;; interpreter.lisp
  'logo-interp-make 'logo-interp-turtle 'logo-run 'logo-run-file
  'logo-eval-program 'logo-truthy? 'logo-interp-sources 'logo-interp-blocked

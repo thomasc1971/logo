@@ -41,11 +41,18 @@ syntax into the shared AST; the English dialect is unchanged.
 - **Done:** command-line semantics for one line executed whole on
   Return, `;` between statements, ESC cancel, and rejection of
   procedure definitions at the prompt.
+- **Done:** command-line cursor editing (manual §3): block cursor,
+  left/right, up/down as start/end, TEGN IND, SLET TEGN, backspace, A1
+  via `C-k`, and F1 recall of the previous sentence line (command lines
+  are skipped). The prompt is `LOGO>`.
+- **Done:** Danish letters fold case in command words and names, so
+  `lær` is the same command as `LÆR` (Ditty's `string-upcase` is ASCII
+  only).
 - **Done:** assignment `variabel := udtryk` and `variabel = udtryk`.
 - **Done:** parse Mikro calls against procedures already in interpreter
   state, so editor-defined procedures can be called from later lines.
 - **Remaining:** erase mode for `SLET` (currently pen-up), `UDPORT`,
-  command-line cursor editing and F1 recall, and the input sentences.
+  and the input sentences.
 - English dialect keeps `TO`/`END`, bracket lists, `MAKE`/`THING` and
   remains the default.
 

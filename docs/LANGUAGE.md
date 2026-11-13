@@ -39,6 +39,26 @@ frem 100; venstre 90; frem 100
 Procedure definitions are not allowed on the command line;
 `sætning/begynd/slut er ikke tilladt` (appendix E.2.1). Use the editor.
 
+The prompt is `LOGO>`, and the line has a block cursor (manual §3):
+
+| Key       | Action                                                        |
+| --------- | ------------------------------------------------------------- |
+| `←` / `→` | move the cursor one place left / right                        |
+| `↑` / `↓` | move the cursor to the start / end of the line                |
+| Insert    | TEGN IND: shift the line right and insert one blank           |
+| Backspace | delete the character left of the cursor                       |
+| Delete    | SLET TEGN: delete the character under the cursor              |
+| `C-k`     | A1: delete the rest of the line from the cursor               |
+| `F1`      | recall the previous sentence line, skipping commands like LÆR |
+| Return    | execute the whole line, wherever the cursor stands            |
+| `ESC`     | abandon and clear the line                                    |
+
+Return always executes the entire line, not just the part before the
+cursor. `F1` walks back through the submitted sentence lines and skips
+command lines such as `lær`, `ret` and `hjælp`; repeated presses keep
+walking backwards. Command words and names are case-insensitive for the
+Danish letters too: `lær` and `LÆR` are the same command.
+
 ### Procedures
 
 ```
@@ -117,7 +137,9 @@ Known deviations while the rest of the manual is implemented:
   `glem`, `kopi`, `fortryd`, `tegnigen`, `status`, `hjælp` and `farvel`
   from the manual are not implemented yet (`farvel` quits the TUI).
 - Physical A1–A4 keys do not exist on modern terminals; the editor uses
-  `C-k`, `C-d`, `C-o`, `C-s` as equivalents (see below).
+  `C-k`, `C-d`, `C-o`, `C-s` as equivalents (see below), and the command
+  line uses `C-k` for A1. Modern terminals have Home/End keys in addition
+  to the RC759's up/down-as-start/end binding.
 
 ### The LÆR/RET editor
 

@@ -108,7 +108,7 @@
              (let scan ((j i))
                (if
                  (or (>= j len) (not (logo-word-char? (string-ref source j))))
-                 (let* ((name (string-upcase (substring source i j))))
+                 (let* ((name (logo-upcase (substring source i j))))
                    (if (equal? name "SÆTNING")
                      (let rest ((k j))
                        (if
@@ -627,13 +627,13 @@
          (if (>= i (length name))
            #t
            (let* ((c (string-ref name i)))
-             (if (or (char-alphabetic? c) (char-numeric? c))
+             (if (or (logo-letter? c) (char-numeric? c))
                (loop (+ i 1))
                #f))))))
 
 (defun logo-mikro-first-word (line)
   (let* ((words (logo-mikro-words line)))
-    (if (null? words) "" (string-upcase (car words)))))
+    (if (null? words) "" (logo-upcase (car words)))))
 
 (defun logo-mikro-indent-body (body)
   "Return BODY with three-space indentation per nesting level.
@@ -681,8 +681,7 @@
     (let* ((header (logo-mikro-words (car trimmed)))
            (body (cdr trimmed)))
       (cond
-        ((or (null? header)
-             (not (equal? (string-upcase (car header)) "BEGYND")))
+        ((or (null? header) (not (equal? (logo-upcase (car header)) "BEGYND")))
          (list 'error "Fejl i begynd"))
         ((null? (cdr header)) (list 'error "Fejl i begynd"))
         (#t

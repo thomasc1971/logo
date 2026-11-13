@@ -52,7 +52,7 @@
                (if
                  (or (>= j len) (not (logo-word-char? (string-ref source j))))
                  (let* ((name (substring source (+ i 1) j)))
-                   (loop j (cons (list ':var (string-upcase name)) tokens)))
+                   (loop j (cons (list ':var (logo-upcase name)) tokens)))
                  (scan (+ j 1)))))
             ((char=? c #\")
              (let scan ((j (+ i 1)))
@@ -79,18 +79,47 @@
                (if
                  (or (>= j len) (not (logo-word-char? (string-ref source j))))
                  (let* ((name (substring source i j)))
-                   (loop j (cons (list ':word (string-upcase name)) tokens)))
+                   (loop j (cons (list ':word (logo-upcase name)) tokens)))
                  (scan (+ j 1)))))
             (#t
              (error (format nil "unexpected character ~a in Logo source" c)))))))))
 
+;; Ditty's string-upcase folds ASCII only, which would leave æ, ø and å
+;; lowercase and break Danish words such as lær. Fold the three Danish
+;; letters explicitly.
+(define *logo-upcase-letters*
+  (list (cons #\u00e6 #\u00c6) (cons #\u00f8 #\u00d8) (cons #\u00e5 #\u00c5)))
+
+(defun logo-upcase-char (c)
+  (let* ((pair (assoc c *logo-upcase-letters*)))
+    (if (null? pair) (char-upcase c) (cdr pair))))
+
+(defun logo-upcase (text)
+  "Uppercase TEXT, including the Danish letters æ, ø and å."
+  (let* ((len (length text)))
+    (let loop ((i 0)
+               (out ""))
+      (if (>= i len)
+        out
+        (loop (+ i 1)
+         (concat out
+          (char->string (logo-upcase-char (string-ref text i)))))))))
+
+(defun logo-letter? (c)
+  "True if C is a letter, including the Danish letters æ, ø and å.
+   Ditty's char-alphabetic? covers ASCII only, so the three Danish
+   letters are listed here to keep Danish names legal words."
+  (or (char-alphabetic? c) (char=? c #\u00e6) (char=? c #\u00f8)
+      (char=? c #\u00e5) (char=? c #\u00c6) (char=? c #\u00d8)
+      (char=? c #\u00c5)))
+
 (defun logo-word-start? (c)
   "True if C can start a Logo word."
-  (or (char-alphabetic? c) (char=? c #\_)))
+  (or (logo-letter? c) (char=? c #\_)))
 
 (defun logo-word-char? (c)
   "True if C can continue a Logo word."
-  (or (char-alphabetic? c) (char-numeric? c) (char=? c #\_) (char=? c #\?)
+  (or (logo-letter? c) (char-numeric? c) (char=? c #\_) (char=? c #\?)
       (char=? c #\!)))
 
 ;; ---------------------------------------------------------------------------

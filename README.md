@@ -63,7 +63,8 @@ make check                            # run the test suite
 The interactive TUI (Tapestry Elm application):
 
 - picture pane (Braille canvas, boxed) · transcript pane (PRINT output
-  and errors) · `? ` prompt line with history (`↑`/`↓`)
+  and errors) · `? ` prompt line with history (`↑`/`↓`); in Mikro mode
+  the prompt is `LOGO>`, with a movable block cursor instead
 - type Logo commands, press Enter; `q` or Esc on an empty line quits
   (English dialect)
 - UTF-8 input: a non-ASCII letter such as `å` in `PRINT "blåbær"` arrives
@@ -71,7 +72,10 @@ The interactive TUI (Tapestry Elm application):
 - `--mikro` switches to the Danish dialect: `frem`, `venstre`,
   `gentag`/`hertil`, `hvis`/`ellers`/`sluthvis`, infix expressions
   (`venstre 360/antal`), `;`-separated command lines, and the modal
-  `lær`/`ret` procedure editor (F5/F6). `farvel` quits.
+  `lær`/`ret` procedure editor (F5/F6). `farvel` quits. The command line
+  follows the manual's editing keys: `←`/`→`, `↑`/`↓` for start/end,
+  Insert, Delete, Backspace, and F1 to recall the previous sentence
+  line.
 - single-line command input: `MAKE` variables and turtle state persist
   across lines. In English, a `TO ... END` definition must be called in
   the same submission (procedure definitions in earlier submissions are
@@ -94,10 +98,11 @@ The interactive TUI (Tapestry Elm application):
   `base64-encode`; see [docs/UPSTREAM.md](docs/UPSTREAM.md)).
 - **TUI** (`tui.lisp`): Tapestry Elm app mirroring the Piccoline's
   split screen — picture above, work area below. Mikro mode includes the
-  modal `lær`/`ret` procedure editor: a 21-line page, cursor editing,
-  A1–A4 equivalents, automatic `slut` and three-space indentation, and
-  the compile-error/retry loop. The rest of the Piccoline screen
-  behaviour remains a roadmap goal.
+  `LOGO>` command line with a block cursor and the manual's editing keys
+  (including F1 recall), and the modal `lær`/`ret` procedure editor: a
+  21-line page, cursor editing, A1–A4 equivalents, automatic `slut` and
+  three-space indentation, and the compile-error/retry loop. The rest of
+  the Piccoline screen behaviour remains a roadmap goal.
 
 The `logo` dialect is documented in
 [docs/LANGUAGE.md](docs/LANGUAGE.md); the April 1985 manual is the

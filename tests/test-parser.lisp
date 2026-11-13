@@ -32,6 +32,10 @@
  (logo-tokenize "FD 10 \\ comment\n") "tokenize comment")
 (assert-equal '((:word "FD") (:num 10))
  (logo-tokenize "fd 10") "tokenizer uppercases words")
+(assert-equal '((:word "BLÅ")) (logo-tokenize "blå")
+ "tokenizer uppercases the Danish letters")
+(assert-equal '((:word "FD") (:var "MÅL")) (logo-tokenize "FD :mål")
+ "tokenizer uppercases Danish variable names")
 
 ;; Parser: flat command stream split by arity
 (assert-equal '((cmd "FD" 100) (cmd "RT" 90))
