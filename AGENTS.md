@@ -15,13 +15,22 @@ Ditty is the runtime.
 
 [`docs/PICCOLINE_Mikro-Logo_Brugervejledning_apr1985.pdf`](docs/PICCOLINE_Mikro-Logo_Brugervejledning_apr1985.pdf)
 — A/S Regnecentralen's _PICCOLINE – Mikro-Logo – Brugervejledning_
-(April 1985) — is the **guiding specification for this project**. When
-this repo does not answer a design or behavior question, follow the
-manual: screen layout, command-line semantics (one line, executed whole
-on Return, `;` between statements), the modal `lær`/`ret` procedure
-editor with `begynd` … `slut`, Danish command words, error messages,
-and limits such as one statement per line and at most 21 lines per
-procedure.
+(April 1985) — is the **guiding specification for this project**. A
+machine-readable transcription lives in [`docs/manual/`](docs/manual/):
+read
+[`PICCOLINE_Mikro-Logo_Brugervejledning_apr1985.md`](docs/manual/PICCOLINE_Mikro-Logo_Brugervejledning_apr1985.md)
+rather than extracting text from the scan. It mirrors the printed
+pages as `<!-- Side N -->` markers, embeds the scanned figures under
+`images/`, and `build.py` regenerates the HTML and PDF editions
+(requires `pandoc` and `weasyprint`). The scan remains the final
+authority if the transcription is unclear or looks wrong.
+
+When this repo does not answer a design or behavior question, follow
+the manual: screen layout, command-line semantics (one line, executed
+whole on Return, `;` between statements), the modal `lær`/`ret`
+procedure editor with `begynd` … `slut`, Danish command words, error
+messages, and limits such as one statement per line and at most 21
+lines per procedure.
 
 Known deviations **in Mikro-Logo mode** (English `TO`/`END` keywords
 there, a one-line REPL with no procedure editor, etc.) are gaps to
@@ -45,8 +54,8 @@ Implement these as two dialects/modes over the shared parser,
 interpreter and canvas core — not as a fork. `docs/ROADMAP.md` tracks
 Mikro-Logo completion separately from broader Logo work.
 
-The PDF is a scan of a Danish manual; extract text with
-`pdftotext -layout`. Provenance:
+The original PDF is a scan of a Danish manual; fall back to
+`pdftotext -layout` on it only to verify the transcription. Provenance:
 <https://rc700.dk/documentation.php> (MD5
 `8984ca01a444ca733fa5d86aec5600d1`). The dialects are documented in
 [docs/LANGUAGE.md](docs/LANGUAGE.md).
@@ -59,8 +68,11 @@ The PDF is a scan of a Danish manual; extract text with
   plan).
 - `docs/ROADMAP.md` — Mikro-Logo completion and broader Logo tracks.
 - `docs/UPSTREAM.md` — needs that belong in Ditty/portty/coffer.
-- `docs/PICCOLINE_Mikro-Logo_Brugervejledning_apr1985.pdf` —
-  authoritative Mikro-Logo specification.
+- `docs/manual/` — machine-readable transcription of the Mikro-Logo
+  manual: Markdown source with printed-page markers, scanned figures,
+  generated HTML/PDF, and the `build.py` rebuild script.
+- `docs/PICCOLINE_Mikro-Logo_Brugervejledning_apr1985.pdf` — original
+  scanned Mikro-Logo specification.
 - `CONTRIBUTING.md` — development setup, formatting, PR rules.
 
 ## Build & run
@@ -167,9 +179,9 @@ source -> parser (arity-driven, 2-pass) -> AST -> interpreter
 ## Conventions
 
 - State which track a change serves: **Mikro-Logo parity** (cite the
-  manual section) or **broader Logo**. Update `docs/ROADMAP.md` and,
-  for language changes, `docs/LANGUAGE.md`; shared-core changes must
-  keep both dialects passing.
+  manual section and printed page) or **broader Logo**. Update
+  `docs/ROADMAP.md` and, for language changes, `docs/LANGUAGE.md`;
+  shared-core changes must keep both dialects passing.
 - Modules are internal files loaded by `lisp/logo.lisp` into the
   `logo` package (Tapestry pattern); public API is exported there.
   Add new public functions to the export list.

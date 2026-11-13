@@ -1,0 +1,348 @@
+/* PICCOLINE Mikro-Logo Brugervejledning (April 1985) - Typewriter Style */
+
+@page {
+  size: A4 portrait;
+  margin: 15mm 18mm 15mm 18mm;
+}
+
+@page cover-page {
+  margin: 0;
+  @top-left { content: none; border: none; }
+  @top-center { content: none; border: none; }
+  @top-right { content: none; border: none; }
+  @bottom-left { content: none; }
+  @bottom-right { content: none; }
+}
+
+@page front-page {
+  @top-left { content: none; border: none; }
+  @top-center { content: none; border: none; }
+  @top-right { content: none; border: none; }
+  @bottom-left { content: none; }
+  @bottom-right { content: none; }
+}
+
+@page toc-page {
+  @top-left {
+    content: "INDHOLDSFORTEGNELSE";
+    font-family: "Courier New", Courier, monospace;
+    font-size: 9.5pt;
+    font-weight: bold;
+    border-bottom: 1.5px solid #000;
+    padding-bottom: 3px;
+    vertical-align: bottom;
+    width: 50%;
+    text-align: left;
+  }
+  @top-right {
+    content: "MIKRO-LOGO";
+    font-family: "Courier New", Courier, monospace;
+    font-size: 9.5pt;
+    font-weight: bold;
+    border-bottom: 1.5px solid #000;
+    padding-bottom: 3px;
+    vertical-align: bottom;
+    width: 50%;
+    text-align: right;
+  }
+  @bottom-left {
+    content: "A/S Regnecentralen";
+    font-family: "Courier New", Courier, monospace;
+    font-size: 9.5pt;
+    padding-top: 3px;
+    width: 50%;
+    text-align: left;
+  }
+  @bottom-right {
+    content: string(pnum);
+    font-family: "Courier New", Courier, monospace;
+    font-size: 9.5pt;
+    padding-top: 3px;
+    width: 50%;
+    text-align: right;
+  }
+}
+
+@page body-page:left {
+  @top-left {
+    content: string(chap-title);
+    font-family: "Courier New", Courier, monospace;
+    font-size: 9.5pt;
+    font-weight: bold;
+    border-bottom: 1.5px solid #000;
+    padding-bottom: 3px;
+    vertical-align: bottom;
+    width: 50%;
+    text-align: left;
+  }
+  @top-right {
+    content: "MIKRO-LOGO";
+    font-family: "Courier New", Courier, monospace;
+    font-size: 9.5pt;
+    font-weight: bold;
+    border-bottom: 1.5px solid #000;
+    padding-bottom: 3px;
+    vertical-align: bottom;
+    width: 50%;
+    text-align: right;
+  }
+  @bottom-left {
+    content: string(pnum);
+    font-family: "Courier New", Courier, monospace;
+    font-size: 9.5pt;
+    padding-top: 3px;
+    width: 50%;
+    text-align: left;
+  }
+  @bottom-right {
+    content: "A/S Regnecentralen";
+    font-family: "Courier New", Courier, monospace;
+    font-size: 9.5pt;
+    padding-top: 3px;
+    width: 50%;
+    text-align: right;
+  }
+}
+
+@page body-page:right {
+  @top-left {
+    content: "MIKRO-LOGO";
+    font-family: "Courier New", Courier, monospace;
+    font-size: 9.5pt;
+    font-weight: bold;
+    border-bottom: 1.5px solid #000;
+    padding-bottom: 3px;
+    vertical-align: bottom;
+    width: 50%;
+    text-align: left;
+  }
+  @top-right {
+    content: string(chap-title);
+    font-family: "Courier New", Courier, monospace;
+    font-size: 9.5pt;
+    font-weight: bold;
+    border-bottom: 1.5px solid #000;
+    padding-bottom: 3px;
+    vertical-align: bottom;
+    width: 50%;
+    text-align: right;
+  }
+  @bottom-left {
+    content: "A/S Regnecentralen";
+    font-family: "Courier New", Courier, monospace;
+    font-size: 9.5pt;
+    padding-top: 3px;
+    width: 50%;
+    text-align: left;
+  }
+  @bottom-right {
+    content: string(pnum);
+    font-family: "Courier New", Courier, monospace;
+    font-size: 9.5pt;
+    padding-top: 3px;
+    width: 50%;
+    text-align: right;
+  }
+}
+
+/* Base Body Styles */
+body {
+  font-family: "Courier Prime", "Courier New", Courier, monospace;
+  font-size: 9.5pt;
+  line-height: 1.34;
+  color: #111;
+  background-color: #f7f7f7;
+  margin: 0;
+  padding: 0;
+}
+
+/* Screen presentation: show as A4 pages */
+@media screen {
+  .book-page {
+    width: 170mm;
+    min-height: 250mm;
+    margin: 20px auto;
+    padding: 15mm 18mm;
+    background: #fff;
+    box-shadow: 0 0 10px rgba(0,0,0,0.15);
+    box-sizing: border-box;
+    position: relative;
+  }
+  .page-header-screen {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1.5px solid #000;
+    padding-bottom: 4px;
+    margin-bottom: 18px;
+    font-weight: bold;
+    font-size: 9.5pt;
+  }
+  .page-footer-screen {
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid #ccc;
+    padding-top: 4px;
+    margin-top: 25px;
+    font-size: 9.5pt;
+  }
+}
+
+@media print {
+  body {
+    background: transparent;
+  }
+  .book-page {
+    page-break-after: always;
+    padding: 0;
+    margin: 0;
+  }
+  .page-header-screen, .page-footer-screen {
+    display: none;
+  }
+}
+
+.cover {
+  page: cover-page;
+  text-align: center;
+  padding: 15mm 15mm !important;
+}
+
+.front-matter {
+  page: front-page;
+}
+
+.toc-p {
+  page: toc-page;
+}
+
+.body-p {
+  page: body-page;
+}
+
+.page-tag {
+  string-set: chap-title attr(data-chap), pnum attr(data-pnum);
+  visibility: hidden;
+  height: 0;
+  line-height: 0;
+  font-size: 0;
+  margin: 0;
+  padding: 0;
+}
+
+/* Headings */
+h1 {
+  font-size: 11pt;
+  font-weight: bold;
+  text-decoration: underline;
+  margin-top: 0.8em;
+  margin-bottom: 0.5em;
+  text-transform: uppercase;
+}
+
+h2 {
+  font-size: 10.5pt;
+  font-weight: bold;
+  text-decoration: underline;
+  margin-top: 0.7em;
+  margin-bottom: 0.4em;
+}
+
+h3 {
+  font-size: 10pt;
+  font-weight: bold;
+  text-decoration: underline;
+  margin-top: 0.6em;
+  margin-bottom: 0.3em;
+}
+
+p {
+  margin: 0.4em 0;
+  text-align: justify;
+}
+
+/* Figures & Images */
+img {
+  max-width: 80%;
+  max-height: 58mm;
+  height: auto;
+  display: block;
+  margin: 0.5em auto;
+}
+
+.figure {
+  text-align: center;
+  margin: 0.6em 0;
+  page-break-inside: avoid;
+}
+
+.cover img {
+  max-width: 50%;
+  max-height: 95mm;
+  height: auto;
+  margin: 1em auto;
+}
+
+.caption {
+  margin-top: 0.4em;
+  font-weight: bold;
+  font-size: 9pt;
+}
+
+/* Code & Preformatted Blocks */
+pre, .code-block {
+  font-family: inherit;
+  font-size: 9pt;
+  line-height: 1.3;
+  background-color: #fafafa;
+  border-left: 2.5px solid #666;
+  padding: 0.3em 0.6em;
+  margin: 0.5em 0;
+  white-space: pre;
+}
+
+code {
+  font-family: inherit;
+  font-size: 9pt;
+}
+
+.screen-box {
+  border: 1.5px solid #000;
+  padding: 0.5em;
+  margin: 0.6em 0;
+  background-color: #fff;
+  font-family: inherit;
+  white-space: pre;
+  line-height: 1.25;
+}
+
+/* Tables */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0.6em 0;
+  font-size: 9pt;
+}
+
+th, td {
+  text-align: left;
+  vertical-align: top;
+  padding: 2px 6px;
+}
+
+th {
+  border-bottom: 1.5px solid #000;
+  font-weight: bold;
+}
+
+.table-bordered td, .table-bordered th {
+  border: 1px solid #aaa;
+}
+
+ul {
+  margin: 0.5em 0;
+  padding-left: 1.8em;
+}
+
+li {
+  margin: 0.25em 0;
+}

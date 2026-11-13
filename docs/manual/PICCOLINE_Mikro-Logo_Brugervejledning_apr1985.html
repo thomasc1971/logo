@@ -1,0 +1,4827 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="utf-8">
+<title>PICCOLINE Mikro-Logo — Brugervejledning (April 1985)</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="book-page cover" id="page-titelblad">
+  <div class="page-tag" data-chap="" data-pnum=""></div>
+  
+  <div class="page-content">
+<section id="piccoline" data-align="center">
+<h1>PICCOLINE</h1>
+<h2 id="mikro-logo">Mikro-Logo</h2>
+<h3 id="brugervejledning">Brugervejledning</h3>
+<figure>
+<img src="images/cover-hand.png" alt="RC Piccoline Hand" />
+<figcaption aria-hidden="true">RC Piccoline Hand</figcaption>
+</figure>
+<p><strong>A/S Regnecentralen af 1979</strong><br />
+PN: 99000852</p>
+</section>
+  </div>
+  
+</div><div class="book-page front-matter" id="page-rygmærke">
+  <div class="page-tag" data-chap="" data-pnum=""></div>
+  
+  <div class="page-content">
+<h2 id="sektion-rygmaerke">Rygmærke</h2>
+<pre><code>PICCOLINE    Mikro-Logo    Brugervejledning    99000852</code></pre>
+  </div>
+  
+</div><div class="book-page front-matter" id="page-fanebladsoversigt">
+  <div class="page-tag" data-chap="" data-pnum=""></div>
+  
+  <div class="page-content">
+<h2 id="sektion-fanebladsoversigt">Fanebladsoversigt</h2>
+<ul>
+<li><strong>Indledning</strong></li>
+<li><strong>Introduktion til Logo</strong></li>
+<li><strong>Skærmen</strong></li>
+<li><strong>Sætninger</strong></li>
+<li><strong>Kommandoer</strong></li>
+<li><strong>Overvågning af udførelse af sætninger</strong></li>
+<li><strong>Forskelle til Mikro-Logo på Piccolo</strong></li>
+<li><strong>Distributionsdisketten</strong></li>
+<li><strong>Læsevejledning for nybegyndere</strong></li>
+<li><strong>ASCII tegnsættet</strong></li>
+<li><strong>Fejlmeddelelser</strong></li>
+<li><strong>Oversigt over sætninger og kommandoer</strong></li>
+<li><strong>Registre</strong></li>
+</ul>
+  </div>
+  
+</div><div class="book-page front-matter" id="page-kolofon">
+  <div class="page-tag" data-chap="" data-pnum=""></div>
+  
+  <div class="page-content">
+<h2 id="sektion-kolofon">Kolofon</h2>
+<p><strong>Nøgleord:</strong> Logo, Mikro-Logo, PICCOLINE, Partner<br />
+<strong>Resumé:</strong> Denne manual beskriver Mikro-Logo på PICCOLINE
+og Partner mikrodatamater.<br />
+<strong>Udgave:</strong> april 1985</p>
+<p>Copyright © 1985 A/S Regnecentralen af 1979<br />
+RC Computer A/S<br />
+Udgivet af A/S Regnecentralen af 1979, København</p>
+<p>Brugere af denne manual gøres opmærksom på, at specifikationerne heri
+uden forudgående varsel kan ændres af RC. RC er ikke ansvarlig for
+typografiske fejl eller regnefejl, som kan forekomme i denne manual, og
+er ikke ansvarlig for skader forårsaget af benyttelsen af dette
+dokument.</p>
+  </div>
+  
+</div><div class="book-page toc-p" id="side-i">
+  <div class="page-tag" data-chap="INDHOLDSFORTEGNELSE" data-pnum="i"></div>
+  <div class="page-header-screen"><span>MIKRO-LOGO</span><span>INDHOLDSFORTEGNELSE</span></div>
+  <div class="page-content">
+<h2 id="indholdsfortegnelse">INDHOLDSFORTEGNELSE</h2>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">Afsnit</th>
+<th style="text-align: left;">Emne</th>
+<th style="text-align: left;">Side</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>1.</strong></td>
+<td style="text-align: left;"><strong>INDLEDNING</strong></td>
+<td style="text-align: left;"><a href="#side-1">1</a></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>2.</strong></td>
+<td style="text-align: left;"><strong>INTRODUKTION TIL
+LOGO</strong></td>
+<td style="text-align: left;"><a href="#side-2">2</a></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>3.</strong></td>
+<td style="text-align: left;"><strong>SKÆRMEN</strong></td>
+<td style="text-align: left;"><a href="#side-3">3</a></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>4.</strong></td>
+<td style="text-align: left;"><strong>SÆTNINGER</strong></td>
+<td style="text-align: left;"><a href="#side-7">7</a></td>
+</tr>
+<tr>
+<td style="text-align: left;">4.1</td>
+<td style="text-align: left;">Variable og udtryk</td>
+<td style="text-align: left;"><a href="#side-8">8</a></td>
+</tr>
+<tr>
+<td style="text-align: left;">4.1.1</td>
+<td style="text-align: left;">Variable</td>
+<td style="text-align: left;"><a href="#side-8">8</a></td>
+</tr>
+<tr>
+<td style="text-align: left;">4.1.2</td>
+<td style="text-align: left;">Udtryk</td>
+<td style="text-align: left;"><a href="#side-8">8</a></td>
+</tr>
+<tr>
+<td style="text-align: left;">4.2</td>
+<td style="text-align: left;">Tegnesætninger</td>
+<td style="text-align: left;"><a href="#side-12">12</a></td>
+</tr>
+<tr>
+<td style="text-align: left;">4.2.1</td>
+<td style="text-align: left;">Position</td>
+<td style="text-align: left;"><a href="#side-12">12</a></td>
+</tr>
+<tr>
+<td style="text-align: left;">4.2.2</td>
+<td style="text-align: left;">Retning</td>
+<td style="text-align: left;"><a href="#side-14">14</a></td>
+</tr>
+<tr>
+<td style="text-align: left;">4.2.3</td>
+<td style="text-align: left;">Pentype</td>
+<td style="text-align: left;"><a href="#side-15">15</a></td>
+</tr>
+<tr>
+<td style="text-align: left;">4.2.4</td>
+<td style="text-align: left;">Andre sætninger til skildpadden</td>
+<td style="text-align: left;"><a href="#side-15">15</a></td>
+</tr>
+<tr>
+<td style="text-align: left;">4.2.5</td>
+<td style="text-align: left;">Eksempler med simple tegninger</td>
+<td style="text-align: left;"><a href="#side-17">17</a></td>
+</tr>
+<tr>
+<td style="text-align: left;">4.3</td>
+<td style="text-align: left;">Tildelings-, indlæsnings- og
+udskrivningssætninger</td>
+<td style="text-align: left;"><a href="#side-22">22</a></td>
+</tr>
+<tr>
+<td style="text-align: left;">4.3.1</td>
+<td style="text-align: left;">Tildelingssætninger</td>
+<td style="text-align: left;"><a href="#side-22">22</a></td>
+</tr>
+<tr>
+<td style="text-align: left;">4.3.2</td>
+<td style="text-align: left;">Indlæsningssætninger</td>
+<td style="text-align: left;"><a href="#side-22">22</a></td>
+</tr>
+<tr>
+<td style="text-align: left;">4.3.3</td>
+<td style="text-align: left;">Udlæsningssætninger</td>
+<td style="text-align: left;"><a href="#side-23">23</a></td>
+</tr>
+<tr>
+<td style="text-align: left;">4.4</td>
+<td style="text-align: left;">Kontrolsætninger</td>
+<td style="text-align: left;"><a href="#side-24">24</a></td>
+</tr>
+<tr>
+<td style="text-align: left;">4.4.1</td>
+<td style="text-align: left;">Procedurekald</td>
+<td style="text-align: left;"><a href="#side-24">24</a></td>
+</tr>
+<tr>
+<td style="text-align: left;">4.4.2</td>
+<td style="text-align: left;">Betingelsessætninger</td>
+<td style="text-align: left;"><a href="#side-26">26</a></td>
+</tr>
+<tr>
+<td style="text-align: left;">4.4.3</td>
+<td style="text-align: left;">Gentagelsessætninger</td>
+<td style="text-align: left;"><a href="#side-27">27</a></td>
+</tr>
+<tr>
+<td style="text-align: left;">4.4.4</td>
+<td style="text-align: left;">Definition af procedurer</td>
+<td style="text-align: left;"><a href="#side-28">28</a></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>5.</strong></td>
+<td style="text-align: left;"><strong>KOMMANDOER</strong></td>
+<td style="text-align: left;"><a href="#side-31">31</a></td>
+</tr>
+<tr>
+<td style="text-align: left;">5.1</td>
+<td style="text-align: left;">Procedurekommandoer</td>
+<td style="text-align: left;"><a href="#side-32">32</a></td>
+</tr>
+<tr>
+<td style="text-align: left;">5.1.1</td>
+<td style="text-align: left;">Definition af procedurer</td>
+<td style="text-align: left;"><a href="#side-32">32</a></td>
+</tr>
+<tr>
+<td style="text-align: left;">5.1.2</td>
+<td style="text-align: left;">Administration af procedurer</td>
+<td style="text-align: left;"><a href="#side-36">36</a></td>
+</tr>
+<tr>
+<td style="text-align: left;">5.2</td>
+<td style="text-align: left;">Diskettekommandoer</td>
+<td style="text-align: left;"><a href="#side-37">37</a></td>
+</tr>
+<tr>
+<td style="text-align: left;">5.3</td>
+<td style="text-align: left;">Tegning på andre medier</td>
+<td style="text-align: left;"><a href="#side-39">39</a></td>
+</tr>
+<tr>
+<td style="text-align: left;">5.4</td>
+<td style="text-align: left;">Andre kommandoer</td>
+<td style="text-align: left;"><a href="#side-41">41</a></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>6.</strong></td>
+<td style="text-align: left;"><strong>OVERVÅGNING AF UDFØRELSE AF
+SÆTNINGER</strong></td>
+<td style="text-align: left;"><a href="#side-43">43</a></td>
+</tr>
+</tbody>
+</table>
+  </div>
+  <div class="page-footer-screen"><span>A/S Regnecentralen</span><span>Side i</span></div>
+</div><div class="book-page toc-p" id="side-ii">
+  <div class="page-tag" data-chap="INDHOLDSFORTEGNELSE" data-pnum="ii"></div>
+  <div class="page-header-screen"><span>INDHOLDSFORTEGNELSE</span><span>MIKRO-LOGO</span></div>
+  <div class="page-content">
+<h3 id="bilag">BILAG:</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Bilag</th>
+<th style="text-align: left;">Emne</th>
+<th style="text-align: left;">Side</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>A.</strong></td>
+<td style="text-align: left;"><strong>FORSKELLE TIL MIKRO-LOGO PÅ
+PICCOLO</strong></td>
+<td style="text-align: left;"><a href="#side-45">45</a></td>
+</tr>
+<tr>
+<td style="text-align: left;">A.1</td>
+<td style="text-align: left;">Sætninger</td>
+<td style="text-align: left;"><a href="#side-45">45</a></td>
+</tr>
+<tr>
+<td style="text-align: left;">A.2</td>
+<td style="text-align: left;">Kommandoer</td>
+<td style="text-align: left;"><a href="#side-46">46</a></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>B.</strong></td>
+<td
+style="text-align: left;"><strong>DISTRIBUTIONSDISKETTEN</strong></td>
+<td style="text-align: left;"><a href="#side-48">48</a></td>
+</tr>
+<tr>
+<td style="text-align: left;">B.1</td>
+<td style="text-align: left;">Polygon</td>
+<td style="text-align: left;"><a href="#side-49">49</a></td>
+</tr>
+<tr>
+<td style="text-align: left;">B.2</td>
+<td style="text-align: left;">Stjerne</td>
+<td style="text-align: left;"><a href="#side-51">51</a></td>
+</tr>
+<tr>
+<td style="text-align: left;">B.3</td>
+<td style="text-align: left;">Spiral</td>
+<td style="text-align: left;"><a href="#side-52">52</a></td>
+</tr>
+<tr>
+<td style="text-align: left;">B.4</td>
+<td style="text-align: left;">Kasse</td>
+<td style="text-align: left;"><a href="#side-54">54</a></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>C.</strong></td>
+<td style="text-align: left;"><strong>LÆSEVEJLEDNING FOR
+BEGYNDERE</strong></td>
+<td style="text-align: left;"><a href="#side-58">58</a></td>
+</tr>
+<tr>
+<td style="text-align: left;">C.1</td>
+<td style="text-align: left;">Opstart</td>
+<td style="text-align: left;"><a href="#side-58">58</a></td>
+</tr>
+<tr>
+<td style="text-align: left;">C.2</td>
+<td style="text-align: left;">Simpel brug af Mikro-Logo</td>
+<td style="text-align: left;"><a href="#side-59">59</a></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>D.</strong></td>
+<td style="text-align: left;"><strong>ASCII TEGNSÆTTET</strong></td>
+<td style="text-align: left;"><a href="#side-64">64</a></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>E.</strong></td>
+<td style="text-align: left;"><strong>FEJLMEDDELELSER</strong></td>
+<td style="text-align: left;"><a href="#side-67">67</a></td>
+</tr>
+<tr>
+<td style="text-align: left;">E.1</td>
+<td style="text-align: left;">Udførelse af kommandoer</td>
+<td style="text-align: left;"><a href="#side-67">67</a></td>
+</tr>
+<tr>
+<td style="text-align: left;">E.1.1</td>
+<td style="text-align: left;">Fejl ved udførelse af kommandoer</td>
+<td style="text-align: left;"><a href="#side-67">67</a></td>
+</tr>
+<tr>
+<td style="text-align: left;">E.1.2</td>
+<td style="text-align: left;">Beskeder under udførelse af
+kommandoer</td>
+<td style="text-align: left;"><a href="#side-68">68</a></td>
+</tr>
+<tr>
+<td style="text-align: left;">E.2</td>
+<td style="text-align: left;">Oversættelse af sætninger</td>
+<td style="text-align: left;"><a href="#side-69">69</a></td>
+</tr>
+<tr>
+<td style="text-align: left;">E.2.1</td>
+<td style="text-align: left;">Fejl ved oversættelse af sætninger</td>
+<td style="text-align: left;"><a href="#side-69">69</a></td>
+</tr>
+<tr>
+<td style="text-align: left;">E.2.2</td>
+<td style="text-align: left;">Beskeder under oversættelse af
+sætninger</td>
+<td style="text-align: left;"><a href="#side-71">71</a></td>
+</tr>
+<tr>
+<td style="text-align: left;">E.3</td>
+<td style="text-align: left;">Udførelse af sætninger</td>
+<td style="text-align: left;"><a href="#side-72">72</a></td>
+</tr>
+<tr>
+<td style="text-align: left;">E.3.1</td>
+<td style="text-align: left;">Fejl ved udførelse af sætninger</td>
+<td style="text-align: left;"><a href="#side-72">72</a></td>
+</tr>
+<tr>
+<td style="text-align: left;">E.3.2</td>
+<td style="text-align: left;">Beskeder under udførelse af sætninger</td>
+<td style="text-align: left;"><a href="#side-72">72</a></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>F.</strong></td>
+<td style="text-align: left;"><strong>OVERSIGT OVER SÆTNINGER OG
+KOMMANDOER</strong></td>
+<td style="text-align: left;"><a href="#side-73">73</a></td>
+</tr>
+<tr>
+<td style="text-align: left;">F.1</td>
+<td style="text-align: left;">Oversigt over sætninger</td>
+<td style="text-align: left;"><a href="#side-73">73</a></td>
+</tr>
+<tr>
+<td style="text-align: left;">F.2</td>
+<td style="text-align: left;">Oversigt over kommandoer og
+funktionstaster</td>
+<td style="text-align: left;"><a href="#side-75">75</a></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>G.</strong></td>
+<td style="text-align: left;"><strong>REGISTRE</strong></td>
+<td style="text-align: left;"><a href="#side-76">76</a></td>
+</tr>
+<tr>
+<td style="text-align: left;">G.1</td>
+<td style="text-align: left;">Oversigt over figurer</td>
+<td style="text-align: left;"><a href="#side-76">76</a></td>
+</tr>
+<tr>
+<td style="text-align: left;">G.2</td>
+<td style="text-align: left;">Stikordsregister</td>
+<td style="text-align: left;"><a href="#side-77">77</a></td>
+</tr>
+</tbody>
+</table>
+  </div>
+  <div class="page-footer-screen"><span>Side ii</span><span>A/S Regnecentralen</span></div>
+</div><div class="book-page body-p" id="side-1">
+  <div class="page-tag" data-chap="1. INDLEDNING" data-pnum="1"></div>
+  <div class="page-header-screen"><span>MIKRO-LOGO</span><span>1. INDLEDNING</span></div>
+  <div class="page-content">
+<h1 id="indledning">1. INDLEDNING</h1>
+<p>Denne manual beskriver en delmængde af sproget LOGO, som det fungerer
+på RC759 PICCOLINE og RC750 Partner.</p>
+<p>Denne version af Logo er en udvidelse af Mikro-Logo, som kører på
+RC700 PICCOLO, men kaldes alligevel også Mikro-Logo. Bilag A beskriver
+forskellene mellem de to Mikro-Logo systemer.</p>
+<p>Mikro-Logo på PICCOLINE og Partner startes med kommandoen
+<code>logo</code>. Inden opstart af Mikro-Logo skal man huske at
+installere grafikken (enten fra menusystemet eller ved kommandoen
+<code>graphics</code>, som beskrevet i brugervejledningen). Ved
+modtagelsen af distributionsdisketten med Mikro-Logo skal man tage nogle
+kopier af denne og derefter bruge kopierne og kun i nødstilfælde anvende
+selve distributionsdisketten til at lave nye kopier, jvnf.
+brugervejledningen for den respektive maskine. I bilag B beskrives
+indholdet af distributionsdisketten og installation af Mikro-Logo på en
+systemdiskette.</p>
+<p>Denne manual indeholder først et kapitel om Logo; heri beskrives
+formålet med Logo, og der gives referencer til yderligere litteratur om
+Logo.</p>
+<p>Derefter følger 4 kapitler om selve Mikro-Logo systemet, hvori det
+beskrives, hvilke sætninger og kommandoer der findes, hvordan de virker,
+og hvorledes man får systemet til at udføre dem.</p>
+<p>Til sidst er der nogle bilag som indeholder:</p>
+<ul>
+<li>en beskrivelse af forskellene til Mikro-Logo på en PICCOLO</li>
+<li>en beskrivelse af indholdet af distributionsdisketten og
+installation på en systemdiskette</li>
+<li>en læsevejledning for begyndere til Logo</li>
+<li>ASCII tegnsættet</li>
+<li>fejlmeddelelser</li>
+<li>en oversigt over sætninger, kommandoer og funktionstaster</li>
+<li>et stikordsregister</li>
+</ul>
+<p>Formålet med denne manual er at give en udtømmende beskrivelse af
+alle komponenter i Mikro-Logo. Herved kan det være svært for nybegyndere
+at komme i gang. Der er derfor lavet en speciel læsevejledning for disse
+i bilag C. Denne manual er ikke beregnet til at blive anvendt som
+undervisningsmateriale, men som et opslagsværk.</p>
+  </div>
+  <div class="page-footer-screen"><span>A/S Regnecentralen</span><span>Side 1</span></div>
+</div><div class="book-page body-p" id="side-2">
+  <div class="page-tag" data-chap="2. INTRODUKTION TIL LOGO" data-pnum="2"></div>
+  <div class="page-header-screen"><span>2. INTRODUKTION TIL LOGO</span><span>MIKRO-LOGO</span></div>
+  <div class="page-content">
+<h1 id="introduktion-til-logo">2. INTRODUKTION TIL LOGO</h1>
+<p>Logo er et datamatsprog, som er udviklet af Seymour Papert ved MIT,
+Boston, U.S.A. Formålet med Logo er at skabe omgivelser, hvor børn kan
+lære at kommunikere med datamaskiner. Derfor er Logo et sprog, der er
+let at lære, men samtidigt er det et stærkt sprog, idet det er muligt at
+lave komplekse ting. For at danne sig et overblik over, hvor stærkt et
+sprog Logo er, kan man se på, hvor få ordrer der skal til for at lave
+komplicerede tegninger, se f.eks. bilag B.</p>
+<p>Der er to hovedideer, der ligger bag anvendelsen af Logo; dels kan
+børn lære at styre datamaten (og ikke lade datamaten styre dem), dels
+kan anvendelsen af Logo ændre børns måde at lære på. Der er, især i
+U.S.A., lavet en del forsøg med anvendelsen af Logo i undervisningen.
+Specielt inden for matematik, programmering, strukturering og kunst har
+Logo vist sig at være anvendelig.</p>
+<p>Den vigtigste del af Logo er skildpadde-grafikken (engelsk:
+<em>turtle graphics</em>), som simulerer styringen af en skildpadde.
+Skildpadden kan gå frem eller tilbage, ændre retning, og tegne eller
+lade være, når den flytter sig. Ved at kombinere disse simple ordrer kan
+man lave nogle nye ordrer, som kan tegne mere komplicerede ting. Det er
+desuden muligt at tilkoble en skildpadde-robot, som tegner på gulvet.
+Det er denne del der er Mikro-Logo. Andre dele af Logo, såsom behandling
+af tekst, er ikke med i Mikro-Logo.</p>
+<p>I bogen <em>“Den totale Skildpaddetur: Børn, datamaskiner og kreative
+tanker”</em> beskriver Seymour Papert hele baggrunden for Logo. Det
+meste andet litteratur er på engelsk. Der er dog enkelte rapporter om
+forsøg med anvendelse af Logo i de danske folkeskoler.</p>
+<p>Det er selvfølgelig nødvendigt at afpasse brugen af Mikro-Logo i
+undervisningen efter klassetrin, formål med undervisningen og det antal
+timer, der er til rådighed.</p>
+  </div>
+  <div class="page-footer-screen"><span>Side 2</span><span>A/S Regnecentralen</span></div>
+</div><div class="book-page body-p" id="side-3">
+  <div class="page-tag" data-chap="3. SKÆRMEN" data-pnum="3"></div>
+  <div class="page-header-screen"><span>MIKRO-LOGO</span><span>3. SKÆRMEN</span></div>
+  <div class="page-content">
+<h1 id="skærmen">3. SKÆRMEN</h1>
+<p>Skærmen er inddelt i 3 felter: den øverste linie (meddelelseslinie),
+tegneområdet, og den nederste linie (kommandolinien).</p>
+<div data-align="center">
+<p><img src="images/fig-01.png"
+alt="Fig. 1. Skærmen er inddelt i 3 felter" /><br />
+<em>Fig. 1. Skærmen er inddelt i 3 felter</em></p>
+</div>
+<p>Den øverste linie anvendes til fejlmeddelelser og andre beskeder og
+spørgsmål til brugeren. Desuden bruges den, når man overvåger
+programudførelsen (dvs. udfører een ordre ad gangen, se kapitel 6).</p>
+<p>Den nederste linie anvendes som kommandolinie. Den starter med
+<code>LOGO&gt;</code> og når der ikke står andet, er Mikro-Logo klar til
+at modtage information fra brugeren. Det er her, brugeren giver
+kommandoer til systemet og sætninger (ordrer) til skildpadden.</p>
+<p>Kommandoerne anvendes til at administrere systemet. Det er kun muligt
+at have een kommando i kommandolinien. Kommandoerne beskrives i kapitel
+5.</p>
+<p>Eks. på kommandolinie med en kommando:</p>
+<pre class="logo"><code>LOGO&gt; hjælp</code></pre>
+  </div>
+  <div class="page-footer-screen"><span>A/S Regnecentralen</span><span>Side 3</span></div>
+</div><div class="book-page body-p" id="side-4">
+  <div class="page-tag" data-chap="3. SKÆRMEN" data-pnum="4"></div>
+  <div class="page-header-screen"><span>3. SKÆRMEN</span><span>MIKRO-LOGO</span></div>
+  <div class="page-content">
+<p>Sætningerne til skildpadden kan enten være basale systemdefinerede
+(se kapitel 4) eller brugerdefinerede (se 4.4 og 5.1). Det er muligt at
+have flere sætninger på samme linie, hvis de adskilles af <code>;</code>
+. Når kommandolinien indeholder skildpaddesætninger, kaldes den også
+sætningslinien.</p>
+<p>Eks. på kommandolinier med sætninger:</p>
+<pre class="logo"><code>LOGO&gt; skriv 13*13
+LOGO&gt; frem 100; venstre 90; frem 100</code></pre>
+<p>Under indtastning i kommandolinien er det muligt at bruge
+editeringstasterne:</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">Tast</th>
+<th style="text-align: left;">Funktion</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong><code>←</code></strong></td>
+<td style="text-align: left;">flytter markøren en plads til venstre,
+hvis det er muligt.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong><code>→</code></strong></td>
+<td style="text-align: left;">flytter markøren en plads til højre, hvis
+det er muligt.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong><code>↖</code></strong></td>
+<td style="text-align: left;">flytter markøren til starten af
+linien.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong><code>↘</code></strong></td>
+<td style="text-align: left;">flytter markøren til slutningen af
+linien.</td>
+</tr>
+<tr>
+<td
+style="text-align: left;"><strong><code>TEGN IND</code></strong></td>
+<td style="text-align: left;">skubber teksten til højre og indsætter en
+blank ved markøren.</td>
+</tr>
+<tr>
+<td
+style="text-align: left;"><strong><code>SLET TEGN</code></strong></td>
+<td style="text-align: left;">sletter tegnet, hvor markøren står, og
+trækker teksten til venstre.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong><code>⌫</code></strong></td>
+<td style="text-align: left;">sletter tegnet til venstre for markøren,
+trækker teksten til venstre og flytter markøren en plads til
+venstre.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong><code>A1</code></strong></td>
+<td style="text-align: left;">sletter resten af linien fra, hvor
+markøren står.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong><code>F1</code></strong></td>
+<td style="text-align: left;">fremkalder den forrige kommandolinie, som
+indeholder skildpaddesætninger, dvs. den forrige sætningslinie.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong><code>↵</code>
+(Retur)</strong></td>
+<td style="text-align: left;">signalerer, at kommandolinien er færdig og
+skal udføres. (NB: Det er lige meget, hvor markøren står i linien, når
+der tastes Retur: det er altid hele linien, der udføres).</td>
+</tr>
+</tbody>
+</table>
+  </div>
+  <div class="page-footer-screen"><span>Side 4</span><span>A/S Regnecentralen</span></div>
+</div><div class="book-page body-p" id="side-5">
+  <div class="page-tag" data-chap="3. SKÆRMEN" data-pnum="5"></div>
+  <div class="page-header-screen"><span>MIKRO-LOGO</span><span>3. SKÆRMEN</span></div>
+  <div class="page-content">
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Tast</th>
+<th style="text-align: left;">Funktion</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong><code>ESC</code></strong></td>
+<td style="text-align: left;">signalerer, at man fortryder, og
+kommandolinien slettes.</td>
+</tr>
+</tbody>
+</table>
+<div data-align="center">
+<p><img src="images/fig-02.png"
+alt="Fig. 2. Skærmbillede under udførelse af sætning" /><br />
+<em>Fig. 2. Skærmbillede under udførelse af sætning</em></p>
+</div>
+<p><code>spiral</code> er en brugerdefineret sætning med 2 parametre;
+den defineres i afsnit 4.4.4. Når udførelsen er fuldført, forsvinder
+<code>spiral 2 90</code> fra kommandolinien, og systemet er klar til en
+ny kommando eller nye sætninger.</p>
+<p>Den resterende del af skærmen (dvs. alt undtagen den øverste og
+nederste linie) kaldes tegneområdet, men anvendes også til tekst, idet
+visse kommandoer har brug for at vise flere linier tekst på skærmen. Der
+er en kommando <code>tegnigen</code> (dvs. lav tegningen igen), se 5.3.
+Denne kommando bruges, hvis man vil have tegningen frem, som er blevet
+slettet af en kommando, der bruger tegneområdet til tekst.</p>
+  </div>
+  <div class="page-footer-screen"><span>A/S Regnecentralen</span><span>Side 5</span></div>
+</div><div class="book-page body-p" id="side-6">
+  <div class="page-tag" data-chap="3. SKÆRMEN" data-pnum="6"></div>
+  <div class="page-header-screen"><span>3. SKÆRMEN</span><span>MIKRO-LOGO</span></div>
+  <div class="page-content">
+<p><em>(Denne side er blank i originalen)</em></p>
+  </div>
+  <div class="page-footer-screen"><span>Side 6</span><span>A/S Regnecentralen</span></div>
+</div><div class="book-page body-p" id="side-7">
+  <div class="page-tag" data-chap="4. SÆTNINGER" data-pnum="7"></div>
+  <div class="page-header-screen"><span>MIKRO-LOGO</span><span>4. SÆTNINGER</span></div>
+  <div class="page-content">
+<h1 id="sætninger">4. SÆTNINGER</h1>
+<p>Til at tegne på skærmen anvendes en fiktiv skildpadde, som hele tiden
+har en placering og en retning, og som kan bringes til at tegne, når den
+flyttes. Når der startes, er skildpadden placeret midt på skærmen og
+pegende til højre, dvs. i position (0,0) og retning 0 grader. Det
+øverste højre hjørne af tegneområdet på en PICCOLINE skærm har
+koordinaterne (280,160), og det nederste venstre hjørne har
+koordinaterne (-280,-160), dvs. det er muligt at adressere fra -280 til
+280 i vandret retning og fra -160 til 160 i lodret retning. På en
+Partner er de tilsvarende tal 360 og 230. Hvis skildpadden flyttes uden
+for dette område, vil der ikke blive tegnet på skærmen, når skildpadden
+flyttes, men skildpadden vil alligevel ændre position.</p>
+<div data-align="center">
+<p><img src="images/fig-03.png"
+alt="Fig. 3. Tegneområdets størrelse på en PICCOLINE" /><br />
+<em>Fig. 3. Tegneområdets størrelse på en PICCOLINE</em></p>
+</div>
+<p>Sætningerne kan inddeles i tre slags: - tegnesætninger - tildelings-,
+indlæsnings- og udskrivningssætninger - kontrolsætninger</p>
+<p>Men først følger et afsnit om udtryk og variable, som indgår som
+argumenter i sætningerne.</p>
+<p>Første gang man læser denne manual, er det måske nemmere at forstå,
+hvis man starter med indledningen til afsnit 4.2 og eksemplerne i afsnit
+4.2.5. Og derefter læser hele afsnit 4.2, inden afsnit 4.1 læses. Men da
+variable og udtryk bruges i afsnit 4.2, er afsnittene for
+fuldstændighedens skyld placeret i denne rækkefølge.</p>
+  </div>
+  <div class="page-footer-screen"><span>A/S Regnecentralen</span><span>Side 7</span></div>
+</div><div class="book-page body-p" id="side-8">
+  <div class="page-tag" data-chap="4. SÆTNINGER" data-pnum="8"></div>
+  <div class="page-header-screen"><span>4. SÆTNINGER</span><span>MIKRO-LOGO</span></div>
+  <div class="page-content">
+<h2 id="variable-og-udtryk">4.1 Variable og udtryk</h2>
+<h3 id="variable">4.1.1 Variable</h3>
+<p>En variabel har et navn og en værdi. Navnet på variablen består af
+højst 16 bogstaver og cifre, hvor det første skal være et bogstav. Når
+der refereres til en variabels navn i et udtryk, er det variablens
+værdi, der skal indgå. Når der refereres til en variabels navn i en
+tildelingssætning eller indlæsningssætning (se 4.3), betyder det, at
+variablen skal have en ny værdi. Hvis en variabel refereres i et udtryk,
+inden den eksplicit har fået en værdi, har den værdien 0.</p>
+<p>Eks. på variabelnavne:</p>
+<pre><code>sidelængde
+antal
+vinkel2</code></pre>
+<h3 id="udtryk">4.1.2 Udtryk</h3>
+<p>Et udtryk er en beregningsforskrift, som kan udregnes til et heltal i
+intervallet fra -32768 til 32767. Der må ikke være blanke (dvs.
+“mellemslag”) i et udtryk. Der kan indgå følgende operatorer:
+<code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>,
+<code>**</code>, <code>=</code>, <code>&lt;</code>, <code>&gt;</code>,
+<code>&lt;=</code>, <code>&gt;=</code> og <code>&lt;&gt;</code> i et
+udtryk.</p>
+<p>Operatorerne har følgende betydninger:</p>
+<table>
+<colgroup>
+<col style="width: 55%" />
+<col style="width: 44%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: center;">Operator</th>
+<th style="text-align: left;">Betydning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><strong><code>+</code></strong></td>
+<td style="text-align: left;">heltalsaddition eller positivt
+fortegn</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong><code>-</code></strong></td>
+<td style="text-align: left;">heltalssubtraktion eller negativt
+fortegn</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong><code>*</code></strong></td>
+<td style="text-align: left;">heltalsmultiplikation</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong><code>/</code></strong></td>
+<td style="text-align: left;">heltalsdivision, dvs. en eventuel rest
+smides væk. Der kommer en fejlmeddelelse, hvis divisoren er 0.</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong><code>**</code></strong></td>
+<td style="text-align: left;">potensopløftning. Der kommer en
+fejlmeddelelse, hvis det andet argument er negativt.</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong><code>=</code></strong></td>
+<td style="text-align: left;">lig med</td>
+</tr>
+</tbody>
+</table>
+  </div>
+  <div class="page-footer-screen"><span>Side 8</span><span>A/S Regnecentralen</span></div>
+</div><div class="book-page body-p" id="side-9">
+  <div class="page-tag" data-chap="4. SÆTNINGER" data-pnum="9"></div>
+  <div class="page-header-screen"><span>MIKRO-LOGO</span><span>4. SÆTNINGER</span></div>
+  <div class="page-content">
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Operator</th>
+<th style="text-align: left;">Betydning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><strong><code>&lt;</code></strong></td>
+<td style="text-align: left;">mindre end</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong><code>&lt;=</code></strong></td>
+<td style="text-align: left;">mindre end eller lig med</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong><code>&gt;</code></strong></td>
+<td style="text-align: left;">større end</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong><code>&gt;=</code></strong></td>
+<td style="text-align: left;">større end eller lig med</td>
+</tr>
+<tr>
+<td
+style="text-align: center;"><strong><code>&lt;&gt;</code></strong></td>
+<td style="text-align: left;">forskellig fra</td>
+</tr>
+</tbody>
+</table>
+<p>De kræver alle to operander, bortset fra at <code>+</code> og
+<code>-</code> også kan anvendes som fortegn. Som operander kan indgå
+talkonstanter, variabelnavne, parentesudtryk, funktionsudtryk og andre
+udtryk.</p>
+<p>Eks.:</p>
+<pre><code>2+3
+-2*vinkel
+(side+20)*3</code></pre>
+<p>Talkonstanter består af et antal cifre, som kan opfattes som et
+heltal. Negative heltal laves som udtryk med <code>-</code> som
+fortegnsoperator.</p>
+<p>Eks.:</p>
+<pre><code>-100</code></pre>
+<p>Variabelnavne i et udtryk betyder, at variablens værdi skal indgå på
+dette sted i udtrykket.</p>
+<p>Eks.:</p>
+<pre><code>sidelængde</code></pre>
+<p>Parentesudtryk er et udtryk omsluttet af parenteser.</p>
+<p>Eks.:</p>
+<pre><code>(2+3)</code></pre>
+<p>Funktionsudtryk: I øjeblikket er der kun een funktion,
+<code>tlf</code> (en forkortelse for tilfældig). Denne kræver et
+argument (i parenteser). Dette argument er et udtryk, som skal udregnes
+til et positivt tal (ellers kommer der en fejlmelding). <code>tlf</code>
+giver et tilfældigt heltal, som er større end eller lig 0 og mindre end
+argumentet.</p>
+<p>Eks.: <code>tlf(100)</code> giver et tilfældigt heltal mellem 0 og 99
+(begge inclusive).</p>
+  </div>
+  <div class="page-footer-screen"><span>A/S Regnecentralen</span><span>Side 9</span></div>
+</div><div class="book-page body-p" id="side-10">
+  <div class="page-tag" data-chap="4. SÆTNINGER" data-pnum="10"></div>
+  <div class="page-header-screen"><span>4. SÆTNINGER</span><span>MIKRO-LOGO</span></div>
+  <div class="page-content">
+<p>Udtryk kan selvfølgelig også indgå som operander i andre udtryk. Det
+er derfor nødvendigt at bestemme, i hvilken rækkefølge operatorerne
+udføres:</p>
+<ol type="1">
+<li>Først beregnes udtryk i parenteser (på samme måde som beskrives
+her).</li>
+<li>Dernæst funktionsudtryk og potensopløftning (<code>**</code>)
+(potensopløftning fra højre mod venstre, hvis der er flere af denne
+operator).</li>
+<li>Dernæst operationer med <code>*</code> og <code>/</code> (fra
+venstre mod højre, hvis der er flere af disse operatorer).</li>
+<li>Så <code>+</code> og <code>-</code> (fra venstre mod højre, hvis der
+er flere af disse operatorer).</li>
+<li>Til sidst alle de relationelle operatorer: <code>=</code>,
+<code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>,
+<code>&gt;=</code>, og <code>&lt;&gt;</code>.</li>
+</ol>
+<p>Eks.: <code>3+4*5/3&lt;-7+tlf(7*længde)+side</code></p>
+<p>Dette udregnes på følgende måde (markeres ved at sætte ekstra
+parenteser):</p>
+<ul>
+<li>Venstresiden: <code>3+((4*5)/3)</code></li>
+<li>Højresiden: <code>((-7)+(tlf(7*længde)))+side</code></li>
+<li>og til sidst <code>&lt;</code> (mindre end).</li>
+</ul>
+<p>Det er kun muligt at have flere relationelle operatorer i et udtryk,
+hvis der er parenteser, så der ikke er to relationelle operatorer på
+“samme niveau”.</p>
+<p>Eks.: <code>(antal&lt;10)=(side&gt;20)</code> er tilladt, hvorimod
+<code>1&lt;2&lt;3</code> ikke er tilladt.</p>
+<p>Det er kun muligt at have fortegnene <code>+</code> og <code>-</code>
+forrest i et udtryk, eller lige efter en relationel operator, eller
+forrest i et udtryk i parenteser.</p>
+<p>Eks.: <code>2*-antal</code> er ikke tilladt, det kan i stedet skrives
+som <code>-2*antal</code></p>
+  </div>
+  <div class="page-footer-screen"><span>Side 10</span><span>A/S Regnecentralen</span></div>
+</div><div class="book-page body-p" id="side-11">
+  <div class="page-tag" data-chap="4. SÆTNINGER" data-pnum="11"></div>
+  <div class="page-header-screen"><span>MIKRO-LOGO</span><span>4. SÆTNINGER</span></div>
+  <div class="page-content">
+<p>Alle relationelle operatorer (<code>=</code>, <code>&lt;</code>,
+<code>&lt;=</code>, <code>&gt;</code>, <code>&gt;=</code>,
+<code>&lt;&gt;</code>) giver resultatet 1, hvis relationen gælder mellem
+de indgående operander (relationen er sand), og 0, hvis relationen ikke
+gælder (relationen er falsk).</p>
+<p>Eks.:</p>
+<pre><code>9*9=81
+20*(tæller&lt;10)</code></pre>
+<p>Det første udtryk har værdien 1. Det andet udtryk har værdien 20
+(hvis <code>tæller</code> er mindre end 10) eller værdien 0 (hvis
+<code>tæller</code> ikke er mindre end 10).</p>
+<p>Det er muligt at simulere de logiske operatorer AND (logisk og) og OR
+(logisk eller) ved at bruge gange (<code>*</code>) og plus
+(<code>+</code>), da 0 opfattes som falsk og et tal forskellig fra 0 som
+sandt.</p>
+<p>Eks.: <code>(antal&lt;10)*(side&gt;20)</code></p>
+<p>Dette udtryk er 1, hvis både <code>antal</code> er mindre end 10 og
+<code>side</code> er større end 20.</p>
+<p>Eks.: <code>(antal&lt;10)+(side&gt;20)</code></p>
+<p>Dette udtryk kan antage værdierne 0, 1 og 2. Hvis begge deludtryk er
+sande, er værdien 2. Hvis præcis et af deludtrykkene er sandt, er
+værdien 1. Hvis ingen af deludtrykkene er sande, er værdien 0. Dvs.
+udtrykket er sandt (forskellig fra 0), når bare et af deludtrykkene er
+sandt.</p>
+<p><strong>Husk:</strong> Der må ikke være blanke i udtryk.</p>
+  </div>
+  <div class="page-footer-screen"><span>A/S Regnecentralen</span><span>Side 11</span></div>
+</div><div class="book-page body-p" id="side-12">
+  <div class="page-tag" data-chap="4. SÆTNINGER" data-pnum="12"></div>
+  <div class="page-header-screen"><span>4. SÆTNINGER</span><span>MIKRO-LOGO</span></div>
+  <div class="page-content">
+<h2 id="tegnesætninger">4.2 Tegnesætninger</h2>
+<p>Skildpadden er beskrevet ved tre størrelser: positionen, retningen og
+pennens type. Dette afsnit er derfor inddelt i underafsnit. De første
+tre beskriver, hvorledes man ændrer henholdsvis positionen, retningen og
+pennens type. Derefter følger et afsnit med andre sætninger, der også
+har indflydelse på skildpadden og tegningen. Til sidst er der et afsnit
+med eksempler.</p>
+<h3 id="position">4.2.1 Position</h3>
+<p>Der er to forskellige måder at ændre skildpaddens position: relativ
+og absolut. Relativ ændring vil sige, at ændringen er relativ til, hvor
+skildpadden står i øjeblikket, og hvilken retning den har. Absolut
+ændring er uafhængig af den øjeblikkelige placering og retning. I alle
+tilfælde vil skildpaddens retning ikke blive ændret.</p>
+<p>Når positionen ændres, vil pennens type afgøre, om der tegnes,
+slettes eller ingen af delene.</p>
+<h4 id="pos-relativ-aendring">Relativ ændring</h4>
+<p><strong><code>frem udtryk</code></strong><br />
+<strong><code>fr udtryk</code></strong><br />
+Flytter skildpadden frem, så langt som værdien af udtryk angiver, i
+skildpaddens retning.<br />
+Eks.:</p>
+<pre class="logo"><code>frem 100
+fr side/2</code></pre>
+<p>Hvis værdien af udtryk bliver negativ, svarer sætningen til
+<code>tilbage</code> med det tilsvarende positive tal som argument.</p>
+<p><strong><code>tilbage udtryk</code></strong><br />
+<strong><code>tb udtryk</code></strong><br />
+Flytter skildpadden værdien af udtryk i den modsatte retning af
+skildpaddens.<br />
+Eks.:</p>
+<pre class="logo"><code>tilbage 50
+tb længde*2</code></pre>
+  </div>
+  <div class="page-footer-screen"><span>Side 12</span><span>A/S Regnecentralen</span></div>
+</div><div class="book-page body-p" id="side-13">
+  <div class="page-tag" data-chap="4. SÆTNINGER" data-pnum="13"></div>
+  <div class="page-header-screen"><span>MIKRO-LOGO</span><span>4. SÆTNINGER</span></div>
+  <div class="page-content">
+<h4 id="pos-absolut-aendring">Absolut ændring</h4>
+<p><strong><code>sætx udtryk</code></strong><br />
+Skildpaddens x-position ændres til værdien af udtryk. Y-positionen og
+retningen ændres ikke. Dvs. skildpadden flyttes vandret.<br />
+Eks.:</p>
+<pre class="logo"><code>sætx -200</code></pre>
+<p><strong><code>sæty udtryk</code></strong><br />
+Skildpaddens y-position ændres til værdien af udtryk. X-positionen og
+retningen ændres ikke. Dvs. skildpadden flyttes lodret.<br />
+Eks.:</p>
+<pre class="logo"><code>sæty ymax</code></pre>
+<p><strong><code>sætxy udtryk udtryk</code></strong><br />
+Ændrer både x-positionen og y-positionen af skildpadden til værdierne af
+de to udtryk. Retningen ændres ikke.<br />
+Eks.:</p>
+<pre class="logo"><code>sætxy 200 100</code></pre>
+<p>Når systemet startes, er skildpaddens position (0,0), dvs. midt på
+skærmen. Tegneområdet på en PICCOLINE skærm refererer fra -280 til 280 i
+vandret (x-aksens) retning og fra -160 til 160 i lodret (y-aksens)
+retning. Tegneområdet på en Partner skærm refererer fra -360 til 360
+vandret og fra -230 til 230 lodret.</p>
+<p>Skildpadden kan godt flyttes uden for tegneområdet, og den vil
+stadigvæk udføre de ordrer, den får, men der vil selvfølgelig ikke ske
+noget på skærmen.</p>
+  </div>
+  <div class="page-footer-screen"><span>A/S Regnecentralen</span><span>Side 13</span></div>
+</div><div class="book-page body-p" id="side-14">
+  <div class="page-tag" data-chap="4. SÆTNINGER" data-pnum="14"></div>
+  <div class="page-header-screen"><span>4. SÆTNINGER</span><span>MIKRO-LOGO</span></div>
+  <div class="page-content">
+<h3 id="retning">4.2.2 Retning</h3>
+<p>Retningen kan også ændres både relativt og absolut. Systemet regner
+med vinkler i området 0 grader til 360 grader, men brugeren kan
+selvfølgelig godt bruge vinkler uden for dette område; de bliver bare
+konverteret til det område, f.eks. bliver både -90 grader og 630 grader
+konverteret til 270 grader. En retning på 0 grader betyder, at
+skildpadden peger vandret til højre; 90 grader betyder, at skildpadden
+peger opad. Når retningen ændres, vil den kun ses på skærmen, hvis
+skildpadden er vist ved en pil (se kommandoen <code>pil</code>, afsnit
+5.3).</p>
+<h4 id="ret-relativ-aendring">Relativ ændring</h4>
+<p><strong><code>venstre udtryk</code></strong><br />
+<strong><code>ve udtryk</code></strong><br />
+Skildpaddens retning ændres med værdien af udtryk (til venstre) i
+forhold til, hvor den peger nu. Hvis værdien af udtryk er negativt,
+svarer det til at dreje til højre med det tilsvarende positive
+tal.<br />
+Eks.:</p>
+<pre class="logo"><code>venstre 45
+ve vinkel1*2</code></pre>
+<p><strong><code>højre udtryk</code></strong><br />
+<strong><code>hø udtryk</code></strong><br />
+Modsat af venstre.<br />
+Eks.: <code>højre 90</code> er det samme som <code>venstre 270</code>
+eller <code>venstre -90</code>.</p>
+<h4 id="ret-absolut-aendring">Absolut ændring</h4>
+<p><strong><code>drejtil udtryk</code></strong><br />
+Skildpaddens retning sættes lig værdien af udtryk (uafhængig af
+retningen før).<br />
+Eks.:</p>
+<pre class="logo"><code>drejtil 90</code></pre>
+<p>Når systemet starter, er retningen 0 grader (vandret til højre).</p>
+  </div>
+  <div class="page-footer-screen"><span>Side 14</span><span>A/S Regnecentralen</span></div>
+</div><div class="book-page body-p" id="side-15">
+  <div class="page-tag" data-chap="4. SÆTNINGER" data-pnum="15"></div>
+  <div class="page-header-screen"><span>MIKRO-LOGO</span><span>4. SÆTNINGER</span></div>
+  <div class="page-content">
+<h3 id="pentype">4.2.3 Pentype</h3>
+<p>Pentypen angiver, hvad der sker, når skildpadden flyttes. Skildpadden
+kan enten tegne, slette eller bare flyttes. Pentypen ændres ved følgende
+tre sætninger; desuden vil <code>viskud</code> og <code>start</code> (se
+4.2.4) ændre pentypen til at tegne.</p>
+<p><strong><code>tegn</code></strong><br />
+Når skildpadden flyttes, vil der blive tegnet en linie fra punktet, der
+flyttes fra, til punktet, der flyttes til.</p>
+<p><strong><code>slet</code></strong><br />
+Når skildpadden flyttes, vil der blive slettet punkter på de linier, der
+krydses, og hele linier, hvor skildpadden løber oven i en eksisterende
+linie.</p>
+<p><strong><code>løft</code></strong><br />
+Hverken tegner eller sletter. Når skildpadden flyttes, vil der ikke ske
+noget, bortset fra at skildpaddens position ændres, og det vil kun kunne
+ses på skærmen, hvis skildpadden er markeret med en pil (se kommandoen
+<code>pil</code>, 5.3).</p>
+<p>Når systemet startes, vil pennens type være <code>tegn</code>.</p>
+<h3 id="andre-sætninger-til-skildpadden">4.2.4 Andre sætninger til
+skildpadden</h3>
+<p><strong><code>hjem</code></strong><br />
+Flytter skildpadden til position (0,0) (dvs. midt på skærmen) og med
+retning 0 grader. Afhængig af pennens type vil der blive tegnet, slettet
+eller ske ingenting ved flytningen.<br />
+Eks.: <code>hjem</code> er det samme som:</p>
+<pre class="logo"><code>sætxy 0 0
+drejtil 0</code></pre>
+<p><strong><code>viskud</code></strong><br />
+Sletter tegningen, men ændrer ikke skildpaddens position og retning.
+Pentypen ændres til <code>tegn</code>.</p>
+  </div>
+  <div class="page-footer-screen"><span>A/S Regnecentralen</span><span>Side 15</span></div>
+</div><div class="book-page body-p" id="side-16">
+  <div class="page-tag" data-chap="4. SÆTNINGER" data-pnum="16"></div>
+  <div class="page-header-screen"><span>4. SÆTNINGER</span><span>MIKRO-LOGO</span></div>
+  <div class="page-content">
+<p><strong><code>start</code></strong><br />
+Sletter tegningen og placerer skildpadden midt på skærmen, dvs. i
+position (0,0), og med retning 0 grader. Pentypen ændres til
+<code>tegn</code>.<br />
+Eks.: <code>start</code> kan laves som:</p>
+<pre class="logo"><code>hjem
+viskud</code></pre>
+<p>Derimod vil:</p>
+<pre class="logo"><code>viskud
+hjem</code></pre>
+<p>ikke gøre det, da der bliver tegnet en linie fra positionen før til
+(0,0).</p>
+<p><strong><code>hvor variabel variabel variabel</code></strong><br />
+Aflæser skildpaddens position og retning, så de kan indgå i udtryk i de
+følgende sætninger (se eksempel 2 i afsnit 4.2.5).<br />
+Eks.:</p>
+<pre class="logo"><code>hvor x y vinkel</code></pre>
+<p>Variablen <code>x</code> får værdien af skildpaddens x-position,
+variablen <code>y</code> får værdien af skildpaddens y-position, og
+<code>vinkel</code> får værdien af skildpaddens retning.</p>
+<p><strong><code>pilind</code></strong><br />
+Sætter en pil til at markere skildpaddens position og retning. Pilen
+slettes, når skildpadden flyttes eller ændrer retning, eller hvis
+sætningen <code>pilud</code> gives. Hvis man er interesseret i at have
+en pil hele tiden, skal man bruge kommandoen <code>pil</code> (se
+5.3).</p>
+<p><strong><code>pilud</code></strong><br />
+Sletter en pil sat ved <code>pilind</code>, men ikke ved kommandoen
+<code>pil</code> (se denne, 5.3).</p>
+  </div>
+  <div class="page-footer-screen"><span>Side 16</span><span>A/S Regnecentralen</span></div>
+</div><div class="book-page body-p" id="side-17">
+  <div class="page-tag" data-chap="4. SÆTNINGER" data-pnum="17"></div>
+  <div class="page-header-screen"><span>MIKRO-LOGO</span><span>4. SÆTNINGER</span></div>
+  <div class="page-content">
+<h3 id="eksempler-med-simple-tegninger">4.2.5 Eksempler med simple
+tegninger</h3>
+<p>Det kan være en fordel at bruge relative operatorer til at ændre
+skildpaddens position og retning, da det derved er muligt at bruge de
+samme ordrer til at lave den samme tegning et andet sted og i en anden
+retning. Dette er nemt ved hjælp af procedurer (se 4.4), idet man så
+giver en samling af ordrer et navn og udfører denne samling af ordrer
+ved at referere til dette navn.</p>
+<p>I de følgende eksempler kan ordrerne skrives over en eller flere
+sætningslinier. Hvis der skrives flere ordrer på en sætningslinie, skal
+de adskilles med <code>;</code> . For overskuelighedens skyld skrives
+ordrerne under hinanden med een på hver linie.</p>
+<h4 id="eksempel-1">Eksempel 1</h4>
+<p>Følgende sætninger vil tegne et kvadrat med sidelængde 100:</p>
+<pre class="logo"><code>frem 100
+venstre 90
+frem 100
+venstre 90
+frem 100
+venstre 90
+frem 100</code></pre>
+<div data-align="center">
+<p><img src="images/fig-04.png" alt="Fig. 4. Et kvadrat" /><br />
+<em>Fig. 4. Et kvadrat</em></p>
+</div>
+  </div>
+  <div class="page-footer-screen"><span>A/S Regnecentralen</span><span>Side 17</span></div>
+</div><div class="book-page body-p" id="side-18">
+  <div class="page-tag" data-chap="4. SÆTNINGER" data-pnum="18"></div>
+  <div class="page-header-screen"><span>4. SÆTNINGER</span><span>MIKRO-LOGO</span></div>
+  <div class="page-content">
+<p>Efter disse ordrer vil skildpaddens retning være nedad, dvs. hvis vi
+skriver ordren:</p>
+<pre class="logo"><code>pilind</code></pre>
+<p>får vi denne tegning på skærmen:</p>
+<div data-align="center">
+<p><img src="images/fig-05.png"
+alt="Fig. 5. Kvadrat med markeret skildpadde" /><br />
+<em>Fig. 5. Kvadrat med markeret skildpadde</em></p>
+</div>
+<p>I afsnit 4.4.3 beskrives en anden og kortere måde at lave et kvadrat
+på.</p>
+  </div>
+  <div class="page-footer-screen"><span>Side 18</span><span>A/S Regnecentralen</span></div>
+</div><div class="book-page body-p" id="side-19">
+  <div class="page-tag" data-chap="4. SÆTNINGER" data-pnum="19"></div>
+  <div class="page-header-screen"><span>MIKRO-LOGO</span><span>4. SÆTNINGER</span></div>
+  <div class="page-content">
+<h4 id="eksempel-2">Eksempel 2</h4>
+<p>Et M kan tegnes som:</p>
+<pre class="logo"><code>venstre 90
+frem 100
+højre 90+45
+frem 70
+venstre 90
+frem 70
+venstre 45
+tilbage 100
+højre 90</code></pre>
+<div data-align="center">
+<p><img src="images/fig-06.png" alt="Fig. 6. Et M" /><br />
+<em>Fig. 6. Et M</em></p>
+</div>
+<p>Her vil skildpadden starte nederst i første ben af M og slutte
+nederst i andet ben. Hvis man ønsker, at skildpadden også skal slutte
+nederst i første ben, kan det gøres ved at tilføje:</p>
+<pre class="logo"><code>hvor x y vinkel</code></pre>
+<p>som den første sætning og</p>
+<pre class="logo"><code>sætxy x y</code></pre>
+<p>som den sidste sætning.</p>
+  </div>
+  <div class="page-footer-screen"><span>A/S Regnecentralen</span><span>Side 19</span></div>
+</div><div class="book-page body-p" id="side-20">
+  <div class="page-tag" data-chap="4. SÆTNINGER" data-pnum="20"></div>
+  <div class="page-header-screen"><span>4. SÆTNINGER</span><span>MIKRO-LOGO</span></div>
+  <div class="page-content">
+<h4 id="eksempel-3">Eksempel 3</h4>
+<p>Dette eksempel laver et H, hvor højden er 100 og bredden 60, og hvor
+skildpadden starter og slutter nederst i det første ben pegende henad
+den linie, H’et kommer til at stå på (denne linie er ikke nødvendigvis
+vandret; det afhænger af skildpaddens retning, inden de følgende ordrer
+udføres).</p>
+<pre class="logo"><code>venstre 90
+frem 100
+tilbage 50
+højre 90
+frem 60
+venstre 90
+frem 50
+tilbage 100
+højre 90
+løft
+tilbage 60</code></pre>
+<div data-align="center">
+<p><img src="images/fig-07.png" alt="Fig. 7. Et H" /><br />
+<em>Fig. 7. Et H</em></p>
+</div>
+  </div>
+  <div class="page-footer-screen"><span>Side 20</span><span>A/S Regnecentralen</span></div>
+</div><div class="book-page body-p" id="side-21">
+  <div class="page-tag" data-chap="4. SÆTNINGER" data-pnum="21"></div>
+  <div class="page-header-screen"><span>MIKRO-LOGO</span><span>4. SÆTNINGER</span></div>
+  <div class="page-content">
+<p>Hvis vi efter at have tegnet H finder ud af, at vi kun vil have et
+lille h, kan vi ændre tegningen (vi forudsætter, at vi ikke har lavet
+nogle ordrer i mellemtiden; dette betyder bl.a., at pennen er
+løftet):</p>
+<pre class="logo"><code>frem 60
+venstre 90
+frem 50
+slet
+frem 50
+løft
+tilbage 100
+højre 90
+tilbage 60</code></pre>
+<div data-align="center">
+<p><img src="images/fig-08.png" alt="Fig. 8. H ændret til h" /><br />
+<em>Fig. 8. H ændret til h</em></p>
+</div>
+  </div>
+  <div class="page-footer-screen"><span>A/S Regnecentralen</span><span>Side 21</span></div>
+</div><div class="book-page body-p" id="side-22">
+  <div class="page-tag" data-chap="4. SÆTNINGER" data-pnum="22"></div>
+  <div class="page-header-screen"><span>4. SÆTNINGER</span><span>MIKRO-LOGO</span></div>
+  <div class="page-content">
+<h2 id="tildelings--indlæsnings--og-udskrivningssætninger">4.3
+Tildelings-, indlæsnings- og udskrivningssætninger</h2>
+<h3 id="tildelingssætninger">4.3.1 Tildelingssætninger</h3>
+<p><strong><code>variabel := udtryk</code></strong><br />
+<strong><code>variabel = udtryk</code></strong><br />
+Betyder, at variablen får en ny værdi, nemlig værdien af udtryk.</p>
+<p>Der må ikke være blanke mellem <code>:</code> og <code>=</code>, men
+der må, men behøver ikke, være blanke efter variabelnavnet eller inden
+udtrykket.</p>
+<p>Eks.:</p>
+<pre class="logo"><code>vinkel = 360/antalsider
+tæller := tæller+1</code></pre>
+<p>I den første tildelingssætning udregnes udtrykket
+<code>360/antalsider</code>, og variablen <code>vinkel</code> får denne
+værdi. I den anden tildelingssætning tælles variablen
+<code>tæller</code> een op.</p>
+<h3 id="indlæsningssætninger">4.3.2 Indlæsningssætninger</h3>
+<p><strong><code>henttal variabel</code></strong><br />
+Bevirker, at programudførelsen stopper, og navnet på variablen skrives i
+øverste linie. Udførelsen fortsætter først, når brugeren skriver et tal
+efterfulgt af et tryk på Retur-tasten.</p>
+<p>Eks.:</p>
+<pre class="logo"><code>henttal sidelængde</code></pre>
+<p><strong><code>henttast variabel</code></strong><br />
+Ved udførelsen af denne sætning ventes der, indtil en tast trykkes ned.
+Variablen får ASCII-værdien (dvs. det tal), der svarer til tasten, der
+blev trykket ned. En tabel over ASCII-værdierne findes i bilag D.</p>
+<p>Eks.:</p>
+<pre class="logo"><code>henttast kommando</code></pre>
+<p>Udførelsen stopper indtil en tast trykkes ned. Hvis <code>a</code>
+trykkes ned, får variablen <code>kommando</code> værdien 97; hvis
+<code>A</code> trykkes ned, får <code>kommando</code> værdien 65.</p>
+  </div>
+  <div class="page-footer-screen"><span>Side 22</span><span>A/S Regnecentralen</span></div>
+</div><div class="book-page body-p" id="side-23">
+  <div class="page-tag" data-chap="4. SÆTNINGER" data-pnum="23"></div>
+  <div class="page-header-screen"><span>MIKRO-LOGO</span><span>4. SÆTNINGER</span></div>
+  <div class="page-content">
+<p><strong><code>læstast variabel</code></strong><br />
+Variablen tildeles værdien 0, hvis ingen tast har været trykket ned,
+ellers får variablen ASCII-værdien af den nedtrykkede tast. Det må ikke
+være mellemrumstasten, Retur eller ESC-tasten, da de bruges i
+forbindelse med overvågning af udførelsen af sætninger (se kapitel 6).
+Tegnenes ASCII-værdier findes i bilag D. Bemærk forskellen mellem
+<code>henttast</code> og <code>læstast</code>.</p>
+<p>Eks.:</p>
+<pre class="logo"><code>læstast kommando</code></pre>
+<h3 id="udlæsningssætninger">4.3.3 Udlæsningssætninger</h3>
+<p><strong><code>skriv udtryk</code></strong><br />
+Skriver værdien af udtryk i den øverste linie. Kan bl.a. anvendes som en
+slags lommeregner fra kommandolinien.</p>
+<p>Eks.:</p>
+<pre class="logo"><code>skriv længde*højde</code></pre>
+<p><strong><code>sætning tekst</code></strong><br />
+Den tekst, der kommer efter <code>sætning</code>, skrives i skærmens
+øverste linie. <code>sætning</code> kan ikke anvendes fra
+kommandolinien, men kun i procedurer, se 4.4.4.</p>
+<p>Eks.:</p>
+<pre class="logo"><code>sætning arealet er</code></pre>
+<p>Udskriver <code>arealet er</code> i den øverste linie på skærmen.</p>
+<p><strong><code>udport udtryk udtryk</code></strong><br />
+Skriver det andet udtryks værdi ud på den port, som det første udtryk
+angiver. Denne ordre kan anvendes til at styre robotter og trafiklys,
+som er koblet til en af portene bag på en PICCOLINE eller en Partner,
+men det kræver et nøjere kendskab til en enhed, der er koblet til en
+port for at vide, hvad der skal sendes ud på porten.</p>
+  </div>
+  <div class="page-footer-screen"><span>A/S Regnecentralen</span><span>Side 23</span></div>
+</div><div class="book-page body-p" id="side-24">
+  <div class="page-tag" data-chap="4. SÆTNINGER" data-pnum="24"></div>
+  <div class="page-header-screen"><span>4. SÆTNINGER</span><span>MIKRO-LOGO</span></div>
+  <div class="page-content">
+<h2 id="kontrolsætninger">4.4 Kontrolsætninger</h2>
+<p>Der er tre måder at lave kontrolsætninger: procedurer,
+betingelsessætninger og gentagelsessætninger. Herudover beskriver dette
+afsnit også definition af procedurer.</p>
+<h3 id="procedurekald">4.4.1 Procedurekald</h3>
+<p>En procedure er en navngivning af en sekvens af ordrer. Det beskrives
+i afsnit 4.4.4 og 5.1, hvorledes man laver procedurer. En procedure
+udføres ved at skrive dens navn i en sætningslinie.</p>
+<p>Eks.: Hvis <code>hus</code> er navnet på en procedure, der tegner en
+husgavl, vil sætningslinien, som kun indeholder ordet <code>hus</code>
+lave tegningen nedenfor.</p>
+<div data-align="center">
+<p><img src="images/fig-09.png" alt="Fig. 9. Et hus" /><br />
+<em>Fig. 9. Et hus</em></p>
+</div>
+  </div>
+  <div class="page-footer-screen"><span>Side 24</span><span>A/S Regnecentralen</span></div>
+</div><div class="book-page body-p" id="side-25">
+  <div class="page-tag" data-chap="4. SÆTNINGER" data-pnum="25"></div>
+  <div class="page-header-screen"><span>MIKRO-LOGO</span><span>4. SÆTNINGER</span></div>
+  <div class="page-content">
+<p>Procedurer kan også have parametre på samme måde som de prædefinerede
+sætninger, f.eks. har <code>frem</code> en parameter og
+<code>sætxy</code> to parametre.</p>
+<p>Eks.: Hvis <code>polygon</code> er en procedure med to parametre, der
+angiver sidelængden og antallet af kanter i polygonen, vil de følgende
+sætningslinier tegne en tikant og en sekskant.</p>
+<pre class="logo"><code>polygon 50 10
+løft
+frem 100
+tegn
+polygon 100 6</code></pre>
+<div data-align="center">
+<p><img src="images/fig-10.png" alt="Fig. 10. To polygoner" /><br />
+<em>Fig. 10. To polygoner</em></p>
+</div>
+<p>Det er nødvendigt, at aktuelle parametre (dvs. parametrene i
+procedurekaldet) forekommer i samme rækkefølge som de formelle parametre
+(dvs. parametrene i proceduredefinitionen) (se også 4.4.4).</p>
+<p>Eks.: <code>polygon 10 50</code> er en 50-kant med sidelængden 10,
+hvis <code>polygon</code> er defineret, så den første formelle parameter
+er sidelængden og den anden antallet af kanter.</p>
+  </div>
+  <div class="page-footer-screen"><span>A/S Regnecentralen</span><span>Side 25</span></div>
+</div><div class="book-page body-p" id="side-26">
+  <div class="page-tag" data-chap="4. SÆTNINGER" data-pnum="26"></div>
+  <div class="page-header-screen"><span>4. SÆTNINGER</span><span>MIKRO-LOGO</span></div>
+  <div class="page-content">
+<h3 id="betingelsessætninger">4.4.2 Betingelsessætninger</h3>
+<p>Disse kaldes således, da en betingelse styrer, hvilke sætninger der
+udføres. Der er to udgaver af betingelsessætninger (også kaldet
+hvis-sætninger):</p>
+<ol type="1">
+<li></li>
+</ol>
+<pre class="logo"><code>hvis udtryk
+  sætninger
+ellers
+  sætninger
+sluthvis</code></pre>
+<ol start="2" type="1">
+<li></li>
+</ol>
+<pre class="logo"><code>hvis udtryk
+  sætninger
+sluthvis</code></pre>
+<p>Hvis udtryk er sandt (dvs. forskelligt fra 0), udføres sætningerne
+lige efter, indtil et eventuelt <code>ellers</code> mødes, hvorefter der
+fortsættes efter <code>sluthvis</code>. Hvis udtryk er falsk (dvs. lig
+0), udføres sætningerne mellem <code>ellers</code> og
+<code>sluthvis</code>; hvis der ikke er noget <code>ellers</code>,
+fortsættes bare efter <code>sluthvis</code>.</p>
+<p>Der må gerne være mere end een sætning mellem <code>hvis</code> og
+<code>ellers</code> og mellem <code>ellers</code> og
+<code>sluthvis</code>.</p>
+<p>Eks.:</p>
+<pre class="logo"><code>hvis antal&gt;2
+  polygon 100 antal
+ellers
+  frem 100
+  tilbage 100
+sluthvis</code></pre>
+<p>Hvis <code>antal</code> er større end 2 tegnes en polygon med
+sidelængde 100. Hvis <code>antal</code> er mindre end eller lig med 2
+tegnes bare en streg af længde 100.</p>
+<p>Eks.:</p>
+<pre class="logo"><code>hvis x&gt;100
+  hjem
+  x := 0
+sluthvis</code></pre>
+<p>Bemærk, at når betingelsessætninger skrives i kommandolinien, skal de
+enkelte dele adskilles med <code>;</code> og hele hvis-sætningen skal
+være på een linie.</p>
+<p>Eks.:</p>
+<pre class="logo"><code>hvis x&gt;100; hjem; x:=0; sluthvis</code></pre>
+  </div>
+  <div class="page-footer-screen"><span>Side 26</span><span>A/S Regnecentralen</span></div>
+</div><div class="book-page body-p" id="side-27">
+  <div class="page-tag" data-chap="4. SÆTNINGER" data-pnum="27"></div>
+  <div class="page-header-screen"><span>MIKRO-LOGO</span><span>4. SÆTNINGER</span></div>
+  <div class="page-content">
+<h3 id="gentagelsessætninger">4.4.3 Gentagelsessætninger</h3>
+<p>En gentagelsessætning udfører nogle sætninger et vist antal
+gange:</p>
+<pre class="logo"><code>gentag udtryk
+  sætninger
+hertil</code></pre>
+<p>Udtrykket udregnes, og hvis det er positivt, udføres sætningerne
+mellem <code>gentag</code> og <code>hertil</code> det antal gange, som
+udtrykket angiver.</p>
+<p>Der må gerne være mere end een sætning mellem <code>gentag</code> og
+<code>hertil</code>.</p>
+<p>Eks.:</p>
+<pre class="logo"><code>gentag 4
+  frem 100
+  venstre 90
+hertil</code></pre>
+<p>Tegner et kvadrat med sidelængde 100 (sammenlign med eksempel 1,
+afsnit 4.2.5). Bemærk at skildpaddens retning er den samme før og efter
+udførelsen af sætningerne ovenfor, hvorimod dette ikke er tilfældet i
+eksempel 1.</p>
+<p>Eks.:</p>
+<pre class="logo"><code>gentag antalsider
+  frem sidelængde
+  venstre 360/antalsider
+hertil</code></pre>
+<p>Tegner en polygon.</p>
+<p>Her skal også sættes <code>;</code> når en gentagelsessætning skrives
+i sætningslinien, og hele gentagelsessætningen skal være på een
+linie.</p>
+<p>Eks.:</p>
+<pre class="logo"><code>gentag antal; fr side; ve 360/antal; hertil</code></pre>
+  </div>
+  <div class="page-footer-screen"><span>A/S Regnecentralen</span><span>Side 27</span></div>
+</div><div class="book-page body-p" id="side-28">
+  <div class="page-tag" data-chap="4. SÆTNINGER" data-pnum="28"></div>
+  <div class="page-header-screen"><span>4. SÆTNINGER</span><span>MIKRO-LOGO</span></div>
+  <div class="page-content">
+<h3 id="def-procedurer-kap4">4.4.4 Definition af procedurer</h3>
+<p>Når man definerer procedurer, er det ikke muligt at have en tegning
+på skærmen, da tegneområdet bruges til at indeholde sætningerne i
+proceduren. Det er kun muligt at definere procedurer ved bestemte
+kommandoer (se 5.1); det er ikke muligt at gøre det direkte i
+sætningslinien. Når man har defineret en ny procedure, har man lært
+skildpadden en ny sætning; en procedure kaldes derfor også en
+brugerdefineret sætning.</p>
+<p>En procedure består af maksimalt 21 linier. Den første linie er
+procedurehovedet. De andre linier (procedurekroppen) indeholder
+sætninger; dog skal den sidste indeholde ordet <code>slut</code>. Der må
+ikke stå flere sætninger på en linie (i modsætning til i
+sætningslinien).</p>
+<p>Procedurehovedet består af ordet <code>begynd</code> efterfulgt af
+navnet på proceduren og navne på eventuelle formelle parametre. Der kan
+højst være 6 parametre. Alle navne skal starte med et bogstav og må
+efterfølges af op til 15 bogstaver eller cifre.</p>
+<p>Eks. på et procedurehoved:</p>
+<pre class="logo"><code>begynd polygon side antal</code></pre>
+<p>Parameternavne er lokale til proceduren, dvs. i sætningerne i
+proceduren kan man referere til parameternavne.</p>
+<p>Eks.:</p>
+<pre class="logo"><code>begynd polygon side antal
+  gentag antal
+    frem side
+    venstre 360/antal
+  hertil
+slut</code></pre>
+<p>Proceduren hedder altså <code>polygon</code> og har 2 parametre, hvis
+formelle navne er <code>side</code> og <code>antal</code>. Hvis man
+laver et procedurekald, f.eks. <code>polygon 20 8</code>, vil
+sætningerne for proceduren blive udført, idet <code>side</code> har
+værdien 20 og <code>antal</code> værdien 8.</p>
+<p><strong>Bemærk:</strong> Systemet vil lave indrykninger, som bruges
+til at markere, hvorledes <code>begynd</code>-<code>slut</code>,
+<code>gentag</code>-<code>hertil</code> og
+<code>hvis</code>-<code>ellers</code>-<code>sluthvis</code> hører
+sammen. Man skal ikke bekymre sig om indrykninger, når man skriver en
+procedure ind; de laves automatisk af Mikro-Logo, når proceduren er
+færdig.</p>
+  </div>
+  <div class="page-footer-screen"><span>Side 28</span><span>A/S Regnecentralen</span></div>
+</div><div class="book-page body-p" id="side-29">
+  <div class="page-tag" data-chap="4. SÆTNINGER" data-pnum="29"></div>
+  <div class="page-header-screen"><span>MIKRO-LOGO</span><span>4. SÆTNINGER</span></div>
+  <div class="page-content">
+<p>En procedure kaldes rekursiv, hvis den i procedurekroppen refererer
+til sit eget navn.</p>
+<p>Eks.:</p>
+<pre class="logo"><code>begynd spiral side vinkel
+  frem side
+  venstre vinkel
+  spiral side+2 vinkel
+slut</code></pre>
+<p>Hvis man for eksempel kalder <code>spiral 2 90</code>, vil den kalde
+<code>spiral 4 90</code>, som kalder <code>spiral 6 90</code> o.s.v. Da
+hvert kald kræver noget lager, er der en øvre grænse for, hvor mange
+rekursive kald der kan laves.</p>
+<div data-align="center">
+<p><img src="images/fig-11.png" alt="Fig. 11. Spiral 2 90" /><br />
+<em>Fig. 11. Spiral 2 90</em></p>
+</div>
+  </div>
+  <div class="page-footer-screen"><span>A/S Regnecentralen</span><span>Side 29</span></div>
+</div><div class="book-page body-p" id="side-30">
+  <div class="page-tag" data-chap="4. SÆTNINGER" data-pnum="30"></div>
+  <div class="page-header-screen"><span>4. SÆTNINGER</span><span>MIKRO-LOGO</span></div>
+  <div class="page-content">
+<p>For at kunne stoppe en rekursion er der endnu en sætning,
+<code>stop</code>, som — hvis den mødes under udførelse af et
+procedurekald — bevirker, at dette procedurekald afsluttes.</p>
+<p>Eks.:</p>
+<pre class="logo"><code>begynd spiral side vinkel
+  hvis side&gt;100
+    stop
+  ellers
+    frem side
+    venstre vinkel
+    spiral side+2 vinkel
+  sluthvis
+slut</code></pre>
+<p>Hvis man kalder <code>spiral 2 90</code>, vil der kun blive lavet 51
+kald af <code>spiral</code>, da <code>spiral 102 90</code> vil opfylde
+stop-betingelsen.</p>
+<p>Hvis et <code>stop</code> mødes i sætningslinien, stopper udførelsen
+af sætningslinien, også selv om der er mere tilbage i
+sætningslinien.</p>
+<p>Der er flere eksempler med procedurer i bilag B.</p>
+  </div>
+  <div class="page-footer-screen"><span>Side 30</span><span>A/S Regnecentralen</span></div>
+</div><div class="book-page body-p" id="side-31">
+  <div class="page-tag" data-chap="5. KOMMANDOER" data-pnum="31"></div>
+  <div class="page-header-screen"><span>MIKRO-LOGO</span><span>5. KOMMANDOER</span></div>
+  <div class="page-content">
+<h1 id="kommandoer">5. KOMMANDOER</h1>
+<p>Kommandoer bruges til administration af systemet. Kommandoerne kan
+inddeles i 4 grupper:</p>
+<ul>
+<li>kommandoer der administrerer procedurer</li>
+<li>kommandoer der administrerer Logo-filer på disketten</li>
+<li>kommandoer der sørger for tegning på andre medier</li>
+<li>andre kommandoer</li>
+</ul>
+<p>Når man afgiver en kommando til systemet, behøver man ikke give alle
+argumenter; systemet spørger selv efter de manglende argumenter, og det
+fortæller ovenikøbet, hvad argumentet skal betyde (f.eks.
+procedurenavn). Det er derfor, at kommandoerne i dette kapitel har
+forskellige former, svarende til hvor mange argumenter der mangler.
+Under indtastning af manglende argumenter er det muligt at rette på
+samme måde som i kommandolinien (se kap. 3); <code>ESC</code> betyder
+så, at man fortryder kommandoen.</p>
+<p>Nogle af kommandoerne er indlagt som funktionstaster (F2, F3, … F12 i
+den øverste række på tastaturet).</p>
+<p>Hvis en kommando er lagt ind i en funktionstast, vil et tryk på
+funktionstasten bevirke, at den tilsvarende kommando udføres (bortset
+fra F9, som står for <code>disk</code>, se 5.2). Eventuelle argumenter
+til kommandoen vil mangle og skal indtastes bagefter.</p>
+<p>Hvis der som argumenter til en kommando gives navne på procedurer og
+filer, som ikke eksisterer, og hvor kommandoen forventer, at de skal
+eksistere, kommer der en fejlmeddelelse (Fejlmeddelelserne er beskrevet
+i bilag E).</p>
+<p>Nogle af kommandoerne (<code>plist</code>, <code>pdisk</code>,
+<code>kopi</code>, <code>phjælp</code>) kræver, at der er en tilsluttet
+skriver (printer), så første gang en af disse anvendes, bliver brugeren
+spurgt om, hvor skriveren sidder på. Der er tre muligheder (0, 1 og 2),
+hvis datamaten ikke er tilsluttet lokalnet:</p>
+<ul>
+<li><code>0</code>: skriver-udgangen på centralenheden (CPU’en),</li>
+<li><code>1</code>: V24-udgangen på CPU’en (ikke standardudstyr) og</li>
+<li><code>2</code>: skriver-udgangen på disketteenheden.</li>
+</ul>
+<p>Hvis datamaten er tilsluttet lokalnet, er der 16 muligheder (tallene
+0 til 15), og navngivningen af skrivere afgør, hvorledes de hænger
+sammen med de eksisterende.</p>
+<p>Hvis der svares med RETUR, vælges den aktuelle skriver, der var, da
+Mikro-Logo startede op. Kommandoen <code>kopi</code> kræver en RC603
+skriver eller en tilsvarende skriver, der kan tegne grafik.</p>
+  </div>
+  <div class="page-footer-screen"><span>A/S Regnecentralen</span><span>Side 31</span></div>
+</div><div class="book-page body-p" id="side-32">
+  <div class="page-tag" data-chap="5. KOMMANDOER" data-pnum="32"></div>
+  <div class="page-header-screen"><span>5. KOMMANDOER</span><span>MIKRO-LOGO</span></div>
+  <div class="page-content">
+<h2 id="procedurekommandoer">5.1 Procedurekommandoer</h2>
+<p>Der findes både kommandoer til at oprette og ændre indholdet af
+procedurer, og kommandoer der kun giver information om de definerede
+procedurer.</p>
+<h3 id="def-procedurer-kap5">5.1.1 Definition af procedurer</h3>
+<p>Der er to måder at lave en procedure: Enten skriver man sætningerne,
+som proceduren skal bestå af (v.hj.a. en editor, dvs. et retteprogram),
+eller også laver man den ud fra en tegning. Sidst i dette afsnit er der
+en oversigt over kommandoerne, der gør dette, men først en mere
+uddybende beskrivelse af, hvordan det gøres.</p>
+<p>Når man laver en procedure v.hj.a. editoren, er der to måder at
+starte på: Enten kan man starte helt fra bunden, eller også kan man
+ændre en allerede eksisterende procedure. Kommandoen <code>lær</code>
+(funktionstast F5) laver en blank side, hvor der kun står
+<code>begynd</code> i øverste linie, dvs. man kan indtaste en procedure.
+Kommandoen <code>ret</code> (F6) beder om et procedurenavn, og teksten
+for denne procedure kommer så op på skærmen, og det er muligt at rette i
+både programhovedet og programkroppen. Hvis man laver en procedure med
+samme navn som en allerede eksisterende, bliver den gamle slettet.</p>
+<p>Under editering har følgende taster speciel betydning:</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">Tast</th>
+<th style="text-align: left;">Funktion</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong><code>←</code></strong></td>
+<td style="text-align: left;">flytter markøren en plads til venstre,
+undtagen hvis markøren står over det første tegn på en linie, så flytter
+den til det sidste tegn på linien over (hvis det ikke er i den øverste
+linie, for så flyttes markøren ikke).</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong><code>→</code></strong></td>
+<td style="text-align: left;">flytter markøren en plads til højre,
+undtagen hvis markøren står over det sidste tegn på en linie, så flyttes
+til det første tegn på næste linie (hvis det ikke er i den sidste
+linie).</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong><code>↑</code></strong></td>
+<td style="text-align: left;">flytter markøren en linie op, hvis det er
+muligt.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong><code>↓</code></strong></td>
+<td style="text-align: left;">flytter markøren en linie ned, hvis det er
+muligt.</td>
+</tr>
+</tbody>
+</table>
+  </div>
+  <div class="page-footer-screen"><span>Side 32</span><span>A/S Regnecentralen</span></div>
+</div><div class="book-page body-p" id="side-33">
+  <div class="page-tag" data-chap="5. KOMMANDOER" data-pnum="33"></div>
+  <div class="page-header-screen"><span>MIKRO-LOGO</span><span>5. KOMMANDOER</span></div>
+  <div class="page-content">
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">Tast</th>
+<th style="text-align: left;">Funktion</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong><code>↵</code>
+(Retur)</strong></td>
+<td style="text-align: left;">flytter markøren ned først på næste linie,
+undtagen hvis markøren er i sidste linie, hvor det virker ligesom
+A4-tasten (editering er færdig og accepteres).</td>
+</tr>
+<tr>
+<td
+style="text-align: left;"><strong><code>TEGN IND</code></strong></td>
+<td style="text-align: left;">skubber teksten til højre for markøren til
+højre og indsætter en blank ved markøren.</td>
+</tr>
+<tr>
+<td
+style="text-align: left;"><strong><code>SLET TEGN</code></strong></td>
+<td style="text-align: left;">sletter tegnet, hvor markøren står, og
+trækker teksten til venstre.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong><code>⌫</code></strong></td>
+<td style="text-align: left;">sletter tegnet til venstre for markøren og
+trækker teksten sammen.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong><code>A1</code></strong></td>
+<td style="text-align: left;">sletter resten af linien fra, hvor
+markøren står.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong><code>A2</code></strong></td>
+<td style="text-align: left;">sletter en linie og rykker de
+efterfølgende linier op.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong><code>A3</code></strong></td>
+<td style="text-align: left;">skubber linierne under markøren ned og
+indsætter en blank linie.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong><code>A4</code></strong></td>
+<td style="text-align: left;">signalerer, at editeringen er færdig, og
+proceduren skal gemmes og oversættes. Editoren sætter selv
+<code>slut</code>, hvis det mangler, og procedurekroppen ikke er på mere
+end 19 linier. Hvis der ikke er plads til <code>slut</code>, kan
+editoren ikke forlades med A4.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong><code>ESC</code></strong></td>
+<td style="text-align: left;">signalerer, at man fortryder editeringen,
+og teksten ikke skal gemmes.</td>
+</tr>
+</tbody>
+</table>
+<p>Hvis der er fejl i oversættelsen efter A4 (f.eks. manglende argument
+til sætningen <code>frem</code>) kommer der en fejlmeddelelse i den
+øverste linie (disse fejlmeddelelser er beskrevet i bilag E.2.1).
+Desuden vender systemet tilbage til kommandolinien, hvor brugeren kan
+afgive kommandoer og sætninger, men det er ikke muligt at udføre nogle
+procedurer, før fejlen er rettet.</p>
+  </div>
+  <div class="page-footer-screen"><span>A/S Regnecentralen</span><span>Side 33</span></div>
+</div><div class="book-page body-p" id="side-34">
+  <div class="page-tag" data-chap="5. KOMMANDOER" data-pnum="34"></div>
+  <div class="page-header-screen"><span>5. KOMMANDOER</span><span>MIKRO-LOGO</span></div>
+  <div class="page-content">
+<div data-align="center">
+<p><img src="images/fig-12.png"
+alt="Fig. 12. Skærmbillede når en procedure rettes" /><br />
+<em>Fig. 12. Skærmbillede når en procedure rettes</em></p>
+</div>
+<p>Den anden måde at lave procedurer på er at lave en tegning ved at
+skrive sætninger i kommandolinien og så udføre dem. Når tegningen er
+færdig, bruger man kommandoen <code>lav</code>, som så beder om et
+procedurenavn og laver en procedure uden parametre med dette navn og de
+brugte sætninger som krop. Da en procedurekrop kun må indeholde 19
+sætningslinier, og da <code>glem alle</code> (se 5.1.2),
+<code>start</code> og <code>viskud</code> betyder, at skærmen viskes
+ren, er det sætningerne siden det sidste <code>glem alle</code>,
+<code>start</code> eller <code>viskud</code> i kommandolinien, der
+bliver sat ind i procedurekroppen.</p>
+<p>Hvis man forsøger at lave en procedure ved <code>lav</code>
+kommandoen, og denne procedure viser sig at være for lang, får man
+mulighed for at rette i proceduren, hvor kroppen er de første 19
+sætninger eller de sidste 19 sætninger. Så hvis man vil bruge
+<code>lav</code>, skal man være omhyggelig, da det kun er muligt at “få
+fat i” alle ordrer, hvis der er færre end 38.</p>
+  </div>
+  <div class="page-footer-screen"><span>Side 34</span><span>A/S Regnecentralen</span></div>
+</div><div class="book-page body-p" id="side-35">
+  <div class="page-tag" data-chap="5. KOMMANDOER" data-pnum="35"></div>
+  <div class="page-header-screen"><span>MIKRO-LOGO</span><span>5. KOMMANDOER</span></div>
+  <div class="page-content">
+<p>Ved at bruge <code>fortryd</code> kommandoen (se 5.3) er det muligt
+at fortryde den sidst udførte sætningslinie, og derved er
+<code>lav</code> kommandoen god til at lave en foreløbig version af en
+procedure, som så kan rettes til med kommandoen <code>ret</code>, som
+beskrevet tidligere i dette afsnit.</p>
+<p>Her følger en oversigt over kommandoerne, som er beskrevet i dette
+afsnit. De er beskrevet på samme form, som de øvrige kommandoer
+beskrives.</p>
+<p><strong><code>lær</code></strong><br />
+<strong><code>F5</code></strong><br />
+Bruges til at oprette en ny procedure. Kommandoen er først færdig, når
+A4 eller ESC trykkes ned.</p>
+<p><strong><code>ret pnavn</code></strong><br />
+<strong><code>ret</code></strong><br />
+<strong><code>F6</code></strong><br />
+Bruges til at rette en eksisterende procedure. Da procedurehovedet også
+kan editeres, kan kommandoen også bruges til at lave en ny procedure. A4
+eller ESC afslutter kommandoen.</p>
+<p><strong><code>lav pnavn</code></strong><br />
+<strong><code>lav</code></strong><br />
+Laver en ny procedure ud fra de ordrer, der er brugt siden sidste
+<code>glem alle</code> (se 5.1.2), <code>start</code> eller
+<code>viskud</code>. Hvis der er brugt flere end 19, er der mulighed for
+at editere proceduren med de første 19 linier eller med de sidste 19
+linier.</p>
+<p>I alle tilfælde gælder, at hvis der laves en procedure, som har samme
+navn som en allerede eksisterende, vil den eksisterende blive slettet,
+når editeringen accepteres med A4-tasten eller oprettes med
+<code>lav</code> kommandoen.</p>
+  </div>
+  <div class="page-footer-screen"><span>A/S Regnecentralen</span><span>Side 35</span></div>
+</div><div class="book-page body-p" id="side-36">
+  <div class="page-tag" data-chap="5. KOMMANDOER" data-pnum="36"></div>
+  <div class="page-header-screen"><span>5. KOMMANDOER</span><span>MIKRO-LOGO</span></div>
+  <div class="page-content">
+<h3 id="administration-af-procedurer">5.1.2 Administration af
+procedurer</h3>
+<p>I forrige afsnit beskrev vi, hvorledes man kan definere og ændre
+procedurer. I dette afsnit beskrives, hvorledes vi bestyrer
+procedurerne.</p>
+<p><strong><code>glem pnavn</code></strong><br />
+<strong><code>glem</code></strong><br />
+<strong><code>F4</code></strong><br />
+Sletter proceduren med navnet <code>pnavn</code>. Hvis
+<code>pnavn</code> er lig <code>alle</code>, slettes alle procedurer og
+variable, og tegningen viskes ud (som ved sætningen <code>start</code>).
+Hvis der ikke er en procedure <code>pnavn</code>, fås en
+fejlmeddelelse.</p>
+<p><strong><code>hvilke</code></strong><br />
+<strong><code>F3</code></strong><br />
+Giver en liste over de definerede procedurer og disses formelle
+parametre. <code>hvilke</code> kan stoppes på samme måde som
+<code>list</code> (se nedenfor), men der er kun behov for det, hvis der
+er over 21 procedurer.<br />
+Eks.:</p>
+<pre class="logo"><code>begynd polygon side antal
+begynd trekant side
+begynd firkant side
+begynd cirkel radius</code></pre>
+<p><strong><code>list pnavn</code></strong><br />
+<strong><code>list</code></strong><br />
+<strong><code>F2</code></strong><br />
+Udskriver sætningerne for proceduren <code>pnavn</code> på skærmen. Hvis
+<code>pnavn</code> er lig <code>alle</code>, udskrives alle procedurer
+med en blank linie mellem hver procedure. Hvis der ikke er en procedure
+<code>pnavn</code>, fås en fejlmeddelelse.</p>
+<p>Da udskriften kan fylde mere end et skærmbillede (hvis
+<code>pnavn</code> er <code>alle</code>), er det muligt at stoppe den
+ved et tryk på mellemrumstasten. Yderligere tryk på mellemrum vil
+bevirke, at der kommer en linie ad gangen. Tryk på en anden tast
+fortsætter udskriften. Udskriften kan stoppes helt ved tryk på
+ESC-tasten.</p>
+<p><strong><code>plist pnavn</code></strong><br />
+<strong><code>plist</code></strong><br />
+Udskriver på skriveren i stedet for på skærmen, men fungerer ellers som
+<code>list</code>, bortset fra, at udskriften ikke kan afbrydes eller
+stoppes.</p>
+  </div>
+  <div class="page-footer-screen"><span>Side 36</span><span>A/S Regnecentralen</span></div>
+</div><div class="book-page body-p" id="side-37">
+  <div class="page-tag" data-chap="5. KOMMANDOER" data-pnum="37"></div>
+  <div class="page-header-screen"><span>MIKRO-LOGO</span><span>5. KOMMANDOER</span></div>
+  <div class="page-content">
+<h2 id="diskettekommandoer">5.2 Diskettekommandoer</h2>
+<p>Når man afslutter Mikro-Logo (kommandoen <code>farvel</code>, afsnit
+5.4), mister man alle de procedurer, man har lavet. Det er derfor gjort
+muligt at gemme sine procedurer på diskette-filer, således at man kan få
+fat i procedurerne, når man senere igen anvender Mikro-Logo.</p>
+<p>En fil er et område på en diskette. En fil med Logo-procedurer
+refereres ved dens navn, som består af højst 8 tegn, hvor det første er
+et bogstav, og de øvrige er bogstaver eller cifre. Bogstaver i filnavne
+må ikke være æ, ø eller å (dette skyldes, at styresystemet er
+amerikansk); dette er i modsætning til variabel-, procedure- og
+parameternavne, som gerne må indeholde æ, ø og å. Foran selve filnavnet
+kan det specificeres, på hvilken diskettestation filen skal gemmes på
+eller findes på. Diskettestationen specificeres med et bogstav og
+adskilles fra selve filnavnet med et <code>:</code>. Den første
+diskettestation i en disketteenhed hedder <code>a</code> og en eventuel
+anden <code>b</code>. Hvis diskettestationen ikke specificeres, er det
+den aktuelle disk, dvs. den, hvorfra Mikro-Logo blev startet op (se
+brugervejledning for den respektive maskine).</p>
+<p>Eks. på filnavne:</p>
+<pre><code>polygon
+b:blomster
+a:umulig</code></pre>
+<p><strong><code>disk</code></strong><br />
+<strong><code>F9</code></strong><br />
+Skriver navnene på de filer med Logo-procedurer, der er på den aktuelle
+disk. Udover navnene skrives også størrelsen af filerne (i bytes).</p>
+<p><strong>Bemærk:</strong> F9 bevirker ikke, at <code>disk</code>
+udføres. Først efter et tryk på Retur udføres kommandoen
+<code>disk</code>, da F9/<code>disk</code> også kan anvendes på andre
+diskettestationer end den aktuelle (se nedenfor).</p>
+<p>Eks.: Kommandoen <code>disk</code> vil give følgende udskrift, hvis
+den bruges på en kopi af distributionsdisketten:</p>
+<pre><code>kasse    6528 b
+polygon  2176 b
+spiral   1664 b
+stjerne  1152 b</code></pre>
+  </div>
+  <div class="page-footer-screen"><span>A/S Regnecentralen</span><span>Side 37</span></div>
+</div><div class="book-page body-p" id="side-38">
+  <div class="page-tag" data-chap="5. KOMMANDOER" data-pnum="38"></div>
+  <div class="page-header-screen"><span>5. KOMMANDOER</span><span>MIKRO-LOGO</span></div>
+  <div class="page-content">
+<p><strong><code>disk bogstav</code></strong><br />
+<strong><code>F9</code></strong><br />
+Som ovenfor bortset fra, at det er på den diskette, der er i den
+diskettestation, som bogstav angiver.<br />
+Eks.: <code>disk b</code></p>
+<p><strong><code>pdisk</code></strong><br />
+<strong><code>pdisk bogstav</code></strong><br />
+Som ovenfor bortset fra, at udskriften kommer på skriver i stedet for på
+skærmen.</p>
+<p><strong><code>gem pnavn filnavn</code></strong><br />
+<strong><code>gem pnavn</code></strong><br />
+<strong><code>gem</code></strong><br />
+<strong><code>F11</code></strong><br />
+Hvis <code>pnavn</code> er <code>alle</code>, bliver alle procedurer
+gemt på filen <code>filnavn</code>, ellers bliver proceduren
+<code>pnavn</code> gemt på filen <code>filnavn</code>. Hvis filen
+<code>filnavn</code> eksisterer i forvejen, bliver brugeren bedt om at
+bekræfte, at den skal slettes.</p>
+<p><strong><code>tilføj pnavn filnavn</code></strong><br />
+<strong><code>tilføj pnavn</code></strong><br />
+<strong><code>tilføj</code></strong><br />
+<strong><code>F12</code></strong><br />
+Proceduren <code>pnavn</code> (alle procedurer, hvis <code>pnavn</code>
+er <code>alle</code>) bliver tilføjet til filen <code>filnavn</code>.
+Hvis filen <code>filnavn</code> ikke eksisterer, kommer der en
+fejlmeddelelse.</p>
+<p><strong><code>hent filnavn</code></strong><br />
+<strong><code>hent</code></strong><br />
+<strong><code>F10</code></strong><br />
+Indlæser de procedurer, der er på filen <code>filnavn</code>. Hvis der i
+forvejen er procedurer, som har samme navne som nogle af de indlæste,
+bliver de første slettet.</p>
+  </div>
+  <div class="page-footer-screen"><span>Side 38</span><span>A/S Regnecentralen</span></div>
+</div><div class="book-page body-p" id="side-39">
+  <div class="page-tag" data-chap="5. KOMMANDOER" data-pnum="39"></div>
+  <div class="page-header-screen"><span>MIKRO-LOGO</span><span>5. KOMMANDOER</span></div>
+  <div class="page-content">
+<p><strong><code>fjern filnavn</code></strong><br />
+<strong><code>fjern</code></strong><br />
+Sletter en fil med Logo-procedurer på disketten. Hvis filen ikke
+eksisterer, kommer der en fejlmeddelelse.</p>
+<h2 id="tegning-på-andre-medier">5.3 Tegning på andre medier</h2>
+<p><strong><code>kopi</code></strong><br />
+<strong><code>F7</code></strong><br />
+Laver en kopi af tegningen på skriveren. Det er nødvendigt, at der er en
+GSX grafik-driver til skriveren, som der f.eks. er til RC603.</p>
+<p><strong><code>tegnigen</code></strong><br />
+Tegner tegningen på skærmen igen. Denne kommando er specielt anvendelig,
+hvis man ønsker at fortsætte på en tegning, der er blevet slettet ved en
+af de kommandoer, der bruger hele skærmen til tekst.</p>
+<p>Både <code>kopi</code> og <code>tegnigen</code> tegner fra sidste
+gang, man anvendte <code>glem alle</code>, <code>start</code> eller
+<code>viskud</code> i kommandolinien. Hvis man anvender flere sætninger
+siden sidste <code>glem alle</code>, <code>start</code> eller
+<code>viskud</code>, end der er plads til, bliver man advaret.</p>
+<p><strong><code>holger</code></strong><br />
+Holger er en gulv-skildpadde; i øjeblikket kan følgende tre styres fra
+Mikro-Logo: Jessop Micro-Electronics, Valiant og Tegnebilen fra
+Mikro-Værkstedet i Odense. Når Holger kobles til, vil den udføre de
+ordrer, man skriver i sætningslinien, hvorved det er muligt at lave den
+samme tegning på gulvet og på skærmen.</p>
+  </div>
+  <div class="page-footer-screen"><span>A/S Regnecentralen</span><span>Side 39</span></div>
+</div><div class="book-page body-p" id="side-40">
+  <div class="page-tag" data-chap="5. KOMMANDOER" data-pnum="40"></div>
+  <div class="page-header-screen"><span>5. KOMMANDOER</span><span>MIKRO-LOGO</span></div>
+  <div class="page-content">
+<div data-align="center">
+<p><img src="images/fig-13.png"
+alt="Fig. 13. En gulv-skildpadde" /><br />
+<em>Fig. 13. En gulv-skildpadde</em></p>
+</div>
+<p>Holger kobles til og fra ved kommandoen <code>holger</code>; hvis
+Holger er koblet til, vil den blive koblet fra, når kommandoen
+<code>holger</code> gives, og omvendt.</p>
+<p>Når Holger kobles til, bliver brugeren spurgt, om Holger er sat til
+skriverudgangen på centralenheden (CPU’en) eller skriverudgangen på
+disketteenheden. Det er ikke muligt at styre en Holger over nettet, da
+det kræves, at man har fuldstændig kontrol over den hele tiden.
+Herudover spørges der efter en datafil for skildpadden. Denne datafil
+indeholder forskellige oplysninger om skildpadden. På
+distributionsdisketten findes følgende datafiler:</p>
+<ul>
+<li><strong><code>jessop</code></strong> beskriver skildpadden fra
+Jessop Micro-Electronics</li>
+<li><strong><code>valiant</code></strong> beskriver skildpadden fra
+Valiant</li>
+<li><strong><code>bil</code></strong> beskriver tegnebilen fra
+Mikro-Værkstedet i Odense</li>
+</ul>
+<p>Det er ikke muligt at bruge Holger samtidigt med plotteren.</p>
+<p><strong><code>plotter</code></strong><br />
+Kobler en plotter til og fra (på samme måde som ved
+<code>holger</code>).</p>
+<p>Når plotteren kobles til, bliver brugeren spurgt om hvilken skriver,
+plotteren er placeret som (se også bemærkningerne om skrivere i det
+indledende afsnit i dette kapitel). Herudover spørges der efter en
+datafil for plotteren. Denne datafil indeholder forskellige oplysninger
+om plotteren. På distributionsdisketten findes følgende datafiler:</p>
+  </div>
+  <div class="page-footer-screen"><span>Side 40</span><span>A/S Regnecentralen</span></div>
+</div><div class="book-page body-p" id="side-41">
+  <div class="page-tag" data-chap="5. KOMMANDOER" data-pnum="41"></div>
+  <div class="page-header-screen"><span>MIKRO-LOGO</span><span>5. KOMMANDOER</span></div>
+  <div class="page-content">
+<ul>
+<li><strong><code>rc621</code></strong> beskriver plotteren som
+Regnecentralen leverer</li>
+<li><strong><code>roland</code></strong> beskriver Roland-plottere og
+Digi-Plot</li>
+<li><strong><code>plotter</code></strong> indeholder en skabelon for
+indholdet på en datafil</li>
+</ul>
+<p>Det er ikke muligt at bruge plotteren samtidigt med
+<code>holger</code>.</p>
+<p><strong><code>Ctrl-P</code></strong><br />
+<em>(dvs. Ctrl-tasten holdes nede, og der tastes P)</em><br />
+Sætter pennen på plotteren ned i venstre hjørne (bruges for at undgå, at
+blækket løber ud på tegningen, og for at slukke alarm-lampen på
+plotteren, hvis plotterpennen er kommet udenfor plotterens tegneområde).
+Når plotteren kobles fra, sættes plotterpennen også ned i venstre
+hjørne.</p>
+<h2 id="andre-kommandoer">5.4 Andre kommandoer</h2>
+<p><strong><code>farvel</code></strong><br />
+Afslutter Mikro-Logo. Inden man afslutter, bør man gemme de procedurer,
+man ønsker at bruge ved en senere lejlighed (se afsnit 5.2).</p>
+<p><strong><code>pil</code></strong><br />
+Bruges til at skifte, om skildpaddens position og retning skal angives
+med en lille pil. Dette er meget anvendeligt for begyndere, idet det kan
+være vanskeligt at holde styr på specielt retningen af skildpadden.</p>
+<p>Kommandoen <code>pil</code> er (ligesom kommandoerne
+<code>holger</code> og <code>plotter</code>) en skifter, så hvis
+kommandoen <code>pil</code> gives, vil pilen blive vist, hvis den ikke
+var vist før, og omvendt.</p>
+<p><strong><code>status</code></strong><br />
+Skriver skildpaddens position, retning og pentype i øverste linie af
+skærmen.</p>
+  </div>
+  <div class="page-footer-screen"><span>A/S Regnecentralen</span><span>Side 41</span></div>
+</div><div class="book-page body-p" id="side-42">
+  <div class="page-tag" data-chap="5. KOMMANDOER" data-pnum="42"></div>
+  <div class="page-header-screen"><span>5. KOMMANDOER</span><span>MIKRO-LOGO</span></div>
+  <div class="page-content">
+<p><strong><code>fortryd</code></strong><br />
+<strong><code>F8</code></strong><br />
+Fortryder den sidst udførte sætningslinie, dvs. de streger, der blev
+tegnet, bliver slettet, og de streger, der blev slettet, bliver
+gentegnet. Men da systemet ikke kan huske, hvis man har tegnet streger
+oven i hinanden, kan der ske uønskede ting, hvis man fortryder en linie,
+der er tegnet oven i en anden. Hvis man fortryder en sætningslinie med
+<code>start</code> eller <code>viskud</code>, får man en
+fejlmeddelelse.</p>
+<p><strong><code>hjælp</code></strong><br />
+Giver information om Mikro-Logo, bl.a. en oversigt og en kort
+beskrivelse af sætninger og kommandoer.</p>
+<p><strong><code>phjælp</code></strong><br />
+Skriver oversigten og beskrivelsen af sætninger og kommandoer på
+skriveren.</p>
+<p><strong><code>R</code></strong><br />
+<strong><code>Ctrl-F</code></strong><br />
+<em>(dvs. Ctrl-tasten holdes nede, og der tastes F)</em><br />
+Skifter mellem, at tegningen viskes ud inden en ny sætningslinie, og der
+tegnes videre på tegningen, når der gives en ny sætningslinie. Når
+Mikro-Logo starter, vil det sidste være tilfældet, dvs. tegningen
+slettes ikke, når en ny sætningslinie udføres.</p>
+<p><strong><code>lager</code></strong><br />
+Anvendes til aftestning af Mikro-Logo.</p>
+  </div>
+  <div class="page-footer-screen"><span>Side 42</span><span>A/S Regnecentralen</span></div>
+</div><div class="book-page body-p" id="side-43">
+  <div class="page-tag" data-chap="6. OVERVÅGNING AF UDFØRELSE AF SÆTNINGER" data-pnum="43"></div>
+  <div class="page-header-screen"><span>MIKRO-LOGO</span><span>6. OVERVÅGNING AF UDFØRELSE AF SÆTNINGER</span></div>
+  <div class="page-content">
+<h1 id="overvågning-af-udførelse-af-sætninger">6. OVERVÅGNING AF
+UDFØRELSE AF SÆTNINGER</h1>
+<p>Når en sætningslinie udføres, kan det være svært at overskue,
+hvorledes tegningen bliver til, specielt hvis der er mange
+procedurekald. Derfor er det gjort muligt at afbryde udførelsen og få
+udført en sætning ad gangen. Dette gøres efter samme princip som ved
+<code>list</code> (afsnit 5.1).</p>
+<p>Når der tastes mellemrum, afbrydes udførelsen midlertidigt, og
+sætningen, der udføres, skrives i den øverste linie sammen med de
+aktuelle argumenter. Herefter vil der for hver gang der tastes
+mellemrum, blive udført en linie, og denne vil blive vist i øverste
+linie, indtil der trykkes på ESC eller Retur. Hvis det er ESC, stoppes
+udførelsen; hvis det er Retur, fortsættes på normal vis. Hvis der tastes
+ESC uden forudgående mellemrum, stoppes udførelsen også.</p>
+<p>Eks.: Hvis proceduren <code>spiral 2 90</code> fra afsnit 4.4.4
+udføres med en sætning ad gangen, vil den øverste linie vise følgende
+(en linie ad gangen, hver gang der tastes mellemrum):</p>
+<pre class="logo"><code>spiral 2 90
+frem 2
+venstre 90
+spiral 4 90
+frem 4
+venstre 90
+spiral 6 90
+frem 6
+venstre 90
+spiral 8 90
+o.s.v.</code></pre>
+  </div>
+  <div class="page-footer-screen"><span>A/S Regnecentralen</span><span>Side 43</span></div>
+</div><div class="book-page body-p" id="side-44">
+  <div class="page-tag" data-chap="6. OVERVÅGNING AF UDFØRELSE AF SÆTNINGER" data-pnum="44"></div>
+  <div class="page-header-screen"><span>6. OVERVÅGNING AF UDFØRELSE AF SÆTNINGER</span><span>MIKRO-LOGO</span></div>
+  <div class="page-content">
+<p><em>(Denne side er blank i originalen)</em></p>
+  </div>
+  <div class="page-footer-screen"><span>Side 44</span><span>A/S Regnecentralen</span></div>
+</div><div class="book-page body-p" id="side-45">
+  <div class="page-tag" data-chap="A. FORSKELLE TIL MIKRO-LOGO PÅ PICCOLO" data-pnum="45"></div>
+  <div class="page-header-screen"><span>MIKRO-LOGO</span><span>A. FORSKELLE TIL MIKRO-LOGO PÅ PICCOLO</span></div>
+  <div class="page-content">
+<h1 id="bilag-a.-forskelle-til-mikro-logo-på-piccolo">BILAG A. FORSKELLE
+TIL MIKRO-LOGO PÅ PICCOLO</h1>
+<h2 id="a.1-sætninger">A.1 Sætninger</h2>
+<p>Der er fire sætninger, der har fået nyt navn, og der er tilføjet en
+ny sætning.</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">PICCOLO</th>
+<th style="text-align: left;">PICCOLINE / Partner</th>
+<th style="text-align: left;">KOMMENTAR</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>til</code></td>
+<td style="text-align: left;"><code>begynd</code></td>
+<td style="text-align: left;">navnet er ændret for at gøre det mere
+sigende.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>sluttil</code></td>
+<td style="text-align: left;"><code>slut</code></td>
+<td style="text-align: left;">navnet er ændret for at gøre det mere
+sigende.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>pil</code></td>
+<td style="text-align: left;"><code>pilind</code></td>
+<td style="text-align: left;">navnet er ændret for at undgå konflikt med
+den nye kommando <code>pil</code>.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>hent</code></td>
+<td style="text-align: left;"><code>henttal</code></td>
+<td style="text-align: left;">navnet er ændret for at undgå konflikt med
+kommandoen <code>hent</code>.</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><code>start</code></td>
+<td style="text-align: left;">sætningen er indført, da man ofte er
+interesseret i både <code>hjem</code> og <code>viskud</code> (se
+4.2.4).</td>
+</tr>
+</tbody>
+</table>
+  </div>
+  <div class="page-footer-screen"><span>A/S Regnecentralen</span><span>Side 45</span></div>
+</div><div class="book-page body-p" id="side-46">
+  <div class="page-tag" data-chap="A. FORSKELLE TIL MIKRO-LOGO PÅ PICCOLO" data-pnum="46"></div>
+  <div class="page-header-screen"><span>A. FORSKELLE TIL MIKRO-LOGO PÅ PICCOLO</span><span>MIKRO-LOGO</span></div>
+  <div class="page-content">
+<h2 id="a.2-kommandoer">A.2 Kommandoer</h2>
+<p>Der er følgende ændringer ved kommandoerne:</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">PICCOLO</th>
+<th style="text-align: left;">PICCOLINE / Partner</th>
+<th style="text-align: left;">KOMMENTAR</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>slet</code></td>
+<td style="text-align: left;"><code>glem</code></td>
+<td style="text-align: left;">navnet er ændret for at undgå konflikt med
+sætningen <code>slet</code> og forveksling med kommandoen
+<code>fjern</code>.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>Ctrl-G</code></td>
+<td style="text-align: left;"><code>F1</code> / <code>↖</code></td>
+<td style="text-align: left;">tasten er ændret for at gøre det lettere
+at fremkalde sidste sætningslinie (se kapitel 3).</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>Ctrl-F</code></td>
+<td style="text-align: left;"><code>R</code> / <code>Ctrl-F</code></td>
+<td style="text-align: left;">det er gjort nemmere at skifte mellem
+sammensat tegning og enkelt tegninger (se 5.4).</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>Ctrl-T</code></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">er fjernet, da det ikke er muligt at
+skifte mellem tekstskærm og grafikskærm.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>dato</code></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">er fjernet, da datoen ikke kan
+ændres.</td>
+</tr>
+</tbody>
+</table>
+  </div>
+  <div class="page-footer-screen"><span>Side 46</span><span>A/S Regnecentralen</span></div>
+</div><div class="book-page body-p" id="side-47">
+  <div class="page-tag" data-chap="A. FORSKELLE TIL MIKRO-LOGO PÅ PICCOLO" data-pnum="47"></div>
+  <div class="page-header-screen"><span>MIKRO-LOGO</span><span>A. FORSKELLE TIL MIKRO-LOGO PÅ PICCOLO</span></div>
+  <div class="page-content">
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">PICCOLO</th>
+<th style="text-align: left;">PICCOLINE / Partner</th>
+<th style="text-align: left;">KOMMENTAR</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>Ctrl-C</code></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">er fjernet, da der ikke er
+overlay-filer.</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><code>tilføj</code></td>
+<td style="text-align: left;">er tilføjet, se 5.2.</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><code>lav</code></td>
+<td style="text-align: left;">er tilføjet, se 5.1.2.</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><code>fortryd</code></td>
+<td style="text-align: left;">er tilføjet, se 5.4.</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><code>tegnigen</code></td>
+<td style="text-align: left;">er tilføjet, se 5.3.</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><code>holger</code></td>
+<td style="text-align: left;">er tilføjet, se 5.3.</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><code>pil</code></td>
+<td style="text-align: left;">er tilføjet, se 5.4.</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><code>status</code></td>
+<td style="text-align: left;">er tilføjet, se 5.4.</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><code>phjælp</code></td>
+<td style="text-align: left;">er tilføjet, se 5.4.</td>
+</tr>
+</tbody>
+</table>
+  </div>
+  <div class="page-footer-screen"><span>A/S Regnecentralen</span><span>Side 47</span></div>
+</div><div class="book-page body-p" id="side-48">
+  <div class="page-tag" data-chap="B. DISTRIBUTIONSDISKETTEN" data-pnum="48"></div>
+  <div class="page-header-screen"><span>B. DISTRIBUTIONSDISKETTEN</span><span>MIKRO-LOGO</span></div>
+  <div class="page-content">
+<h1 id="bilag-b.-distributionsdisketten">BILAG B.
+DISTRIBUTIONSDISKETTEN</h1>
+<p>Inden man starter med at bruge Mikro-Logo, skal man tage en
+arbejdskopi af distributionsdisketten med Mikro-Logo, og så bruge denne,
+hver gang man skal lave en diskette med Mikro-Logo. Man bør aldrig
+anvende distributionsdisketten i det daglige arbejde.</p>
+<p>Mikro-Logo installeres på en systemdiskette ved at placere denne i
+diskettestation A og en kopi af distributionsdisketten med Mikro-Logo i
+diskettestation B. Den aktuelle disk sættes til A, og følgende kommando
+gives til CCP/M:</p>
+<pre><code>submit b:instlogo</code></pre>
+<p>Denne kommando sørger for at kopiere filerne over på systemdisketten
+i diskettestation A.</p>
+<p>Ud over filerne med Mikro-Logo systemet (<code>LOGO.CMD</code>,
+<code>LOGOKOM.HLP</code> og <code>LOGOSAET.HLP</code>) indeholder
+distributionsdisketten et konverteringsprogram, nogle datafiler til
+skildpadder og plottere, og nogle filer med eksempler på
+Logo-procedurer. Konverteringsprogrammet (<code>LOGOCONV.CMD</code>)
+konverterer en fil med Logo-procedurer, hvor der er brugt
+<code>til</code> og <code>sluttil</code>, til en fil med procedurer med
+<code>begynd</code> og <code>slut</code>.</p>
+<p>Der er følgende datafiler:</p>
+<ul>
+<li><strong><code>JESSOP.PAD</code></strong>: datafil til skildpadden
+fra Jessop Micro-Electronics</li>
+<li><strong><code>VALIANT.PAD</code></strong>: datafil til skildpadden
+fra Valiant</li>
+<li><strong><code>BIL.PAD</code></strong>: datafil til tegnebilen fra
+Mikro-Værkstedet i Odense</li>
+<li><strong><code>RC621.PLO</code></strong>: datafil til
+RC621-plotteren</li>
+<li><strong><code>ROLAND.PLO</code></strong>: datafil til plottere fra
+Roland</li>
+<li><strong><code>PLOTTER.PLO</code></strong>: skabelon for datafil til
+en plotter</li>
+</ul>
+<p>Der er følgende eksempler på filerne med Logo-procedurer:</p>
+<ul>
+<li>polygoner og cirkler</li>
+<li>stjerner</li>
+<li>spiraler</li>
+<li>“umulig” tegning med kasser</li>
+</ul>
+<p>Ved at bruge kommandoen <code>hent</code> (afsnit 5.2) kan man hente
+de Logo-procedurer, der er på disse filer, ind i Mikro-Logo.</p>
+<p>De følgende afsnit beskriver procedurerne på de 4 filer og er alle
+opbygget på samme måde. Først beskrives, hvad procedurerne gør. Så er
+der en tegning lavet ved hjælp af disse procedurer, og til sidst er der
+en udskrift af procedurerne.</p>
+  </div>
+  <div class="page-footer-screen"><span>Side 48</span><span>A/S Regnecentralen</span></div>
+</div><div class="book-page body-p" id="side-49">
+  <div class="page-tag" data-chap="B. DISTRIBUTIONSDISKETTEN" data-pnum="49"></div>
+  <div class="page-header-screen"><span>MIKRO-LOGO</span><span>B. DISTRIBUTIONSDISKETTEN</span></div>
+  <div class="page-content">
+<h2 id="b.1-polygon">B.1 Polygon</h2>
+<p>Filen <code>polygon</code> indeholder 4 procedurer (her er angivet
+procedurernes navne og deres formelle parametre):</p>
+<ul>
+<li><code>polygon side antal</code></li>
+<li><code>trekant side</code></li>
+<li><code>firkant side</code></li>
+<li><code>cirkel radius</code></li>
+</ul>
+<p>Proceduren <code>polygon</code> er allerede defineret i afsnit 4.4.4.
+Procedurerne <code>trekant</code> og <code>firkant</code> er defineret
+ved <code>polygon</code>, hvor antal er henholdsvis 3 og 4.</p>
+<p>Procedure <code>cirkel</code> tegner en cirkel med centrum det sted,
+skildpadden står, og med den angivne radius. Først flyttes skildpadden
+ud på cirkelperiferien, derefter tegnes en 36 siders polygon, og til
+sidst flyttes skildpadden tilbage til centrum. Det er faktisk ikke
+muligt at se, at cirklen er en polygon. Det eneste uheldige ved denne
+procedure er, at det er svært at beregne sidelængden af polygonen
+nøjagtig nok, da Mikro-Logo kun arbejder med heltal. Sidelængden kan
+beregnes ud fra, at polygonen og cirklen skal have samme omkreds.</p>
+<div data-align="center">
+<p><img src="images/fig-14.png"
+alt="Fig. 14. Polygon og cirkel" /><br />
+<em>Fig. 14. Polygon og cirkel</em></p>
+</div>
+  </div>
+  <div class="page-footer-screen"><span>A/S Regnecentralen</span><span>Side 49</span></div>
+</div><div class="book-page body-p" id="side-50">
+  <div class="page-tag" data-chap="B. DISTRIBUTIONSDISKETTEN" data-pnum="50"></div>
+  <div class="page-header-screen"><span>B. DISTRIBUTIONSDISKETTEN</span><span>MIKRO-LOGO</span></div>
+  <div class="page-content">
+<p>Ovenstående figur er lavet med følgende sætninger:</p>
+<pre class="logo"><code>start
+løft
+tilbage 100
+tegn
+polygon 50 8
+løft
+frem 200
+cirkel 50</code></pre>
+<p>De 4 procedurer består af følgende sætninger:</p>
+<pre class="logo"><code>begynd polygon side antalkanter
+  gentag antalkanter
+    frem side
+    venstre 360/antalkanter
+  hertil
+slut
+
+begynd trekant side
+  polygon side 3
+slut
+
+begynd firkant side
+  polygon side 4
+slut
+
+begynd cirkel radius
+  løft
+  frem radius
+  venstre 90
+  længde := radius*2*22/7/36+1
+  tilbage længde/2
+  tegn
+  polygon længde 36
+  løft
+  frem længde/2
+  højre 90
+  tilbage radius
+  tegn
+slut</code></pre>
+  </div>
+  <div class="page-footer-screen"><span>Side 50</span><span>A/S Regnecentralen</span></div>
+</div><div class="book-page body-p" id="side-51">
+  <div class="page-tag" data-chap="B. DISTRIBUTIONSDISKETTEN" data-pnum="51"></div>
+  <div class="page-header-screen"><span>MIKRO-LOGO</span><span>B. DISTRIBUTIONSDISKETTEN</span></div>
+  <div class="page-content">
+<h2 id="b.2-stjerne">B.2 Stjerne</h2>
+<p>Filen <code>stjerne</code> indeholder kun een procedure:</p>
+<ul>
+<li><code>stjerne side antal</code></li>
+</ul>
+<p>som tegner en stjerne, hvis <code>antal</code> er ulige. Hvis
+<code>antal</code> er lige, kommer der en fejlmeddelelse.</p>
+<div data-align="center">
+<p><img src="images/fig-15.png" alt="Fig. 15. Stjerner" /><br />
+<em>Fig. 15. Stjerner</em></p>
+</div>
+<p>Ovenstående figur er lavet med følgende sætninger:</p>
+<pre class="logo"><code>start
+løft
+tilbage 100
+stjerne 100 5
+frem 200
+stjerne 100 15</code></pre>
+  </div>
+  <div class="page-footer-screen"><span>A/S Regnecentralen</span><span>Side 51</span></div>
+</div><div class="book-page body-p" id="side-52">
+  <div class="page-tag" data-chap="B. DISTRIBUTIONSDISKETTEN" data-pnum="52"></div>
+  <div class="page-header-screen"><span>B. DISTRIBUTIONSDISKETTEN</span><span>MIKRO-LOGO</span></div>
+  <div class="page-content">
+<p>Procedure <code>stjerne</code> er lavet således (Bemærk:
+<code>antal=antal/2*2</code> tester, om antal er lige, da der bruges
+heltalsdivision):</p>
+<pre class="logo"><code>begynd stjerne side antal
+  hvis antal=antal/2*2
+    sætning antal skal være ulige
+  ellers
+    vinkel := antal/2*360/antal
+    tegn
+    gentag antal
+      frem side
+      venstre vinkel
+    hertil
+    løft
+  sluthvis
+slut</code></pre>
+<h2 id="b.3-spiral">B.3 Spiral</h2>
+<p>Filen <code>spiral</code> indeholder 3 procedurer:</p>
+<ul>
+<li><code>spiral side vinkel</code></li>
+<li><code>itspiral side vinkel</code></li>
+<li><code>tlfspiral</code></li>
+</ul>
+<p>Proceduren <code>spiral</code> er allerede defineret i afsnit 4.4.4.
+Proceduren <code>itspiral</code> gør det samme som <code>spiral</code>,
+men er lavet med en gentag-sætning og kaldes derfor en iterativ
+procedure, hvorimod <code>spiral</code> er en rekursiv procedure (den
+kalder sig selv). Procedure <code>tlfspiral</code> laver en spiral, hvor
+<code>vinkel</code> er et tilfældigt tal mellem 90 og 179.</p>
+  </div>
+  <div class="page-footer-screen"><span>Side 52</span><span>A/S Regnecentralen</span></div>
+</div><div class="book-page body-p" id="side-53">
+  <div class="page-tag" data-chap="B. DISTRIBUTIONSDISKETTEN" data-pnum="53"></div>
+  <div class="page-header-screen"><span>MIKRO-LOGO</span><span>B. DISTRIBUTIONSDISKETTEN</span></div>
+  <div class="page-content">
+<div data-align="center">
+<p><img src="images/fig-16.png" alt="Fig. 16. Spiraler" /><br />
+<em>Fig. 16. Spiraler</em></p>
+</div>
+<p>Figuren er lavet med følgende sætninger:</p>
+<pre class="logo"><code>start
+løft
+sætxy -100 0
+tegn
+spiral 2 62
+løft
+sætxy 100 0
+tegn
+tlfspiral</code></pre>
+<p>Procedurerne består af følgende sætninger:</p>
+<pre class="logo"><code>begynd spiral side vinkel
+  hvis side&gt;150
+    stop
+  ellers
+    frem side
+    venstre vinkel
+    spiral side+2 vinkel
+  sluthvis
+slut</code></pre>
+  </div>
+  <div class="page-footer-screen"><span>A/S Regnecentralen</span><span>Side 53</span></div>
+</div><div class="book-page body-p" id="side-54">
+  <div class="page-tag" data-chap="B. DISTRIBUTIONSDISKETTEN" data-pnum="54"></div>
+  <div class="page-header-screen"><span>B. DISTRIBUTIONSDISKETTEN</span><span>MIKRO-LOGO</span></div>
+  <div class="page-content">
+<pre class="logo"><code>begynd itspiral side vinkel
+  gentag 100
+    frem side
+    venstre vinkel
+    side := side+2
+  hertil
+slut
+
+begynd tlfspiral
+  i := tlf(90)+90
+  spiral 2 i
+slut</code></pre>
+<h2 id="b.4-kasse">B.4 Kasse</h2>
+<p>Filen <code>kasse</code> indeholder 5 procedurer:</p>
+<ul>
+<li><code>ethjørne side</code></li>
+<li><code>kryds side</code></li>
+<li><code>tohjørner side</code></li>
+<li><code>halvkryds side</code></li>
+<li><code>startop side antal</code></li>
+</ul>
+<p>De 4 første er hjælpeprocedurer til proceduren <code>startop</code>.
+Proceduren <code>ethjørne</code> tegner en kasse, hvor det ene hjørne
+mangler; <code>ethjørne</code> kalder proceduren <code>kryds</code>, som
+tegner de tre “indvendige” streger. Proceduren <code>tohjørner</code>
+tegner en kasse, hvor to nabohjørner mangler; <code>tohjørner</code>
+kalder proceduren <code>halvkryds</code>.</p>
+<p>Proceduren <code>startop</code> laver en “trekant”, hvor siderne
+består af kasser, og hvor der er “problemer” med perspektivet.
+Parameteren <code>antal</code> angiver, hvor mange kasser der skal være
+på hver side i “trekanten”.</p>
+  </div>
+  <div class="page-footer-screen"><span>Side 54</span><span>A/S Regnecentralen</span></div>
+</div><div class="book-page body-p" id="side-55">
+  <div class="page-tag" data-chap="B. DISTRIBUTIONSDISKETTEN" data-pnum="55"></div>
+  <div class="page-header-screen"><span>MIKRO-LOGO</span><span>B. DISTRIBUTIONSDISKETTEN</span></div>
+  <div class="page-content">
+<div data-align="center">
+<p><img src="images/fig-17.png" alt="Fig. 17. Umulig figur" /><br />
+<em>Fig. 17. Umulig figur</em></p>
+</div>
+<p>Tegningen er lavet med sætningen:</p>
+<pre class="logo"><code>startop 40 4</code></pre>
+<p>Proceduren <code>tohjørner</code> har tegnet den “anden” kasse på
+hver side, mens <code>ethjørne</code> har tegnet de øvrige.</p>
+<p>Procedurerne er lavet således:</p>
+<pre class="logo"><code>begynd ethjørne side
+  tegn
+  gentag 4
+    frem side
+    venstre 60
+  hertil
+  frem side/2
+  løft
+  frem side/2
+  venstre 60
+  frem side/2
+  tegn
+  frem side/2
+  venstre 60
+  kryds side
+  løft
+slut</code></pre>
+  </div>
+  <div class="page-footer-screen"><span>A/S Regnecentralen</span><span>Side 55</span></div>
+</div><div class="book-page body-p" id="side-56">
+  <div class="page-tag" data-chap="B. DISTRIBUTIONSDISKETTEN" data-pnum="56"></div>
+  <div class="page-header-screen"><span>B. DISTRIBUTIONSDISKETTEN</span><span>MIKRO-LOGO</span></div>
+  <div class="page-content">
+<pre class="logo"><code>begynd kryds side
+  venstre 60
+  frem side
+  venstre 60
+  frem side
+  tilbage side
+  højre 120
+  frem side
+  tilbage side
+  venstre 60
+  tilbage side
+  højre 60
+slut
+
+begynd tohjørner side
+  tegn
+  gentag 3
+    frem side
+    venstre 60
+  hertil
+  frem side/2
+  løft
+  frem side/2
+  venstre 60
+  frem side
+  venstre 60
+  frem side/2
+  tegn
+  frem side/2
+  venstre 60
+  halvkryds side
+  løft
+slut
+
+begynd halvkryds side
+  venstre 60
+  frem side
+  venstre 60
+  frem side/2
+  tilbage side/2
+  højre 120
+  frem side
+  tilbage side
+  venstre 60
+  tilbage side
+  højre 60
+slut</code></pre>
+  </div>
+  <div class="page-footer-screen"><span>Side 56</span><span>A/S Regnecentralen</span></div>
+</div><div class="book-page body-p" id="side-57">
+  <div class="page-tag" data-chap="B. DISTRIBUTIONSDISKETTEN" data-pnum="57"></div>
+  <div class="page-header-screen"><span>MIKRO-LOGO</span><span>B. DISTRIBUTIONSDISKETTEN</span></div>
+  <div class="page-content">
+<pre class="logo"><code>begynd startop side antal
+  start
+  løft
+  sætxy -antal*side*3/4 -140
+  gentag 3
+    frem 3*side/2
+    tohjørner side
+    gentag antal-2
+      frem 3*side/2
+      ethjørne side
+    hertil
+    frem side
+    venstre 60
+    frem side
+    venstre 60
+  hertil
+slut</code></pre>
+  </div>
+  <div class="page-footer-screen"><span>A/S Regnecentralen</span><span>Side 57</span></div>
+</div><div class="book-page body-p" id="side-58">
+  <div class="page-tag" data-chap="C. LÆSEVEJLEDNING FOR BEGYNDERE" data-pnum="58"></div>
+  <div class="page-header-screen"><span>C. LÆSEVEJLEDNING FOR BEGYNDERE</span><span>MIKRO-LOGO</span></div>
+  <div class="page-content">
+<h1 id="bilag-c.-læsevejledning-for-begyndere">BILAG C. LÆSEVEJLEDNING
+FOR BEGYNDERE</h1>
+<p>Dette er en beskrivelse, der skal gøre det lettere for nybegyndere at
+starte med at bruge Mikro-Logo. Dette bilag er skrevet i “du-form”, da
+det helst skal virke som en instruktør, der hjælper dig i gang.</p>
+<h2 id="c.1-opstart">C.1 Opstart</h2>
+<p>Du må ikke bruge distributionsdisketten, når du vil “køre”
+Mikro-Logo. Derfor skal du lave en kopi af distributionsdisketten (se
+Betjeningsvejledningen for maskinen) og flytte filerne fra kopien af
+distributionsdisketten for Mikro-Logo over på en systemdiskette (se
+bilag B).</p>
+<p>Når maskinen er startet op som beskrevet i brugervejledningen for
+maskinen, installeres grafikken (også beskrevet i
+brugervejledningen).</p>
+<p>Mikro-Logo startes så op fra styresystemet (dvs. når der på skærmen
+står <code>A&gt;</code> eller <code>B&gt;</code> lige før markøren) ved
+at skrive <code>logo</code> og trykke på Retur-tasten (det er en af de
+store taster, der er markeret med ↵). Du skal sikre dig, at disketten
+med Mikro-Logo er den aktuelle disk (bogstavet før <code>&gt;</code>
+angiver hvilken disk, der er den aktuelle). I brugervejledningen for
+maskinen er det beskrevet, hvorledes du skifter aktuel disk.</p>
+<p>I brugervejledningen for maskinen er det også beskrevet, hvorledes du
+kan få maskinen til automatisk at starte op med Mikro-Logo, og hvorledes
+du kan indlægge Logo i en menu, så Mikro-Logo kan startes op fra
+menu-systemet.</p>
+  </div>
+  <div class="page-footer-screen"><span>Side 58</span><span>A/S Regnecentralen</span></div>
+</div><div class="book-page body-p" id="side-59">
+  <div class="page-tag" data-chap="C. LÆSEVEJLEDNING FOR BEGYNDERE" data-pnum="59"></div>
+  <div class="page-header-screen"><span>MIKRO-LOGO</span><span>C. LÆSEVEJLEDNING FOR BEGYNDERE</span></div>
+  <div class="page-content">
+<h2 id="c.2-simpel-brug-af-mikro-logo">C.2 Simpel brug af
+Mikro-Logo</h2>
+<p>Når Mikro-Logo er startet op, vil der stå <code>LOGO&gt;</code> i den
+nederste linie (kommandolinien). Det betyder, at Mikro-Logo er klar til
+at modtage kommandoer. Når du skriver kommandoer, kan du bl.a. bruge
+tasterne <code>←</code>, <code>→</code>, <code>⌫</code>,
+<code>SLET TEGN</code> og <code>TEGN IND</code> til at rette. Virkningen
+er beskrevet i kapitel 3, men ved at prøve at bruge dem, er det rimelig
+nemt at forstå virkningen af dem. Du skal bemærke, at det ikke er muligt
+at flytte markøren længere til venstre end det første tegn og længere
+til højre end en plads efter det sidste tegn.</p>
+<p>Skriv nu <code>pil</code> i kommandolinien. Når du trykker på
+Retur-tasten (markeret med ↵), vil kommandoen blive udført. Det gælder
+altid, at der skal trykkes på Retur, for at kommandoerne i
+kommandolinien udføres. Markøren behøver ikke stå sidst i
+kommandolinien, når der trykkes på Retur.</p>
+<p>Når kommandoen <code>pil</code> er udført, er der lavet en lille pil
+midt på skærmen. Denne pil markerer en skildpadde, som du kan dirigere
+ved at give den ordrer (også kaldet sætninger). Denne skildpadde har
+hele tiden en position og en retning (se figur 18.a).</p>
+<p>Skriv derefter <code>frem 100</code> i kommandolinien. Skildpadden
+flyttes 100 skridt i skildpaddens retning, når der trykkes på Retur (se
+figur 18.b).</p>
+<p>Hvis du nu skriver <code>venstre 90</code>, vil skildpadden ændre
+retning, 90 grader til venstre i forhold til, hvor den pegede før (se
+figur 18.c).</p>
+<p>Lad os nu prøve med to ordrer i kommandolinien samtidig; de skal så
+adskilles med <code>;</code></p>
+<p>eks.: <code>frem 100; venstre 90</code></p>
+<p>Du skal bemærke, at ordren <code>venstre</code> er relativ i forhold
+til, hvad retning skildpadden har, når ordren gives (se figur 18.d).</p>
+  </div>
+  <div class="page-footer-screen"><span>A/S Regnecentralen</span><span>Side 59</span></div>
+</div><div class="book-page body-p" id="side-60">
+  <div class="page-tag" data-chap="C. LÆSEVEJLEDNING FOR BEGYNDERE" data-pnum="60"></div>
+  <div class="page-header-screen"><span>C. LÆSEVEJLEDNING FOR BEGYNDERE</span><span>MIKRO-LOGO</span></div>
+  <div class="page-content">
+<div data-align="center">
+<p><img src="images/fig-18.png"
+alt="Fig. 18. Dele af en tegning" /><br />
+<em>Fig. 18. Dele af en tegning</em></p>
+</div>
+<p>Ved at trykke på tasten F1 (i den øverste række på tastaturet)
+fremkommer de sætninger, der stod i kommandolinien. Det er nu muligt at
+rette i denne linie, eller du kan udføre linien igen ved at trykke på
+Retur. Hvis du trykker F1 og Retur og gør dette endnu en gang, får du et
+kvadrat frem.</p>
+<p>Der er selvfølgelig også andre sætninger, bl.a. <code>tilbage</code>
+og <code>højre</code>, som begge skal have et argument ligesom
+<code>frem</code> og <code>venstre</code>, og <code>start</code>, som
+visker tegningen ud og placerer skildpadden midt på skærmen. Prøv nu at
+bruge <code>start</code> og lav en tegning, så du får lidt øvelse i at
+styre skildpadden (du kan f.eks. tegne en trekant eller et af
+bogstaverne i dit navn).</p>
+<p>Når du flytter skildpadden (f.eks. med <code>frem</code> eller
+<code>tilbage</code>), tegner den en streg. Det er også muligt at flytte
+uden at tegne. Endelig er det muligt at slette. Dette gøres ved
+henholdsvis <code>løft</code> og <code>slet</code>. Skildpadden sættes
+til at tegne</p>
+  </div>
+  <div class="page-footer-screen"><span>Side 60</span><span>A/S Regnecentralen</span></div>
+</div><div class="book-page body-p" id="side-61">
+  <div class="page-tag" data-chap="C. LÆSEVEJLEDNING FOR BEGYNDERE" data-pnum="61"></div>
+  <div class="page-header-screen"><span>MIKRO-LOGO</span><span>C. LÆSEVEJLEDNING FOR BEGYNDERE</span></div>
+  <div class="page-content">
+<p>igen ved sætningen <code>tegn</code>. Hver gang du udfører sætningen
+<code>start</code>, vil skildpadden automatisk blive ændret til at
+tegne. Se eksemplerne i figur 19.</p>
+<div data-align="center">
+<p><img src="images/fig-19.png"
+alt="Fig. 19. Eksempel med løft og slet" /><br />
+<em>Fig. 19. Eksempel med løft og slet</em></p>
+</div>
+  </div>
+  <div class="page-footer-screen"><span>A/S Regnecentralen</span><span>Side 61</span></div>
+</div><div class="book-page body-p" id="side-62">
+  <div class="page-tag" data-chap="C. LÆSEVEJLEDNING FOR BEGYNDERE" data-pnum="62"></div>
+  <div class="page-header-screen"><span>C. LÆSEVEJLEDNING FOR BEGYNDERE</span><span>MIKRO-LOGO</span></div>
+  <div class="page-content">
+<p>Du kan nu kigge på de tre eksempler i afsnit 4.2.5; du skal ikke
+bekymre dig om sætningerne <code>pilind</code>, <code>hvor</code> og
+<code>sætxy</code>; de forklares senere. Du kan også selv lave nogle
+eksempler.</p>
+<p>Læs nu afsnit 4.1.1 om variable. Hvis du laver en tildelingssætning,
+f.eks. <code>vinkel := 90</code>, betyder det, at <code>vinkel</code> er
+en variabel, der har værdien 90, så <code>højre vinkel</code> betyder,
+at retningen ændres med 90 grader til højre. Variablen
+<code>vinkel</code> har værdien 90, men vi kan godt ændre værdien,
+f.eks. ved en ny tildelingssætning. Variable er meget anvendelige, når
+vi bruger procedurer, men de introduceres allerede nu, da de bruges i
+nogle af eksemplerne i afsnit 4.2. I afsnit 4.2 bruges også udtryk, som
+er parameter til f.eks. <code>frem</code>. Disse parametre kan være
+andet end tal, f.eks. <code>venstre 2*vinkel</code>, som drejer
+retningen 2 gange den aktuelle værdi af <code>vinkel</code> til venstre.
+Der må ikke være blanke (“mellemslag”) i udtryk.</p>
+<p>Med dette oplæg skulle det være muligt at læse hele afsnit 4.2 og
+danne sig et overblik over de simple sætninger. Læs også afsnit 4.3.1
+(resten af 4.3 kan godt vente til senere).</p>
+<p>Prøv nu at læse afsnit 4.4. Du vil måske støde på problemer
+undervejs, men læs bare videre, så du får en ide om hvilke andre
+sætninger, der findes.</p>
+<p>Skriv nu <code>lær</code> i kommandolinien (husk Retur). Tegningen
+forsvinder nu, og der står <code>begynd</code> i den næstøverste linie.
+Det er nu muligt at skrive en procedure. Du kan enten skrive en af dem
+fra afsnit 4.4.4 eller selv lave en.</p>
+<p>Du skal huske, at der kun må være een sætning i hver linie (dvs. ikke
+noget med <code>;</code>). Du behøver ikke bekymre dig om indrykning,
+sådan som alle eksemplerne i afsnit 4.4.4 har; systemet laver selv
+indrykninger i proceduren, når den er oversat.</p>
+<p>Hvis du laver en fejl under indtastningen, kan du rette ved at bruge
+de samme taster, som du kunne bruge under retning i kommandolinien, og
+desuden tasterne <code>↑</code>, <code>↓</code>, og de 4 A-taster i den
+øverste række af tastaturet. Betydningen af de 4 A-taster står i linien
+lige over kommandolinien. Alle editeringstaster er beskrevet i afsnit
+5.1.1. Når du er færdig med at skrive proceduren ind, trykker du på
+tasten A4, som oversætter proceduren. Hvis der er fejl i oversættelsen,
+kommer der en fejlmeddelelse i den øverste linie. (Fejlmeddelelserne er
+beskrevet i bilag E). Hvis der er en fejl, skriver du <code>ret</code> i
+kommandolinien og trykker på Retur, og når systemet beder om et
+procedurenavn, skriver du navnet på den procedure, du er ved at lave, og
+du får derved mulighed for at rette den.</p>
+  </div>
+  <div class="page-footer-screen"><span>Side 62</span><span>A/S Regnecentralen</span></div>
+</div><div class="book-page body-p" id="side-63">
+  <div class="page-tag" data-chap="C. LÆSEVEJLEDNING FOR BEGYNDERE" data-pnum="63"></div>
+  <div class="page-header-screen"><span>MIKRO-LOGO</span><span>C. LÆSEVEJLEDNING FOR BEGYNDERE</span></div>
+  <div class="page-content">
+<p>Når proceduren er oversat korrekt, kan den udføres. Du skriver
+procedurenavnet efterfulgt af udtryk svarende til parametrene i
+kommandolinien, trykker på Retur, og proceduren udføres.</p>
+<p>Du kan nu øve dig med at lave flere procedurer og udføre disse. Du
+kan f.eks. lave procedurer til at tegne stjerner eller blomster.</p>
+<p>Når du er ved at oprette en procedure (kommandoen <code>lær</code>)
+eller rette en eksisterende procedure (kommandoen <code>ret</code>), kan
+du fortryde ved at trykke på ESC-tasten. Så bliver der ikke gjort noget
+ved proceduren, og systemet er igen klar til kommandoer. Kommandoen
+<code>hvilke</code> giver en oversigt over de procedurer, der er i
+systemet.</p>
+<p>Når du har lavet nogle procedurer, kan du gemme dem på disketten, så
+du kan få fat i dem næste gang, du bruger Mikro-Logo. Dette gøres ved at
+udføre kommandoen <code>gem</code>. Den beder først om et procedurenavn
+— her er det ofte en fordel at skrive <code>alle</code>, idet dette
+betyder, at alle procedurer gemmes. Herefter beder den om et filnavn —
+du skriver her et navn på op til 8 bogstaver (dog ikke æ, ø og å) eller
+cifre.</p>
+<p>Kommandoen <code>disk</code> giver oplysninger om hvilke filer, der
+indeholder Logo-procedurer på disketten. Procedurerne fra en fil kan
+hentes ind i systemet med kommandoen <code>hent</code>. Inden dette
+gøres, er det ofte en fordel at bruge kommandoen <code>glem</code> med
+procedurenavnet <code>alle</code>, da du herved sletter alle de
+procedurer, der er i systemet i forvejen. Dette er ofte en fordel, da
+oversættelsen er hurtigere, jo færre procedurer der er, og da der er en
+øvre grænse for, hvor mange procedurer der kan være i systemet.</p>
+<p>Når du er færdig med at bruge Mikro-Logo for denne gang, bruger du
+kommandoen <code>farvel</code>. Inden skal du huske at gemme de
+procedurer, du har lavet eller ændret i, hvis du vil bruge dem
+senere.</p>
+<p>Du bør nu læse hele afsnit 5.1 og 5.2 og derefter øve dig noget mere.
+Hvis du får problemer, skal du kigge i denne manual; her vil
+stikordsregistret ofte være en stor hjælp. På et tidspunkt skal du læse
+alle kapitlerne i denne manual, da dette bilag ikke er en udtømmende
+beskrivelse. Specielt kan kapitel 6 være anvendeligt, når du begynder at
+lave mere komplicerede tegninger med rekursive procedurer.</p>
+  </div>
+  <div class="page-footer-screen"><span>A/S Regnecentralen</span><span>Side 63</span></div>
+</div><div class="book-page body-p" id="side-64">
+  <div class="page-tag" data-chap="D. ASCII TEGNSÆTTET" data-pnum="64"></div>
+  <div class="page-header-screen"><span>D. ASCII TEGNSÆTTET</span><span>MIKRO-LOGO</span></div>
+  <div class="page-content">
+<h1 id="bilag-d.-ascii-tegnsættet">BILAG D. ASCII TEGNSÆTTET</h1>
+<p>Dette er en tabel over tegnenes ASCII-værdier, som bruges i
+sætningerne <code>henttast</code> og <code>læstast</code> (se
+4.3.2).</p>
+<p>Nogle få af tegnene er blevet omdøbt, så hele det danske alfabet er
+med.</p>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: center;">Talværdi</th>
+<th style="text-align: center;">ASCII tegn</th>
+<th style="text-align: center;">Dansk tegn</th>
+<th style="text-align: center;"></th>
+<th style="text-align: center;">Talværdi</th>
+<th style="text-align: center;">ASCII tegn</th>
+<th style="text-align: center;">Dansk tegn</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">NUL</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">32</td>
+<td style="text-align: center;">SPACE</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">SOH</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">33</td>
+<td style="text-align: center;">!</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">STX</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">34</td>
+<td style="text-align: center;">”</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">ETX</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">35</td>
+<td style="text-align: center;">#</td>
+<td style="text-align: center;">§</td>
+</tr>
+<tr>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">EOT</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">36</td>
+<td style="text-align: center;">$</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">ENQ</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">37</td>
+<td style="text-align: center;">%</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td style="text-align: center;">6</td>
+<td style="text-align: center;">ACK</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">38</td>
+<td style="text-align: center;">&amp;</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td style="text-align: center;">7</td>
+<td style="text-align: center;">BEL</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">39</td>
+<td style="text-align: center;">’</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td style="text-align: center;">8</td>
+<td style="text-align: center;">BS</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">40</td>
+<td style="text-align: center;">(</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td style="text-align: center;">9</td>
+<td style="text-align: center;">HT</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">41</td>
+<td style="text-align: center;">)</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td style="text-align: center;">10</td>
+<td style="text-align: center;">LF</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">42</td>
+<td style="text-align: center;">*</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td style="text-align: center;">11</td>
+<td style="text-align: center;">VT</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">43</td>
+<td style="text-align: center;">+</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td style="text-align: center;">12</td>
+<td style="text-align: center;">FF</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">44</td>
+<td style="text-align: center;">,</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td style="text-align: center;">13</td>
+<td style="text-align: center;">CR</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">45</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td style="text-align: center;">14</td>
+<td style="text-align: center;">SO</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">46</td>
+<td style="text-align: center;">.</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td style="text-align: center;">15</td>
+<td style="text-align: center;">SI</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">47</td>
+<td style="text-align: center;">/</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td style="text-align: center;">16</td>
+<td style="text-align: center;">DLE</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">48</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td style="text-align: center;">17</td>
+<td style="text-align: center;">DC1</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">49</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td style="text-align: center;">18</td>
+<td style="text-align: center;">DC2</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">50</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td style="text-align: center;">19</td>
+<td style="text-align: center;">DC3</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">51</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td style="text-align: center;">20</td>
+<td style="text-align: center;">DC4</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">52</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td style="text-align: center;">21</td>
+<td style="text-align: center;">NAK</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">53</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td style="text-align: center;">22</td>
+<td style="text-align: center;">SYN</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">54</td>
+<td style="text-align: center;">6</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td style="text-align: center;">23</td>
+<td style="text-align: center;">ETB</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">55</td>
+<td style="text-align: center;">7</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td style="text-align: center;">24</td>
+<td style="text-align: center;">CAN</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">56</td>
+<td style="text-align: center;">8</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td style="text-align: center;">25</td>
+<td style="text-align: center;">EM</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">57</td>
+<td style="text-align: center;">9</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td style="text-align: center;">26</td>
+<td style="text-align: center;">SUB</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">58</td>
+<td style="text-align: center;">:</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td style="text-align: center;">27</td>
+<td style="text-align: center;">ESC</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">59</td>
+<td style="text-align: center;">;</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td style="text-align: center;">28</td>
+<td style="text-align: center;">FS</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">60</td>
+<td style="text-align: center;">&lt;</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td style="text-align: center;">29</td>
+<td style="text-align: center;">GS</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">61</td>
+<td style="text-align: center;">=</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td style="text-align: center;">30</td>
+<td style="text-align: center;">RS</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">62</td>
+<td style="text-align: center;">&gt;</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td style="text-align: center;">31</td>
+<td style="text-align: center;">US</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">63</td>
+<td style="text-align: center;">?</td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+  </div>
+  <div class="page-footer-screen"><span>Side 64</span><span>A/S Regnecentralen</span></div>
+</div><div class="book-page body-p" id="side-65">
+  <div class="page-tag" data-chap="D. ASCII TEGNSÆTTET" data-pnum="65"></div>
+  <div class="page-header-screen"><span>MIKRO-LOGO</span><span>D. ASCII TEGNSÆTTET</span></div>
+  <div class="page-content">
+<table style="width:100%;">
+<colgroup>
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: center;">Talværdi</th>
+<th style="text-align: center;">ASCII tegn</th>
+<th style="text-align: center;">Dansk tegn</th>
+<th style="text-align: center;"></th>
+<th style="text-align: center;">Talværdi</th>
+<th style="text-align: center;">ASCII tegn</th>
+<th style="text-align: center;">Dansk tegn</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">64</td>
+<td style="text-align: center;">@</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">96</td>
+<td style="text-align: center;">`</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td style="text-align: center;">65</td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">97</td>
+<td style="text-align: center;">a</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td style="text-align: center;">66</td>
+<td style="text-align: center;">B</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">98</td>
+<td style="text-align: center;">b</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td style="text-align: center;">67</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">99</td>
+<td style="text-align: center;">c</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td style="text-align: center;">68</td>
+<td style="text-align: center;">D</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">100</td>
+<td style="text-align: center;">d</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td style="text-align: center;">69</td>
+<td style="text-align: center;">E</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">101</td>
+<td style="text-align: center;">e</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td style="text-align: center;">70</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">102</td>
+<td style="text-align: center;">f</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td style="text-align: center;">71</td>
+<td style="text-align: center;">G</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">103</td>
+<td style="text-align: center;">g</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td style="text-align: center;">72</td>
+<td style="text-align: center;">H</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">104</td>
+<td style="text-align: center;">h</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td style="text-align: center;">73</td>
+<td style="text-align: center;">I</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">105</td>
+<td style="text-align: center;">i</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td style="text-align: center;">74</td>
+<td style="text-align: center;">J</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">106</td>
+<td style="text-align: center;">j</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td style="text-align: center;">75</td>
+<td style="text-align: center;">K</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">107</td>
+<td style="text-align: center;">k</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td style="text-align: center;">76</td>
+<td style="text-align: center;">L</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">108</td>
+<td style="text-align: center;">l</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td style="text-align: center;">77</td>
+<td style="text-align: center;">M</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">109</td>
+<td style="text-align: center;">m</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td style="text-align: center;">78</td>
+<td style="text-align: center;">N</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">110</td>
+<td style="text-align: center;">n</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td style="text-align: center;">79</td>
+<td style="text-align: center;">O</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">111</td>
+<td style="text-align: center;">o</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td style="text-align: center;">80</td>
+<td style="text-align: center;">P</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">112</td>
+<td style="text-align: center;">p</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td style="text-align: center;">81</td>
+<td style="text-align: center;">Q</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">113</td>
+<td style="text-align: center;">q</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td style="text-align: center;">82</td>
+<td style="text-align: center;">R</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">114</td>
+<td style="text-align: center;">r</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td style="text-align: center;">83</td>
+<td style="text-align: center;">S</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">115</td>
+<td style="text-align: center;">s</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td style="text-align: center;">84</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">116</td>
+<td style="text-align: center;">t</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td style="text-align: center;">85</td>
+<td style="text-align: center;">U</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">117</td>
+<td style="text-align: center;">u</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td style="text-align: center;">86</td>
+<td style="text-align: center;">V</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">118</td>
+<td style="text-align: center;">v</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td style="text-align: center;">87</td>
+<td style="text-align: center;">W</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">119</td>
+<td style="text-align: center;">w</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td style="text-align: center;">88</td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">120</td>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td style="text-align: center;">89</td>
+<td style="text-align: center;">Y</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">121</td>
+<td style="text-align: center;">y</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td style="text-align: center;">90</td>
+<td style="text-align: center;">Z</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">122</td>
+<td style="text-align: center;">z</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td style="text-align: center;">91</td>
+<td style="text-align: center;">[</td>
+<td style="text-align: center;">Æ</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">123</td>
+<td style="text-align: center;">{</td>
+<td style="text-align: center;">æ</td>
+</tr>
+<tr>
+<td style="text-align: center;">92</td>
+<td style="text-align: center;">\</td>
+<td style="text-align: center;">Ø</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">124</td>
+<td style="text-align: center;">|</td>
+<td style="text-align: center;">ø</td>
+</tr>
+<tr>
+<td style="text-align: center;">93</td>
+<td style="text-align: center;">]</td>
+<td style="text-align: center;">Å</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">125</td>
+<td style="text-align: center;">}</td>
+<td style="text-align: center;">å</td>
+</tr>
+<tr>
+<td style="text-align: center;">94</td>
+<td style="text-align: center;">^</td>
+<td style="text-align: center;">Ü</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">126</td>
+<td style="text-align: center;">~</td>
+<td style="text-align: center;">ü</td>
+</tr>
+<tr>
+<td style="text-align: center;">95</td>
+<td style="text-align: center;">_</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">127</td>
+<td style="text-align: center;">DEL</td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+  </div>
+  <div class="page-footer-screen"><span>A/S Regnecentralen</span><span>Side 65</span></div>
+</div><div class="book-page body-p" id="side-66">
+  <div class="page-tag" data-chap="D. ASCII TEGNSÆTTET" data-pnum="66"></div>
+  <div class="page-header-screen"><span>D. ASCII TEGNSÆTTET</span><span>MIKRO-LOGO</span></div>
+  <div class="page-content">
+<p><em>(Denne side er blank i originalen)</em></p>
+  </div>
+  <div class="page-footer-screen"><span>Side 66</span><span>A/S Regnecentralen</span></div>
+</div><div class="book-page body-p" id="side-67">
+  <div class="page-tag" data-chap="E. FEJLMEDDELELSER" data-pnum="67"></div>
+  <div class="page-header-screen"><span>MIKRO-LOGO</span><span>E. FEJLMEDDELELSER</span></div>
+  <div class="page-content">
+<h1 id="bilag-e.-fejlmeddelelser">BILAG E. FEJLMEDDELELSER</h1>
+<p>Systemet har tre hovedfunktioner:</p>
+<ul>
+<li>udførelse af kommandoer</li>
+<li>oversættelse af sætninger</li>
+<li>udførelse af sætninger</li>
+</ul>
+<p>hvor oversættelse og udførelse af sætninger gælder både sætninger
+skrevet i procedurer og sætninger skrevet i kommandolinien.</p>
+<p>Under disse tre funktioner kan der forekomme forskellige fejl eller
+beskeder til brugeren. Når der er en fejl, betyder det, at systemet ikke
+kan fortsætte og må afbryde udførelsen eller oversættelsen. Når brugeren
+får en besked, betyder det, at systemet behøver mere information, eller
+at brugeren har lavet en fejl, men kan nå at rette den. I de
+nedenstående meddelelser bruges X som en ubekendt og kan være en
+vilkårlig streng af tegn.</p>
+<h2 id="e.1-udførelse-af-kommandoer">E.1 Udførelse af kommandoer</h2>
+<h3 id="e.1.1-fejl-ved-udførelse-af-kommandoer">E.1.1 Fejl ved udførelse
+af kommandoer</h3>
+<p><strong><code>Hvad betyder X?</code></strong><br />
+X er ikke blevet genkendt som en lovlig kommando (eller sætning; denne
+fejl er derfor også nævnt i E.2.1).</p>
+<p><strong><code>X findes ikke</code></strong><br />
+Der er ikke nogen procedure, der hedder X.</p>
+<p><strong><code>Indre lager tomt</code></strong><br />
+Der er slet ikke defineret nogle procedurer. Fejlmeddelelsen kommer, når
+man giver <code>alle</code> med som procedurenavn.</p>
+<p><strong><code>Det er kun muligt at rette en procedure ad gangen</code></strong><br />
+Navnet <code>alle</code> er givet med som procedurenavn til kommandoen
+<code>ret</code>.</p>
+<p><strong><code>Sidste procedure kan ikke være i lageret</code></strong><br />
+Der er ikke plads til alle linier af den sidste procedure. Proceduren
+bliver derfor ikke gemt. Den kan først oprettes, når der er blevet
+slettet andre procedurer.</p>
+  </div>
+  <div class="page-footer-screen"><span>A/S Regnecentralen</span><span>Side 67</span></div>
+</div><div class="book-page body-p" id="side-68">
+  <div class="page-tag" data-chap="E. FEJLMEDDELELSER" data-pnum="68"></div>
+  <div class="page-header-screen"><span>E. FEJLMEDDELELSER</span><span>MIKRO-LOGO</span></div>
+  <div class="page-content">
+<p><strong><code>Ikke plads til denne linie</code></strong><br />
+Under udførelse af <code>kopi</code>, <code>tegnigen</code> eller
+<code>fortryd</code> kan brugeren komme ud for denne fejlmeddelelse,
+hvis der er blevet defineret procedurer siden sidste
+<code>glem alle</code>, <code>start</code> eller <code>viskud</code>.
+Denne meddelelse kan også forekomme, hvis der skrives sætninger i
+kommandolinien (se E.2.1).</p>
+<p><strong><code>Start kan ikke fortrydes</code></strong><br />
+<strong><code>Viskud kan ikke fortrydes</code></strong><br />
+Det er ikke muligt at fortryde sætninger, der laver <code>start</code>
+eller <code>viskud</code>.</p>
+<p><strong><code>Fil findes ikke</code></strong><br />
+Filen findes ikke på disketten.</p>
+<p><strong><code>Ingen plads på disketten</code></strong><br />
+Der er enten for mange filer på disketten, eller også er der for lidt
+plads til endnu en fil.</p>
+<p><strong><code>Filfejl nr. X</code></strong><br />
+Der er andre fejl ved en fil på disketten. Prøv at gentage kommandoen
+med en anden fil for at se, om det er filen eller disketten, der er fejl
+ved.</p>
+<h3 id="e.1.2-beskeder-under-udførelse-af-kommandoer">E.1.2 Beskeder
+under udførelse af kommandoer</h3>
+<p><strong><code>Fejl i begynd</code></strong><br />
+Efter editering er der ikke et <code>begynd</code> efterfulgt af et
+procedurenavn i den første linie. Ret proceduren eller afbryd med
+ESC.</p>
+<p><strong><code>For mange linier</code></strong><br />
+Efter editering er der for mange linier i proceduren (der er ikke plads
+til <code>slut</code>). Ret proceduren eller afbryd med ESC.</p>
+<p><strong><code>Proceduren er for lang - vil du rette den?</code></strong><br />
+Hvis kommandoen <code>lav</code> udføres, og der er udført mere end 19
+sætninger fra kommandolinie siden sidste <code>glem alle</code>,
+<code>start</code> eller <code>viskud</code>, kan der ikke laves en
+procedure med alle sætninger. Men det er muligt at rette i proceduren
+indeholdende de første 19 sætninger eller de sidste 19 sætninger.</p>
+<p><strong><code>Ulovligt tegn i CCP/M filnavn</code></strong><br />
+Der er brugt andre tegn end bogstaver (dog ikke æ, ø og å) og cifre i et
+filnavn. Ret det eller afbryd med ESC.</p>
+  </div>
+  <div class="page-footer-screen"><span>Side 68</span><span>A/S Regnecentralen</span></div>
+</div><div class="book-page body-p" id="side-69">
+  <div class="page-tag" data-chap="E. FEJLMEDDELELSER" data-pnum="69"></div>
+  <div class="page-header-screen"><span>MIKRO-LOGO</span><span>E. FEJLMEDDELELSER</span></div>
+  <div class="page-content">
+<p><strong><code>Vil du slette eksisterende fil?</code></strong><br />
+Forsøg på at gemme på en fil, der allerede eksisterer. Brugeren skal
+bekræfte, at den gamle fil skal slettes.</p>
+<p><strong><code>Er der en skriver (plotter, Holger) koblet til?</code></strong><br />
+Brugeren skal fortælle, om de er sat til, når de skal bruges, og hvor de
+er sat til (på centralenheden eller disketteenheden).</p>
+<h2 id="e.2-oversættelse-af-sætninger">E.2 Oversættelse af
+sætninger</h2>
+<h3 id="e.2.1-fejl-ved-oversættelse-af-sætninger">E.2.1 Fejl ved
+oversættelse af sætninger</h3>
+<p>Hvis der findes fejl i oversættelsen af en sætning i en procedure
+udskrives udover fejlmeddelelsen også procedurenavnet og sætningen, så
+det er lettere at finde fejlen.</p>
+<p>Hvis der er fejl i oversættelsen af en procedure, er der ingen
+procedurer, der kan udføres, før alle fejl er rettet.</p>
+<p><strong><code>Hvad betyder X?</code></strong><br />
+X er ikke genkendt som en sætning eller procedure (se også E.1.1).</p>
+<p><strong><code>Navn eller tal mangler</code></strong><br />
+Det er forventet, at der kommer et tal eller et variabelnavn, men der er
+slet ingen tegn.</p>
+<p><strong><code>Navn eller tal forventet, ikke X</code></strong><br />
+Som ovenfor, men det første tegn i X er hverken et ciffer eller et
+bogstav.</p>
+<p><strong><code>Ulovligt tal X</code></strong><br />
+X består af andet end cifre.</p>
+<p><strong><code>Ikke plads til tal</code></strong><br />
+Der er brugt mere end 40 forskellige tal.</p>
+<p><strong><code>Ikke plads til navn</code></strong><br />
+Der er brugt mere end 40 forskellige variabelnavne.</p>
+<p><strong><code>Højre-parentes mangler</code></strong><br />
+<code>)</code> mangler til at afslutte <code>(</code>.</p>
+  </div>
+  <div class="page-footer-screen"><span>A/S Regnecentralen</span><span>Side 69</span></div>
+</div><div class="book-page body-p" id="side-70">
+  <div class="page-tag" data-chap="E. FEJLMEDDELELSER" data-pnum="70"></div>
+  <div class="page-header-screen"><span>E. FEJLMEDDELELSER</span><span>MIKRO-LOGO</span></div>
+  <div class="page-content">
+<p><strong><code>tlf skal følges af (</code></strong><br />
+<code>tlf</code> kræver, at argumentet skal være i parenteser; der skal
+derfor komme en <code>(</code> lige efter <code>tlf</code>.</p>
+<p><strong><code>Fejl i udtryk ved X</code></strong><br />
+Der er mere tilbage i udtryk, men det starter ikke med en operator som
+forventet, men med X.</p>
+<p><strong><code>Mere end eet udtryk: X</code></strong><br />
+En sætning, der kræver præcis eet argument, efterfølges af X udover det
+ene udtryk.</p>
+<p><strong><code>Intet udtryk forventet: X</code></strong><br />
+En sætning, som ingen argumenter har, efterfølges af X.</p>
+<p><strong><code>X er ikke et navn</code></strong><br />
+Tildelings- og indlæsningssætninger samt <code>hvor</code> kræver, at
+argumenterne er variabelnavne, og det er X ikke.</p>
+<p><strong><code>For mange navne: X</code></strong><br />
+Der er mere (X) end de variabelnavne, der er argumenter til tildelings-
+og indlæsningssætninger samt <code>hvor</code>.</p>
+<p><strong><code>sætxy skal have 2 tal</code></strong><br />
+<code>sætxy</code> kræver 2 argumenter.</p>
+<p><strong><code>udport skal have 2 tal</code></strong><br />
+<code>udport</code> kræver 2 argumenter.</p>
+<p><strong><code>For mange løkker</code></strong><br />
+Der er for mange <code>gentag</code>- og <code>hvis</code>-sætninger
+inden i hinanden.</p>
+<p><strong><code>Fejl i løkke</code></strong><br />
+Der er <code>gentag</code>- eller <code>hvis</code>-sætninger, der ikke
+er afsluttet.</p>
+<p><strong><code>For mange ellers/sluthvis</code></strong><br />
+Der er flere <code>ellers</code>/<code>sluthvis</code>, end der er
+<code>hvis</code>.</p>
+<p><strong><code>For mange hertil</code></strong><br />
+Der er flere <code>hertil</code> end <code>gentag</code>.</p>
+<p><strong><code>hertil ventet</code></strong><br />
+Forsøg på at afslutte en <code>hvis</code>-sætning, men der er en
+<code>gentag</code>-sætning, der skal afsluttes først.</p>
+  </div>
+  <div class="page-footer-screen"><span>Side 70</span><span>A/S Regnecentralen</span></div>
+</div><div class="book-page body-p" id="side-71">
+  <div class="page-tag" data-chap="E. FEJLMEDDELELSER" data-pnum="71"></div>
+  <div class="page-header-screen"><span>MIKRO-LOGO</span><span>E. FEJLMEDDELELSER</span></div>
+  <div class="page-content">
+<p><strong><code>ellers/sluthvis ventet</code></strong><br />
+Forsøg på at afslutte en <code>gentag</code>-sætning, men der er en
+<code>hvis</code>-sætning, der skal afsluttes først.</p>
+<p><strong><code>Kun eet ellers</code></strong><br />
+Forsøg på at lave en <code>hvis</code>-sætning med flere
+<code>ellers</code>.</p>
+<p><strong><code>X (et procedurenavn) skal starte med et bogstav</code></strong><br />
+Et procedurenavn skal starte med et bogstav.</p>
+<p><strong><code>Højst 6 parametre</code></strong><br />
+En procedure må højst have 6 parametre.</p>
+<p><strong><code>X (en formel parameter) skal starte med et bogstav</code></strong><br />
+De formelle parametre skal være navne, der starter med et bogstav.</p>
+<p><strong><code>Parameterantal forkert</code></strong><br />
+Antal parametre i et procedurekald passer ikke med
+proceduredefinitionen.</p>
+<p><strong><code>For mange procedurer</code></strong><br />
+Der er defineret for mange procedurer.</p>
+<p><strong><code>Ikke plads til denne linie</code></strong><br />
+Kan forekomme, når der skrives sætninger i kommandolinien. Det er
+nødvendigt at slette procedurer for at gøre plads til at udføre denne
+sætningslinie. Denne meddelelse kan også forekomme ved kommandoerne
+<code>kopi</code>, <code>tegnigen</code> og <code>fortryd</code> (se
+også E.1.1).</p>
+<p><strong><code>Parameterstak fuld</code></strong><br />
+Det samlede antal udtryk fylder for meget. Det er nødvendigt at slette
+procedurer eller gøre nogle udtryk simplere for at undgå denne fejl.</p>
+<p><strong><code>sætning/begynd/slut er ikke tilladt</code></strong><br />
+Det er ikke tilladt at bruge <code>sætning</code> eller definere
+procedurer direkte i kommandolinien.</p>
+<h3 id="e.2.2-beskeder-under-oversættelse-af-sætninger">E.2.2 Beskeder
+under oversættelse af sætninger</h3>
+<p>Der er ingen beskeder, da det ikke er muligt for brugeren at rette
+fejl i oversættelsen direkte. Brugeren skal rette fejl i procedurer ved
+kommandoen <code>ret</code>. Fejl i kommandolinien kan rettes ved at
+fremkalde kommandolinien med funktionstasten F1 og rette med
+editeringstasterne. Hvis der er fejl i oversættelsen af procedurer, er
+det ikke muligt at udføre nogle procedurer, før fejlen er rettet.</p>
+  </div>
+  <div class="page-footer-screen"><span>A/S Regnecentralen</span><span>Side 71</span></div>
+</div><div class="book-page body-p" id="side-72">
+  <div class="page-tag" data-chap="E. FEJLMEDDELELSER" data-pnum="72"></div>
+  <div class="page-header-screen"><span>E. FEJLMEDDELELSER</span><span>MIKRO-LOGO</span></div>
+  <div class="page-content">
+<h2 id="e.3-udførelse-af-sætninger">E.3 Udførelse af sætninger</h2>
+<h3 id="e.3.1-fejl-ved-udførelse-af-sætninger">E.3.1 Fejl ved udførelse
+af sætninger</h3>
+<p><strong><code>Division med 0</code></strong><br />
+Det er ikke tilladt at dividere med nul.</p>
+<p><strong><code>Potens er negativ</code></strong><br />
+Det er ikke tilladt at opløfte til en negativ potens, da systemet kun
+regner med heltal.</p>
+<p><strong><code>tlf kræver et positivt tal</code></strong><br />
+Argumentet til <code>tlf</code> skal være et positivt tal.</p>
+<h3 id="e.3.2-beskeder-under-udførelse-af-sætninger">E.3.2 Beskeder
+under udførelse af sætninger</h3>
+<p><strong><code>Ikke mere lager</code></strong><br />
+En rekursiv procedure er løbet mod grænsen for, hvor mange gange den kan
+udføres.</p>
+<p><strong><code>For mange linier, hvis lav, kopi eller tegnigen bruges</code></strong><br />
+Der er brugt for mange sætninger i kommandolinien siden sidste
+<code>glem alle</code>, <code>start</code> eller <code>viskud</code>.
+Hvis brugeren bruger en af kommandoerne <code>lav</code>,
+<code>kopi</code> eller <code>tegnigen</code>, vil det ikke give det
+rigtige resultat. Det anbefales at slette tegningen og lave procedurer
+til at lave dele af tegningen.</p>
+<p><strong><code>For mange tlf tal eller input - fortryd, kopi og tegnigen bliver forkerte</code></strong><br />
+Der er brugt for mange tilfældige tal og indlæsningssætninger siden
+sidste <code>glem alle</code>, <code>start</code> eller
+<code>viskud</code> i kommandolinien. Kommandoerne <code>fortryd</code>,
+<code>kopi</code> og <code>tegnigen</code> vil ikke give det rigtige
+resultat. Det anbefales at overveje at omstrukturere procedurerne, så
+der ikke bruges så mange indlæsninger og tilfældige tal og starte forfra
+på tegningen.</p>
+  </div>
+  <div class="page-footer-screen"><span>Side 72</span><span>A/S Regnecentralen</span></div>
+</div><div class="book-page body-p" id="side-73">
+  <div class="page-tag" data-chap="F. OVERSIGT OVER SÆTNINGER OG KOMMANDOER" data-pnum="73"></div>
+  <div class="page-header-screen"><span>MIKRO-LOGO</span><span>F. OVERSIGT OVER SÆTNINGER OG KOMMANDOER</span></div>
+  <div class="page-content">
+<h1 id="bilag-f.-oversigt-over-sætninger-og-kommandoer">BILAG F.
+OVERSIGT OVER SÆTNINGER OG KOMMANDOER</h1>
+<h2 id="f.1-oversigt-over-sætninger">F.1 Oversigt over sætninger</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Sætning og evt. argumenter</th>
+<th style="text-align: left;">Beskrevet i afsnit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>frem udtryk</code> /
+<code>fr udtryk</code></td>
+<td style="text-align: left;">4.2.1</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>tilbage udtryk</code> /
+<code>tb udtryk</code></td>
+<td style="text-align: left;">4.2.1</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>venstre udtryk</code> /
+<code>ve udtryk</code></td>
+<td style="text-align: left;">4.2.2</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>højre udtryk</code> /
+<code>hø udtryk</code></td>
+<td style="text-align: left;">4.2.2</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>tegn</code></td>
+<td style="text-align: left;">4.2.3</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>slet</code></td>
+<td style="text-align: left;">4.2.3</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>løft</code></td>
+<td style="text-align: left;">4.2.3</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>start</code></td>
+<td style="text-align: left;">4.2.4</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>viskud</code></td>
+<td style="text-align: left;">4.2.4</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>hjem</code></td>
+<td style="text-align: left;">4.2.4</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>sætxy udtryk udtryk</code></td>
+<td style="text-align: left;">4.2.1</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>sætx udtryk</code></td>
+<td style="text-align: left;">4.2.1</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>sæty udtryk</code></td>
+<td style="text-align: left;">4.2.1</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>drejtil udtryk</code></td>
+<td style="text-align: left;">4.2.2</td>
+</tr>
+<tr>
+<td
+style="text-align: left;"><code>hvor variabel variabel variabel</code></td>
+<td style="text-align: left;">4.2.4</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>pilind</code></td>
+<td style="text-align: left;">4.2.4</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>pilud</code></td>
+<td style="text-align: left;">4.2.4</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>variabel := udtryk</code> /
+<code>variabel = udtryk</code></td>
+<td style="text-align: left;">4.3.1</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>henttal variabel</code></td>
+<td style="text-align: left;">4.3.2</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>henttast variabel</code></td>
+<td style="text-align: left;">4.3.2</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>læstast variabel</code></td>
+<td style="text-align: left;">4.3.2</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>skriv udtryk</code></td>
+<td style="text-align: left;">4.3.3</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>sætning tekst</code></td>
+<td style="text-align: left;">4.3.3</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>udport udtryk udtryk</code></td>
+<td style="text-align: left;">4.3.3</td>
+</tr>
+</tbody>
+</table>
+  </div>
+  <div class="page-footer-screen"><span>A/S Regnecentralen</span><span>Side 73</span></div>
+</div><div class="book-page body-p" id="side-74">
+  <div class="page-tag" data-chap="F. OVERSIGT OVER SÆTNINGER OG KOMMANDOER" data-pnum="74"></div>
+  <div class="page-header-screen"><span>F. OVERSIGT OVER SÆTNINGER OG KOMMANDOER</span><span>MIKRO-LOGO</span></div>
+  <div class="page-content">
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">Sætning og evt. argumenter</th>
+<th style="text-align: left;">Beskrevet i afsnit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>hvis udtryk</code> <br>
+  <code>sætninger</code> <br> <code>ellers</code> <br>
+  <code>sætninger</code> <br> <code>sluthvis</code></td>
+<td style="text-align: left;">4.4.2</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>hvis udtryk</code> <br>
+  <code>sætninger</code> <br> <code>sluthvis</code></td>
+<td style="text-align: left;">4.4.2</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>gentag udtryk</code> <br>
+  <code>sætninger</code> <br> <code>hertil</code></td>
+<td style="text-align: left;">4.4.3</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>begynd pnavn parameternavne</code>
+<br>   <code>sætninger</code> <br> <code>slut</code></td>
+<td style="text-align: left;">4.4.4</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>stop</code></td>
+<td style="text-align: left;">4.4.4</td>
+</tr>
+</tbody>
+</table>
+  </div>
+  <div class="page-footer-screen"><span>Side 74</span><span>A/S Regnecentralen</span></div>
+</div><div class="book-page body-p" id="side-75">
+  <div class="page-tag" data-chap="F. OVERSIGT OVER SÆTNINGER OG KOMMANDOER" data-pnum="75"></div>
+  <div class="page-header-screen"><span>MIKRO-LOGO</span><span>F. OVERSIGT OVER SÆTNINGER OG KOMMANDOER</span></div>
+  <div class="page-content">
+<h2 id="f.2-oversigt-over-kommandoer-og-funktionstaster">F.2 Oversigt
+over kommandoer og funktionstaster</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Kommando og evt. argumenter</th>
+<th style="text-align: center;">Funktionstast</th>
+<th style="text-align: left;">Beskrevet i afsnit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>lær</code></td>
+<td style="text-align: center;">F5</td>
+<td style="text-align: left;">5.1.1</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>ret pnavn</code></td>
+<td style="text-align: center;">F6</td>
+<td style="text-align: left;">5.1.1</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>lav pnavn</code></td>
+<td style="text-align: center;"></td>
+<td style="text-align: left;">5.1.1</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>list pnavn</code></td>
+<td style="text-align: center;">F2</td>
+<td style="text-align: left;">5.1.2</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>plist pnavn</code></td>
+<td style="text-align: center;"></td>
+<td style="text-align: left;">5.1.2</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>hvilke</code></td>
+<td style="text-align: center;">F3</td>
+<td style="text-align: left;">5.1.2</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>glem pnavn</code></td>
+<td style="text-align: center;">F4</td>
+<td style="text-align: left;">5.1.2</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>disk</code></td>
+<td style="text-align: center;">F9 + Retur</td>
+<td style="text-align: left;">5.2</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>disk bogstav</code></td>
+<td style="text-align: center;">F9 + bogstav + Retur</td>
+<td style="text-align: left;">5.2</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>pdisk</code></td>
+<td style="text-align: center;"></td>
+<td style="text-align: left;">5.2</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>pdisk bogstav</code></td>
+<td style="text-align: center;"></td>
+<td style="text-align: left;">5.2</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>gem pnavn filnavn</code></td>
+<td style="text-align: center;">F11</td>
+<td style="text-align: left;">5.2</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>tilføj pnavn filnavn</code></td>
+<td style="text-align: center;">F12</td>
+<td style="text-align: left;">5.2</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>hent filnavn</code></td>
+<td style="text-align: center;">F10</td>
+<td style="text-align: left;">5.2</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>fjern filnavn</code></td>
+<td style="text-align: center;"></td>
+<td style="text-align: left;">5.2</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>kopi</code></td>
+<td style="text-align: center;">F7</td>
+<td style="text-align: left;">5.3</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>tegnigen</code></td>
+<td style="text-align: center;"></td>
+<td style="text-align: left;">5.3</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>holger</code></td>
+<td style="text-align: center;"></td>
+<td style="text-align: left;">5.3</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>plotter</code></td>
+<td style="text-align: center;"></td>
+<td style="text-align: left;">5.3</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>fortryd</code></td>
+<td style="text-align: center;">F8</td>
+<td style="text-align: left;">5.4</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>pil</code></td>
+<td style="text-align: center;"></td>
+<td style="text-align: left;">5.4</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>status</code></td>
+<td style="text-align: center;"></td>
+<td style="text-align: left;">5.4</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>farvel</code></td>
+<td style="text-align: center;"></td>
+<td style="text-align: left;">5.4</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>hjælp</code></td>
+<td style="text-align: center;"></td>
+<td style="text-align: left;">5.4</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>phjælp</code></td>
+<td style="text-align: center;"></td>
+<td style="text-align: left;">5.4</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>R</code> / <code>Ctrl-F</code></td>
+<td style="text-align: center;"></td>
+<td style="text-align: left;">5.4</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>Ctrl-P</code></td>
+<td style="text-align: center;"></td>
+<td style="text-align: left;">5.3</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: center;">F1 / <code>↖</code></td>
+<td style="text-align: left;">3.2</td>
+</tr>
+</tbody>
+</table>
+  </div>
+  <div class="page-footer-screen"><span>A/S Regnecentralen</span><span>Side 75</span></div>
+</div><div class="book-page body-p" id="side-76">
+  <div class="page-tag" data-chap="G. REGISTRE" data-pnum="76"></div>
+  <div class="page-header-screen"><span>G. REGISTRE</span><span>MIKRO-LOGO</span></div>
+  <div class="page-content">
+<h1 id="bilag-g.-registre">BILAG G. REGISTRE</h1>
+<h2 id="g.1-oversigt-over-figurer">G.1 Oversigt over figurer</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Nr.</th>
+<th style="text-align: left;">Titel</th>
+<th style="text-align: center;">Side</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">1.</td>
+<td style="text-align: left;">Skærmen er inddelt i 3 felter</td>
+<td style="text-align: center;"><a href="#side-3">3</a></td>
+</tr>
+<tr>
+<td style="text-align: center;">2.</td>
+<td style="text-align: left;">Skærmbillede under udførelse af
+sætning</td>
+<td style="text-align: center;"><a href="#side-5">5</a></td>
+</tr>
+<tr>
+<td style="text-align: center;">3.</td>
+<td style="text-align: left;">Tegneområdets størrelse på en
+PICCOLINE</td>
+<td style="text-align: center;"><a href="#side-7">7</a></td>
+</tr>
+<tr>
+<td style="text-align: center;">4.</td>
+<td style="text-align: left;">Et kvadrat</td>
+<td style="text-align: center;"><a href="#side-17">17</a></td>
+</tr>
+<tr>
+<td style="text-align: center;">5.</td>
+<td style="text-align: left;">Kvadrat med markeret skildpadde</td>
+<td style="text-align: center;"><a href="#side-18">18</a></td>
+</tr>
+<tr>
+<td style="text-align: center;">6.</td>
+<td style="text-align: left;">Et M</td>
+<td style="text-align: center;"><a href="#side-19">19</a></td>
+</tr>
+<tr>
+<td style="text-align: center;">7.</td>
+<td style="text-align: left;">Et H</td>
+<td style="text-align: center;"><a href="#side-20">20</a></td>
+</tr>
+<tr>
+<td style="text-align: center;">8.</td>
+<td style="text-align: left;">H ændret til h</td>
+<td style="text-align: center;"><a href="#side-21">21</a></td>
+</tr>
+<tr>
+<td style="text-align: center;">9.</td>
+<td style="text-align: left;">Et hus</td>
+<td style="text-align: center;"><a href="#side-24">24</a></td>
+</tr>
+<tr>
+<td style="text-align: center;">10.</td>
+<td style="text-align: left;">To polygoner</td>
+<td style="text-align: center;"><a href="#side-25">25</a></td>
+</tr>
+<tr>
+<td style="text-align: center;">11.</td>
+<td style="text-align: left;">Spiral 2 90</td>
+<td style="text-align: center;"><a href="#side-29">29</a></td>
+</tr>
+<tr>
+<td style="text-align: center;">12.</td>
+<td style="text-align: left;">Skærmbillede når en procedure rettes</td>
+<td style="text-align: center;"><a href="#side-34">34</a></td>
+</tr>
+<tr>
+<td style="text-align: center;">13.</td>
+<td style="text-align: left;">En gulv-skildpadde</td>
+<td style="text-align: center;"><a href="#side-40">40</a></td>
+</tr>
+<tr>
+<td style="text-align: center;">14.</td>
+<td style="text-align: left;">Polygon og cirkel</td>
+<td style="text-align: center;"><a href="#side-49">49</a></td>
+</tr>
+<tr>
+<td style="text-align: center;">15.</td>
+<td style="text-align: left;">Stjerner</td>
+<td style="text-align: center;"><a href="#side-51">51</a></td>
+</tr>
+<tr>
+<td style="text-align: center;">16.</td>
+<td style="text-align: left;">Spiraler</td>
+<td style="text-align: center;"><a href="#side-53">53</a></td>
+</tr>
+<tr>
+<td style="text-align: center;">17.</td>
+<td style="text-align: left;">Umulig figur</td>
+<td style="text-align: center;"><a href="#side-55">55</a></td>
+</tr>
+<tr>
+<td style="text-align: center;">18.</td>
+<td style="text-align: left;">Dele af en tegning</td>
+<td style="text-align: center;"><a href="#side-60">60</a></td>
+</tr>
+<tr>
+<td style="text-align: center;">19.</td>
+<td style="text-align: left;">Eksempel med løft og slet</td>
+<td style="text-align: center;"><a href="#side-61">61</a></td>
+</tr>
+</tbody>
+</table>
+  </div>
+  <div class="page-footer-screen"><span>Side 76</span><span>A/S Regnecentralen</span></div>
+</div><div class="book-page body-p" id="side-77">
+  <div class="page-tag" data-chap="G. REGISTRE" data-pnum="77"></div>
+  <div class="page-header-screen"><span>MIKRO-LOGO</span><span>G. REGISTRE</span></div>
+  <div class="page-content">
+<h2 id="g.2-stikordsregister">G.2 Stikordsregister</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Stikord</th>
+<th style="text-align: left;">Side</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">accept i editor</td>
+<td style="text-align: left;">33</td>
+</tr>
+<tr>
+<td style="text-align: left;">afbryde udførelsen</td>
+<td style="text-align: left;">43</td>
+</tr>
+<tr>
+<td style="text-align: left;">aktuelle parametre</td>
+<td style="text-align: left;">25</td>
+</tr>
+<tr>
+<td style="text-align: left;">argumenter til kommandoer</td>
+<td style="text-align: left;">31</td>
+</tr>
+<tr>
+<td style="text-align: left;">begynd</td>
+<td style="text-align: left;">28</td>
+</tr>
+<tr>
+<td style="text-align: left;">betingelsessætninger</td>
+<td style="text-align: left;">26</td>
+</tr>
+<tr>
+<td style="text-align: left;">brugerdefineret sætning</td>
+<td style="text-align: left;">se procedure</td>
+</tr>
+<tr>
+<td style="text-align: left;">Ctrl-F</td>
+<td style="text-align: left;">42</td>
+</tr>
+<tr>
+<td style="text-align: left;">Ctrl-P</td>
+<td style="text-align: left;">41</td>
+</tr>
+<tr>
+<td style="text-align: left;">definition af procedure</td>
+<td style="text-align: left;">28</td>
+</tr>
+<tr>
+<td style="text-align: left;">disk</td>
+<td style="text-align: left;">37, 38</td>
+</tr>
+<tr>
+<td style="text-align: left;">diskette</td>
+<td style="text-align: left;">37</td>
+</tr>
+<tr>
+<td style="text-align: left;">diskettekommandoer</td>
+<td style="text-align: left;">37</td>
+</tr>
+<tr>
+<td style="text-align: left;">diskettestation</td>
+<td style="text-align: left;">37</td>
+</tr>
+<tr>
+<td style="text-align: left;">distributionsdiskette</td>
+<td style="text-align: left;">1, 48</td>
+</tr>
+<tr>
+<td style="text-align: left;">drejtil</td>
+<td style="text-align: left;">14</td>
+</tr>
+<tr>
+<td style="text-align: left;">editering, fortrydelse af</td>
+<td style="text-align: left;">33</td>
+</tr>
+<tr>
+<td style="text-align: left;">editeringstaster</td>
+<td style="text-align: left;">4</td>
+</tr>
+<tr>
+<td style="text-align: left;">editeringstaster i editor</td>
+<td style="text-align: left;">32</td>
+</tr>
+<tr>
+<td style="text-align: left;">editor</td>
+<td style="text-align: left;">32</td>
+</tr>
+<tr>
+<td style="text-align: left;">editor, accept i</td>
+<td style="text-align: left;">33</td>
+</tr>
+<tr>
+<td style="text-align: left;">editor, editeringstaster i</td>
+<td style="text-align: left;">32</td>
+</tr>
+<tr>
+<td style="text-align: left;">ellers</td>
+<td style="text-align: left;">26</td>
+</tr>
+<tr>
+<td style="text-align: left;">ESC</td>
+<td style="text-align: left;">5, 23, 31, 33, 36, 43</td>
+</tr>
+<tr>
+<td style="text-align: left;">farvel</td>
+<td style="text-align: left;">41</td>
+</tr>
+<tr>
+<td style="text-align: left;">fejl i oversættelse</td>
+<td style="text-align: left;">33</td>
+</tr>
+<tr>
+<td style="text-align: left;">fejlmeddelelser</td>
+<td style="text-align: left;">67 ff.</td>
+</tr>
+<tr>
+<td style="text-align: left;">fil</td>
+<td style="text-align: left;">37</td>
+</tr>
+<tr>
+<td style="text-align: left;">filnavn</td>
+<td style="text-align: left;">37</td>
+</tr>
+<tr>
+<td style="text-align: left;">fjern</td>
+<td style="text-align: left;">39</td>
+</tr>
+<tr>
+<td style="text-align: left;">formelle parametre</td>
+<td style="text-align: left;">28</td>
+</tr>
+<tr>
+<td style="text-align: left;">fortegn</td>
+<td style="text-align: left;">9, 10</td>
+</tr>
+<tr>
+<td style="text-align: left;">fortryd</td>
+<td style="text-align: left;">42</td>
+</tr>
+<tr>
+<td style="text-align: left;">fortrydelse af editering</td>
+<td style="text-align: left;">33</td>
+</tr>
+<tr>
+<td style="text-align: left;">fr</td>
+<td style="text-align: left;">12</td>
+</tr>
+<tr>
+<td style="text-align: left;">frem</td>
+<td style="text-align: left;">12</td>
+</tr>
+<tr>
+<td style="text-align: left;">funktionstaster</td>
+<td style="text-align: left;">31, 75</td>
+</tr>
+<tr>
+<td style="text-align: left;">funktionsudtryk</td>
+<td style="text-align: left;">9</td>
+</tr>
+<tr>
+<td style="text-align: left;">gem</td>
+<td style="text-align: left;">38</td>
+</tr>
+</tbody>
+</table>
+  </div>
+  <div class="page-footer-screen"><span>A/S Regnecentralen</span><span>Side 77</span></div>
+</div><div class="book-page body-p" id="side-78">
+  <div class="page-tag" data-chap="G. REGISTRE" data-pnum="78"></div>
+  <div class="page-header-screen"><span>G. REGISTRE</span><span>MIKRO-LOGO</span></div>
+  <div class="page-content">
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Stikord</th>
+<th style="text-align: left;">Side</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">gentag</td>
+<td style="text-align: left;">27</td>
+</tr>
+<tr>
+<td style="text-align: left;">gentagelsessætninger</td>
+<td style="text-align: left;">27</td>
+</tr>
+<tr>
+<td style="text-align: left;">glem</td>
+<td style="text-align: left;">34, 35, 36, 39</td>
+</tr>
+<tr>
+<td style="text-align: left;">gulv-skildpadde</td>
+<td style="text-align: left;">39</td>
+</tr>
+<tr>
+<td style="text-align: left;">hent</td>
+<td style="text-align: left;">38</td>
+</tr>
+<tr>
+<td style="text-align: left;">henttal</td>
+<td style="text-align: left;">22</td>
+</tr>
+<tr>
+<td style="text-align: left;">henttast</td>
+<td style="text-align: left;">22</td>
+</tr>
+<tr>
+<td style="text-align: left;">hertil</td>
+<td style="text-align: left;">27</td>
+</tr>
+<tr>
+<td style="text-align: left;">hjem</td>
+<td style="text-align: left;">15</td>
+</tr>
+<tr>
+<td style="text-align: left;">hjælp</td>
+<td style="text-align: left;">42</td>
+</tr>
+<tr>
+<td style="text-align: left;">hvilke</td>
+<td style="text-align: left;">36</td>
+</tr>
+<tr>
+<td style="text-align: left;">hvis</td>
+<td style="text-align: left;">26</td>
+</tr>
+<tr>
+<td style="text-align: left;">hvor</td>
+<td style="text-align: left;">16</td>
+</tr>
+<tr>
+<td style="text-align: left;">hø</td>
+<td style="text-align: left;">14</td>
+</tr>
+<tr>
+<td style="text-align: left;">højre</td>
+<td style="text-align: left;">14</td>
+</tr>
+<tr>
+<td style="text-align: left;">indlæsningssætninger</td>
+<td style="text-align: left;">22</td>
+</tr>
+<tr>
+<td style="text-align: left;">installation</td>
+<td style="text-align: left;">48</td>
+</tr>
+<tr>
+<td style="text-align: left;">iterativ procedure</td>
+<td style="text-align: left;">52</td>
+</tr>
+<tr>
+<td style="text-align: left;">kommandoer</td>
+<td style="text-align: left;">3, 31 ff., 75</td>
+</tr>
+<tr>
+<td style="text-align: left;">kommandoer, argumenter til</td>
+<td style="text-align: left;">31</td>
+</tr>
+<tr>
+<td style="text-align: left;">kommandolinie</td>
+<td style="text-align: left;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">kontrolsætninger</td>
+<td style="text-align: left;">24</td>
+</tr>
+<tr>
+<td style="text-align: left;">kopi</td>
+<td style="text-align: left;">39</td>
+</tr>
+<tr>
+<td style="text-align: left;">lager</td>
+<td style="text-align: left;">42</td>
+</tr>
+<tr>
+<td style="text-align: left;">lav</td>
+<td style="text-align: left;">34, 35</td>
+</tr>
+<tr>
+<td style="text-align: left;">list</td>
+<td style="text-align: left;">36</td>
+</tr>
+<tr>
+<td style="text-align: left;">logisk eller</td>
+<td style="text-align: left;">11</td>
+</tr>
+<tr>
+<td style="text-align: left;">logisk og</td>
+<td style="text-align: left;">11</td>
+</tr>
+<tr>
+<td style="text-align: left;">Logo i undervisningen</td>
+<td style="text-align: left;">2</td>
+</tr>
+<tr>
+<td style="text-align: left;">lær</td>
+<td style="text-align: left;">32, 35</td>
+</tr>
+<tr>
+<td style="text-align: left;">læsevejledning</td>
+<td style="text-align: left;">1, 58</td>
+</tr>
+<tr>
+<td style="text-align: left;">læstast</td>
+<td style="text-align: left;">23</td>
+</tr>
+<tr>
+<td style="text-align: left;">løft</td>
+<td style="text-align: left;">15</td>
+</tr>
+<tr>
+<td style="text-align: left;">mellemrumstasten</td>
+<td style="text-align: left;">23, 36, 43</td>
+</tr>
+<tr>
+<td style="text-align: left;">operatorer</td>
+<td style="text-align: left;">8</td>
+</tr>
+<tr>
+<td style="text-align: left;">operatorer, prioritet af</td>
+<td style="text-align: left;">10</td>
+</tr>
+<tr>
+<td style="text-align: left;">opstart</td>
+<td style="text-align: left;">1, 58</td>
+</tr>
+<tr>
+<td style="text-align: left;">ordrer til skildpadde</td>
+<td style="text-align: left;">se sætninger</td>
+</tr>
+<tr>
+<td style="text-align: left;">oversættelse af procedurer</td>
+<td style="text-align: left;">33</td>
+</tr>
+<tr>
+<td style="text-align: left;">oversættelse, fejl i</td>
+<td style="text-align: left;">33</td>
+</tr>
+<tr>
+<td style="text-align: left;">overvåge udførelsen</td>
+<td style="text-align: left;">43</td>
+</tr>
+<tr>
+<td style="text-align: left;">parametre</td>
+<td style="text-align: left;">25, 28</td>
+</tr>
+</tbody>
+</table>
+  </div>
+  <div class="page-footer-screen"><span>Side 78</span><span>A/S Regnecentralen</span></div>
+</div><div class="book-page body-p" id="side-79">
+  <div class="page-tag" data-chap="G. REGISTRE" data-pnum="79"></div>
+  <div class="page-header-screen"><span>MIKRO-LOGO</span><span>G. REGISTRE</span></div>
+  <div class="page-content">
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Stikord</th>
+<th style="text-align: left;">Side</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">parametre, aktuelle</td>
+<td style="text-align: left;">25</td>
+</tr>
+<tr>
+<td style="text-align: left;">parametre, formelle</td>
+<td style="text-align: left;">28</td>
+</tr>
+<tr>
+<td style="text-align: left;">parentesudtryk</td>
+<td style="text-align: left;">9</td>
+</tr>
+<tr>
+<td style="text-align: left;">pdisk</td>
+<td style="text-align: left;">31, 38</td>
+</tr>
+<tr>
+<td style="text-align: left;">pentype</td>
+<td style="text-align: left;">15</td>
+</tr>
+<tr>
+<td style="text-align: left;">phjælp</td>
+<td style="text-align: left;">31, 42</td>
+</tr>
+<tr>
+<td style="text-align: left;">pil</td>
+<td style="text-align: left;">41</td>
+</tr>
+<tr>
+<td style="text-align: left;">pilind</td>
+<td style="text-align: left;">16</td>
+</tr>
+<tr>
+<td style="text-align: left;">pilud</td>
+<td style="text-align: left;">16</td>
+</tr>
+<tr>
+<td style="text-align: left;">plist</td>
+<td style="text-align: left;">31, 36</td>
+</tr>
+<tr>
+<td style="text-align: left;">plotter</td>
+<td style="text-align: left;">40</td>
+</tr>
+<tr>
+<td style="text-align: left;">position</td>
+<td style="text-align: left;">7, 12</td>
+</tr>
+<tr>
+<td style="text-align: left;">printer</td>
+<td style="text-align: left;">se skriver</td>
+</tr>
+<tr>
+<td style="text-align: left;">prioritet af operatorer</td>
+<td style="text-align: left;">10</td>
+</tr>
+<tr>
+<td style="text-align: left;">procedure</td>
+<td style="text-align: left;">24, 28</td>
+</tr>
+<tr>
+<td style="text-align: left;">procedure, definition af</td>
+<td style="text-align: left;">28</td>
+</tr>
+<tr>
+<td style="text-align: left;">procedure, udførelse af</td>
+<td style="text-align: left;">se procedurekald</td>
+</tr>
+<tr>
+<td style="text-align: left;">procedurehoved</td>
+<td style="text-align: left;">28</td>
+</tr>
+<tr>
+<td style="text-align: left;">procedurekald</td>
+<td style="text-align: left;">24</td>
+</tr>
+<tr>
+<td style="text-align: left;">procedurekommandoer</td>
+<td style="text-align: left;">32</td>
+</tr>
+<tr>
+<td style="text-align: left;">procedurekrop</td>
+<td style="text-align: left;">28</td>
+</tr>
+<tr>
+<td style="text-align: left;">procedurer, oversættelse af</td>
+<td style="text-align: left;">33</td>
+</tr>
+<tr>
+<td style="text-align: left;">rekursiv procedure</td>
+<td style="text-align: left;">29, 52</td>
+</tr>
+<tr>
+<td style="text-align: left;">relationelle operatorer</td>
+<td style="text-align: left;">10, 11</td>
+</tr>
+<tr>
+<td style="text-align: left;">ret</td>
+<td style="text-align: left;">32, 35</td>
+</tr>
+<tr>
+<td style="text-align: left;">retning</td>
+<td style="text-align: left;">7, 14</td>
+</tr>
+<tr>
+<td style="text-align: left;">Retur</td>
+<td style="text-align: left;">4, 23, 33, 43, 58</td>
+</tr>
+<tr>
+<td style="text-align: left;">skildpadde</td>
+<td style="text-align: left;">2, 7, 12</td>
+</tr>
+<tr>
+<td style="text-align: left;">skildpaddeordrer</td>
+<td style="text-align: left;">se sætninger</td>
+</tr>
+<tr>
+<td style="text-align: left;">skildpaddesætninger</td>
+<td style="text-align: left;">se sætninger</td>
+</tr>
+<tr>
+<td style="text-align: left;">skriv</td>
+<td style="text-align: left;">23</td>
+</tr>
+<tr>
+<td style="text-align: left;">skriver</td>
+<td style="text-align: left;">31</td>
+</tr>
+<tr>
+<td style="text-align: left;">skærmbillede</td>
+<td style="text-align: left;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">slet</td>
+<td style="text-align: left;">15</td>
+</tr>
+<tr>
+<td style="text-align: left;">slut</td>
+<td style="text-align: left;">28</td>
+</tr>
+<tr>
+<td style="text-align: left;">sluthvis</td>
+<td style="text-align: left;">26</td>
+</tr>
+<tr>
+<td style="text-align: left;">start</td>
+<td style="text-align: left;">16, 34, 35, 39</td>
+</tr>
+<tr>
+<td style="text-align: left;">status</td>
+<td style="text-align: left;">41</td>
+</tr>
+<tr>
+<td style="text-align: left;">stop</td>
+<td style="text-align: left;">30</td>
+</tr>
+<tr>
+<td style="text-align: left;">systemdiskette</td>
+<td style="text-align: left;">48</td>
+</tr>
+<tr>
+<td style="text-align: left;">sætning</td>
+<td style="text-align: left;">23</td>
+</tr>
+<tr>
+<td style="text-align: left;">sætninger</td>
+<td style="text-align: left;">4, 7 ff., 73</td>
+</tr>
+<tr>
+<td style="text-align: left;">sætningslinie</td>
+<td style="text-align: left;">4</td>
+</tr>
+<tr>
+<td style="text-align: left;">sætx</td>
+<td style="text-align: left;">13</td>
+</tr>
+<tr>
+<td style="text-align: left;">sætxy</td>
+<td style="text-align: left;">13</td>
+</tr>
+<tr>
+<td style="text-align: left;">sæty</td>
+<td style="text-align: left;">13</td>
+</tr>
+</tbody>
+</table>
+  </div>
+  <div class="page-footer-screen"><span>A/S Regnecentralen</span><span>Side 79</span></div>
+</div><div class="book-page body-p" id="side-80">
+  <div class="page-tag" data-chap="G. REGISTRE" data-pnum="80"></div>
+  <div class="page-header-screen"><span>G. REGISTRE</span><span>MIKRO-LOGO</span></div>
+  <div class="page-content">
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Stikord</th>
+<th style="text-align: left;">Side</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">talkonstanter</td>
+<td style="text-align: left;">9</td>
+</tr>
+<tr>
+<td style="text-align: left;">tb</td>
+<td style="text-align: left;">12</td>
+</tr>
+<tr>
+<td style="text-align: left;">tegn</td>
+<td style="text-align: left;">15</td>
+</tr>
+<tr>
+<td style="text-align: left;">tegneområde</td>
+<td style="text-align: left;">3, 5, 7, 13</td>
+</tr>
+<tr>
+<td style="text-align: left;">tegnesætninger</td>
+<td style="text-align: left;">12</td>
+</tr>
+<tr>
+<td style="text-align: left;">tegnigen</td>
+<td style="text-align: left;">39</td>
+</tr>
+<tr>
+<td style="text-align: left;">tilbage</td>
+<td style="text-align: left;">12</td>
+</tr>
+<tr>
+<td style="text-align: left;">tildelingssætninger</td>
+<td style="text-align: left;">22</td>
+</tr>
+<tr>
+<td style="text-align: left;">tilføj</td>
+<td style="text-align: left;">38</td>
+</tr>
+<tr>
+<td style="text-align: left;">tlf</td>
+<td style="text-align: left;">9</td>
+</tr>
+<tr>
+<td style="text-align: left;">udførelse af kommandolinie</td>
+<td style="text-align: left;">4</td>
+</tr>
+<tr>
+<td style="text-align: left;">udførelse af procedure</td>
+<td style="text-align: left;">se procedurekald</td>
+</tr>
+<tr>
+<td style="text-align: left;">udførelsen, afbryde</td>
+<td style="text-align: left;">43</td>
+</tr>
+<tr>
+<td style="text-align: left;">udførelsen, overvåge</td>
+<td style="text-align: left;">43</td>
+</tr>
+<tr>
+<td style="text-align: left;">udlæsningssætninger</td>
+<td style="text-align: left;">23</td>
+</tr>
+<tr>
+<td style="text-align: left;">udport</td>
+<td style="text-align: left;">23</td>
+</tr>
+<tr>
+<td style="text-align: left;">udtryk</td>
+<td style="text-align: left;">8 ff.</td>
+</tr>
+<tr>
+<td style="text-align: left;">variabel</td>
+<td style="text-align: left;">8, 9</td>
+</tr>
+<tr>
+<td style="text-align: left;">ve</td>
+<td style="text-align: left;">14</td>
+</tr>
+<tr>
+<td style="text-align: left;">venstre</td>
+<td style="text-align: left;">14</td>
+</tr>
+<tr>
+<td style="text-align: left;">viskud</td>
+<td style="text-align: left;">15, 34, 35, 39</td>
+</tr>
+</tbody>
+</table>
+  </div>
+  <div class="page-footer-screen"><span>Side 80</span><span>A/S Regnecentralen</span></div>
+</div><div class="book-page body-p" id="side-81">
+  <div class="page-tag" data-chap="LÆSERBEMÆRKNINGER" data-pnum="81"></div>
+  <div class="page-header-screen"><span>MIKRO-LOGO</span><span>LÆSERBEMÆRKNINGER</span></div>
+  <div class="page-content">
+<h1 id="læserbemærkninger">LÆSERBEMÆRKNINGER</h1>
+<p><strong>Titel:</strong> Mikro-Logo Brugervejledning<br />
+<strong>RCSL Nr.:</strong> 29 0 00852</p>
+<p>A/S Regnecentralen af 1979 bestræber sig på at forbedre kvalitet og
+brugbarhed af sine publikationer. For at opnå dette ønskes læserens
+kritiske vurdering af denne publikation.</p>
+<p>Kommenter venligst manualens fuldstændighed, nøjagtighed,
+disposition, anvendelighed og læsbarhed:</p>
+<p><br></p>
+<p>Angiv fundne fejl (reference til sidenummer):</p>
+<p><br></p>
+<p>Hvordan kan manualen forbedres:</p>
+<p><br></p>
+<p>Andre kommentarer:</p>
+<p><br></p>
+<p><strong>Navn:</strong><br />
+<strong>Stilling:</strong><br />
+<strong>Dato:</strong></p>
+<p><em>På forhånd tak!</em></p>
+  </div>
+  <div class="page-footer-screen"><span>A/S Regnecentralen</span><span>Side 81</span></div>
+</div><div class="book-page body-p" id="side-82">
+  <div class="page-tag" data-chap="LÆSERBEMÆRKNINGER" data-pnum="82"></div>
+  <div class="page-header-screen"><span>LÆSERBEMÆRKNINGER</span><span>MIKRO-LOGO</span></div>
+  <div class="page-content">
+<div data-align="center">
+<p><em>Riv ikke - Fold her og hæft.</em></p>
+<pre><code>                                                  Frankeres
+                                                     som
+                                                    brev
+
+                    REGNECENTRALEN
+                    af 1979
+                    Informationsafdelingen
+                    Lautrupbjerg 1
+                    2750 Ballerup</code></pre>
+</div>
+  </div>
+  <div class="page-footer-screen"><span>Side 82</span><span>A/S Regnecentralen</span></div>
+</div>
+</body>
+</html>
