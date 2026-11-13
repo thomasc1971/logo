@@ -11,7 +11,24 @@
 ;; Tapestry symbols qualified (tapestry:...), and Ditty's reader resolves
 ;; pkg:symbol against packages that exist at read time. Headless paths
 ;; do not need Tapestry at all.
-(if (null? *command-line-args*)
+(defun logo-headless-args? (args)
+  "True when ARGS select -e or a file, i.e. do not start the TUI."
+  (if (null? args)
+    #f
+    (let* ((arg (car args)))
+      (cond
+        ((equal? arg "-e") #t)
+        ((equal? arg "--backend") (logo-headless-args? (cddr args)))
+        ((equal? arg "--dialect") (logo-headless-args? (cddr args)))
+        ((or (equal? arg "--help") (equal? arg "-h") (equal? arg "--version")
+             (equal? arg "-V"))
+         #t)
+        ((equal? arg "--mikro") (logo-headless-args? (cdr args)))
+        ((and (> (length arg) 0) (char=? (string-ref arg 0) #\-))
+         (logo-headless-args? (cdr args)))
+        (#t #t)))))
+
+(if (not (logo-headless-args? *command-line-args*))
   (require 'tapestry))
 
 (require 'logo)
@@ -30,6 +47,8 @@
     "  logo                  Interactive TUI (Tapestry)\n"
     "  logo FILE.logo        Run a Logo program, print the picture\n"
     "  logo -e \"CODE\"      Run Logo code, print the picture\n"
+    "  logo --dialect mikro  Mikro-Logo mode (Danish, LÆR/RET editor)\n"
+    "  logo --mikro          Shorthand for --dialect mikro\n"
     "  logo --backend B FILE Run with graphics backend B\n"
     "                        (canvas [default], sixel, kitty, iterm2)\n"
     "  logo --help           This message\n"
@@ -67,27 +86,36 @@
   (let ((args *command-line-args*))
     (cond
       ((null? args)
-       (logo-tui-main))
+       (logo-tui-main 'logo))
       ((or (equal? (car args) "--help") (equal? (car args) "-h"))
        (logo-usage))
       ((or (equal? (car args) "--version") (equal? (car args) "-V"))
        (princ (concat "logo " *logo-version* "\n")))
       (#t
-       ;; Parse options: --backend B, -e CODE, FILE...
+       ;; Parse options: --dialect D, --backend B, -e CODE, FILE...
        (let loop ((rest args)
                   (backend 'canvas)
                   (code nil)
-                  (files nil))
+                  (files nil)
+                  (dialect 'logo))
          (if (null? rest)
            (cond
              (code
-              (logo-render-and-print (logo-run code) backend))
+              (logo-render-and-print
+               (logo-run code nil nil dialect 'command-line)
+               backend))
              ((not (null? files))
-              (let ((state (logo-run-file (car files))))
+              (let ((state (logo-run-file (car files) nil nil dialect)))
                 (logo-render-and-print state backend)))
+             ((not (eq? dialect 'logo)) (logo-tui-main dialect))
              (#t (progn (logo-usage) (exit 1))))
            (let ((arg (car rest)))
              (cond
+               ((equal? arg "--dialect")
+                (loop (cddr rest) backend code files
+                 (if (equal? (cadr rest) "mikro") 'mikro 'logo)))
+               ((equal? arg "--mikro")
+                (loop (cdr rest) backend code files 'mikro))
                ((equal? arg "--backend")
                 (loop (cddr rest)
                  (if (equal? (cadr rest) "sixel")
@@ -95,10 +123,11 @@
                    (if (equal? (cadr rest) "kitty")
                      'kitty
                      (if (equal? (cadr rest) "iterm2") 'iterm2 'canvas)))
-                 code files))
+                 code files dialect))
                ((equal? arg "-e")
-                (loop (cddr rest) backend (cadr rest) files))
+                (loop (cddr rest) backend (cadr rest) files dialect))
                (#t
-                (loop (cdr rest) backend code (append files (list arg))))))))))))
+                (loop (cdr rest) backend code (append files (list arg))
+                 dialect))))))))))
 
 (logo-main)

@@ -138,6 +138,125 @@
   (assert-true (> (length lines) 5) "view returns lines")
   (assert-true (string-contains? (car lines) "Logo") "view header names Logo"))
 
+;; ---------------------------------------------------------------------------
+;; Mikro-Logo editor
+;; ---------------------------------------------------------------------------
+(defun tui-key (m key)
+  (logo-tui-update m (list (cons 'type 'key) (cons 'key key))))
+
+(defun tui-type (m text)
+  (let loop ((i 0)
+             (m m))
+    (if (>= i (length text))
+      m
+      (loop (+ i 1) (tui-key m (substring text i (+ i 1)))))))
+
+(defun tui-enter (m text)
+  (tui-key (tui-type m text) "return"))
+
+(let* ((logo-model (logo-model-make 'logo))
+       (logo-f5 (tui-key logo-model "f5")))
+  (assert-equal nil (logo-model-editor logo-f5)
+   "F5 does nothing in the English dialect"))
+(let* ((m (logo-model-make 'mikro))
+       (m1 (tui-key m "f5"))
+       (editor (logo-model-editor m1)))
+  (assert-true (not (null? editor)) "F5 opens the editor in Mikro mode")
+  (assert-equal "begynd " (car (logo-editor-lines editor))
+   "LÆR starts with BEGYND")
+  (assert-equal 24 (length (logo-tui-view m1))
+   "editor view fills a 24-row screen")
+  (assert-true
+   (string-contains? (list-ref (logo-tui-view m1) 22) "A4")
+   "editor status line names A4"))
+
+;; Type a complete procedure, A4, then run it.
+(let* ((m (logo-model-make 'mikro))
+       (m1 (tui-enter (tui-key m "f5") "polygon side antal"))
+       (m2 (tui-enter m1 "frem side"))
+       (m3 (tui-key m2 "C-s")))
+  (assert-equal nil (logo-model-editor m3) "A4 closes the editor")
+  (assert-equal nil (logo-model-message m3) "successful compile has no message")
+  (assert-true
+   (not (null? (hash-ref (logo-interp-procs (logo-model-state m3)) "POLYGON")))
+   "A4 installs the procedure")
+  (assert-equal
+   '("begynd polygon side antal" "   frem side" "slut")
+   (logo-interp-procedure-source (logo-model-state m3) "POLYGON")
+   "A4 stores canonical indented source")
+  (assert-equal nil (logo-interp-blocked (logo-model-state m3))
+   "successful compile clears the block")
+  (let* ((m4 (tui-enter (logo-model-with m3 'input "") "polygon 30 4"))
+         (turtle (logo-interp-turtle (logo-model-state m4))))
+    (assert-equal 1 (length (canvas-segments (turtle-canvas turtle)))
+     "the compiled procedure runs from the command line")))
+
+;; RET reopens stored source; ESC abandons without changing it.
+(let* ((m (logo-model-make 'mikro))
+       (m1 (tui-enter (tui-key m "f5") "polygon side antal"))
+       (m2 (tui-enter m1 "frem side"))
+       (m3 (tui-key m2 "C-s"))
+       (m4 (tui-enter (logo-model-with m3 'input "") "ret polygon"))
+       (editor (logo-model-editor m4)))
+  (assert-true (not (null? editor)) "RET opens an existing procedure")
+  (assert-equal "   frem side" (list-ref (logo-editor-lines editor) 1)
+   "RET shows canonical indented source")
+  (let* ((m5 (tui-key m4 "escape")))
+    (assert-equal nil (logo-model-editor m5) "ESC closes the editor")
+    (assert-equal
+     '("begynd polygon side antal" "   frem side" "slut")
+     (logo-interp-procedure-source (logo-model-state m5) "POLYGON")
+     "ESC leaves the stored source intact")))
+
+;; A compile error returns to the command line, blocks procedures, and keeps
+;; the draft for RET.
+(let* ((m (logo-model-make 'mikro))
+       (m1 (tui-enter (tui-key m "f5") "polygon side antal"))
+       (m2 (tui-enter m1 "frem side"))
+       (m3 (tui-key m2 "C-s"))
+       (m4 (tui-enter (logo-model-with m3 'input "") "ret polygon"))
+       (m5 (tui-key m4 "down"))
+       (m6 (tui-key m5 "end"))
+       (m7 (tui-key m6 "backspace"))
+       (m8 (tui-key m7 "backspace"))
+       (m9 (tui-key m8 "backspace"))
+       (m10 (tui-key m9 "backspace"))
+       (m11 (tui-key m10 "C-s")))
+  (assert-equal nil (logo-model-editor m11)
+   "failed compile returns to the command line")
+  (assert-equal "Navn eller tal mangler" (logo-model-message m11)
+   "failed compile reports in the message line")
+  (assert-true (not (null? (logo-interp-blocked (logo-model-state m11))))
+   "failed compile blocks procedure execution")
+  (assert-true (not (null? (logo-model-draft m11)))
+   "failed compile keeps the draft")
+  (assert-equal "POLYGON" (logo-model-draft-name m11)
+   "the draft remembers its procedure name")
+  (let* ((m12 (tui-enter (logo-model-with m11 'input "") "polygon 10 4"))
+         (turtle (logo-interp-turtle (logo-model-state m12))))
+    (assert-equal 0 (length (canvas-segments (turtle-canvas turtle)))
+     "blocked procedures do not run")
+    (assert-true
+     (member "Error: Navn eller tal mangler" (logo-model-transcript m12))
+     "blocked execution reports the compile error"))
+  (let* ((m12 (tui-enter (logo-model-with m11 'input "") "ret polygon"))
+         (editor (logo-model-editor m12)))
+    (assert-true (not (null? editor)) "RET reopens the failed draft")
+    (assert-equal "   frem " (list-ref (logo-editor-lines editor) 1)
+     "the reopened draft has the failed text")))
+
+;; Bare RET prompts for a procedure name.
+(let* ((m (logo-model-make 'mikro))
+       (defined (tui-key (tui-enter (tui-key m "f5") "p") "C-s"))
+       (m1 (tui-enter defined "ret")))
+  (assert-equal 'ret-name (logo-model-prompt m1) "bare RET prompts for a name")
+  (let* ((m2 (tui-enter m1 "p")))
+    (assert-equal nil (logo-model-prompt m2) "the prompt is cleared")
+    (assert-true (not (null? (logo-model-editor m2)))
+     "a name after the RET prompt opens the editor")
+    (assert-equal nil (logo-model-editor (tui-key m2 "escape"))
+     "ESC closes the editor opened from the prompt")))
+
 (format #t "~%Passed: ~a, Failed: ~a~%" passed failed)
 
 (if (> failed 0) (exit 1) (exit 0))

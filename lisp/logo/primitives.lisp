@@ -155,3 +155,39 @@
      (if (null? (cdr xs))
        (reverse acc)
        (loop (cdr xs) (cons (car xs) acc))))))
+
+;; ---------------------------------------------------------------------------
+;; Mikro-Logo expression/statement helpers
+;;
+;; The Mikro parser lowers infix expressions and Danish commands into these
+;; primitives, so the interpreter core stays shared. They are internal names;
+;; the user-facing words are in the dialect table.
+;; ---------------------------------------------------------------------------
+(logo-define-value-primitive "MIKRO-NEG" 1
+ (lambda (t args) (- 0 (car args))))
+(logo-define-value-primitive "MIKRO-NOT-ZERO" 1
+ (lambda (t args) (if (= 0 (car args)) #f #t)))
+(logo-define-value-primitive "MIKRO-POW" 2
+ (lambda (t args)
+   (let* ((base (car args))
+          (exponent (cadr args)))
+     (if (< exponent 0)
+       (error "Potens er negativ")
+       (truncate (expt base exponent))))))
+(logo-define-value-primitive "MIKRO-EQ" 2
+ (lambda (t args) (if (= (car args) (cadr args)) 1 0)))
+(logo-define-value-primitive "MIKRO-NE" 2
+ (lambda (t args) (if (not (= (car args) (cadr args))) 1 0)))
+(logo-define-value-primitive "MIKRO-LT" 2
+ (lambda (t args) (if (< (car args) (cadr args)) 1 0)))
+(logo-define-value-primitive "MIKRO-GT" 2
+ (lambda (t args) (if (> (car args) (cadr args)) 1 0)))
+(logo-define-value-primitive "MIKRO-LE" 2
+ (lambda (t args) (if (<= (car args) (cadr args)) 1 0)))
+(logo-define-value-primitive "MIKRO-GE" 2
+ (lambda (t args) (if (>= (car args) (cadr args)) 1 0)))
+
+(logo-define-primitive "MIKRO-START" 0
+ (lambda (t args) (turtle-with (turtle-home (turtle-clear t)) 'pen-down #t)))
+(logo-define-primitive "MIKRO-SETXY" 2
+ (lambda (t args) (turtle-move-to t (car args) (cadr args))))

@@ -28,7 +28,10 @@
 (load (concat *logo-dir* "logo/turtle.lisp"))
 (load (concat *logo-dir* "logo/primitives.lisp"))
 (load (concat *logo-dir* "logo/parser.lisp"))
+(load (concat *logo-dir* "logo/mikro.lisp"))
 (load (concat *logo-dir* "logo/interpreter.lisp"))
+(load (concat *logo-dir* "logo/repl.lisp"))
+(load (concat *logo-dir* "logo/editor.lisp"))
 (load (concat *logo-dir* "logo/graphics.lisp"))
 (load (concat *logo-dir* "logo/tui.lisp"))
 
@@ -48,15 +51,28 @@
  'logo-primitive-arity
  ;; parser.lisp
  'logo-tokenize 'logo-parse
+ ;; mikro.lisp
+ 'logo-mikro-parse 'logo-mikro-compile-lines
+ ;; editor.lisp
+ 'logo-editor-learn 'logo-editor-ret 'logo-editor-lines 'logo-editor-row
+ 'logo-editor-col 'logo-editor-name 'logo-editor-error
+ 'logo-editor-move-left 'logo-editor-move-right 'logo-editor-move-up
+ 'logo-editor-move-down 'logo-editor-home 'logo-editor-end
+ 'logo-editor-insert-text 'logo-editor-insert-space 'logo-editor-backspace
+ 'logo-editor-delete 'logo-editor-kill-to-end 'logo-editor-delete-line
+ 'logo-editor-insert-line 'logo-editor-return 'logo-editor-text
  ;; interpreter.lisp
  'logo-interp-make 'logo-interp-turtle 'logo-run 'logo-run-file
- 'logo-eval-program 'logo-truthy?
+ 'logo-eval-program 'logo-truthy? 'logo-interp-sources 'logo-interp-blocked
+ 'logo-interp-define-procedure 'logo-interp-procedure-source
  ;; graphics.lisp
  'logo-graphics-capabilities 'logo-graphics-backend 'logo-render
  'logo-render-sixel 'logo-graphics-capabilities-from
  'logo-graphics-backend-from 'logo-graphics-cell-size
  'logo-graphics-pixel-size
+ ;; repl.lisp
+ 'logo-repl-eval
  ;; tui.lisp
- 'logo-tui-main 'logo-repl-eval)
+ 'logo-tui-main)
 
 (provide 'logo)

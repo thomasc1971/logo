@@ -33,11 +33,14 @@ Tapestry view — both thin.
 | `lisp/logo/canvas.lisp`      | Segment-list canvas, Bresenham rasterizer, Braille renderer. Zero terminal knowledge.                       |
 | `lisp/logo/turtle.lisp`      | Turtle state as an alist; every op returns a new state.                                                     |
 | `lisp/logo/primitives.lisp`  | Two registries: commands `(turtle args) -> turtle'`, queries `(turtle args) -> value`.                      |
-| `lisp/logo/parser.lisp`      | Tokenizer + two-pass parser (scan `TO` arities, then arity-driven descent).                                 |
-| `lisp/logo/interpreter.lisp` | State-threading evaluator; `OUTPUT`/`STOP` as explicit signal values.                                       |
+| `lisp/logo/parser.lisp`      | English tokenizer + two-pass parser (scan `TO` arities, then arity-driven descent).                         |
+| `lisp/logo/mikro.lisp`       | Mikro front end: line-aware tokenizer, infix expressions, block forms, procedure compiler.                  |
+| `lisp/logo/interpreter.lisp` | State-threading evaluator; `OUTPUT`/`STOP` as explicit signal values; procedure source store.               |
+| `lisp/logo/repl.lisp`        | Headless one-line evaluation shared by the TUI and tests; dialect dispatch and output diffing.              |
+| `lisp/logo/editor.lisp`      | Headless 21-line procedure-editor buffer and cursor/line operations; no Tapestry or terminal dependency.    |
 | `lisp/logo/graphics.lisp`    | Capability helpers over Ditty's `terminal` alist, canvas + sixel encoders.                                  |
-| `lisp/logo/tui.lisp`         | Tapestry Elm app: model/update/view mirroring the RC759 split screen.                                       |
-| `logo-main.lisp`             | CLI dispatch on `*command-line-args*` (TUI / file / `-e`).                                                  |
+| `lisp/logo/tui.lisp`         | Tapestry Elm app: model/update/view mirroring the RC759 split screen, key mapping, editor view.             |
+| `logo-main.lisp`             | CLI dispatch on `*command-line-args*` (TUI / file / `-e`, `--dialect`).                                     |
 
 ## Key design decisions
 
@@ -100,6 +103,28 @@ belongs in dialect tables and interpreter state/options, and shared
 core changes must keep both dialects passing. Editor/dialog state lives
 in the TUI model, so it stays headless-testable.
 
+### Mikro lowers to the shared AST; the editor is headless
+
+The Mikro surface is deliberately front-end work, not a second
+interpreter. `mikro.lisp` tokenizes with line boundaries (the `BEGYND`
+header ends at the newline, and one statement per line is enforced),
+parses the manual's infix expression grammar, and emits the same AST
+that `parser.lisp` produces. Relational expressions lower to
+`MIKRO-*` value primitives returning `1`/`0`, conditions lower to
+`MIKRO-NOT-ZERO`, and variable references lower to `(:mikro-var NAME)`
+so an unbound Mikro variable reads as `0`. The evaluator, turtle and
+canvas are untouched.
+
+`editor.lisp` owns only the fixed 21-line page and cursor-editing
+semantics. It has no Tapestry or terminal dependency, so its tests run
+without a TTY. `tui.lisp` is the adapter: it maps Tapestry key names to
+editor operations and renders the page with an inverse-video block
+cursor (Tapestry hides the hardware cursor). The interpreter state keeps
+canonical source text in a `sources` hash, which is what `RET` reopens.
+A failed A4 stores the draft in the TUI model and sets a `blocked`
+message in interpreter state; `logo-call-procedure` refuses to run any
+user procedure until a later A4 clears it.
+
 ### Canvas, not pixels, as the interchange format
 
 The turtle records segments, not pixels. Backends rasterize as they
@@ -147,6 +172,14 @@ from it; headless code calls the pure
 `terminal-capabilities-from-replies` with no replies, i.e. the
 environment-only fallback. A terminal that never answers DA1 keeps the
 fallback and simply stays on Braille. See docs/UPSTREAM.md #5.
+
+The boundary is deliberate: Tapestry owns terminal mechanics and
+rendering (`key-text`/`printable-key?` for insertable input, one
+newline _between_ view lines so a full-screen view does not scroll),
+while Logo owns policy (F5/F6, `LÆR`/`RET`, A1–A4, the 21-line limit,
+compile errors). The editor buffer and Mikro front end stay in Logo so
+they remain headless-testable; only generic text-editing primitives
+would move upstream if a second Tapestry app needed them.
 
 ## Invariants
 

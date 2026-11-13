@@ -24,47 +24,54 @@ Two tracks share one core:
 
 ## v0.2 — dialects and command-line parity
 
-- Split literal/keyword matching into explicit dialects: `logo`
-  (English, current default) and `mikro` (Danish). One shared
-  parser/interpreter/canvas core; the dialect is selected by CLI flag
-  and TUI mode, never by forking the interpreter.
-- Mikro-Logo vocabulary from manual appendix F.1: `FREM`/`FR`,
-  `TILBAGE`/`TB`, `VENSTRE`/`VE`, `HØJRE`/`HØ`, `TEGN`, `SLET`, `LØFT`,
+**Mostly done.** The Mikro front end lowers Danish, line-oriented
+syntax into the shared AST; the English dialect is unchanged.
+
+- **Done:** dialect selection with `--mikro` / `--dialect mikro`; one
+  shared parser/interpreter/canvas core.
+- **Done:** Mikro vocabulary from appendix F.1: `FREM`/`FR`,
+  `TILBAGE`/`TB`, `VENSTRE`/`VE`, `HØJRE`/`HØ`, `TEGN`, `LØFT`,
   `START`, `VISKUD`, `HJEM`, `SÆTXY`, `SÆTX`, `SÆTY`, `DREJTIL`,
-  `HVOR`, `PILIND`, `PILUD`, `SKRIV`, `SÆTNING`, `UDPORT`,
+  `HVOR`, `PILIND`, `PILUD`, `SKRIV`, `SÆTNING`,
   `HVIS`/`ELLERS`/`SLUTHVIS`, `GENTAG`/`HERTIL`, `BEGYND`/`SLUT`,
   `STOP`.
-- Mikro-Logo command-line semantics: one line executed whole on Return,
-  `;` between statements, cursor editing, F1 recall of the previous
-  statement line, ESC cancel, and no procedure definition at the
-  prompt.
-- Assignment in Mikro-Logo syntax: `variabel := udtryk` and
-  `variabel = udtryk`.
-- Parse procedure calls against definitions already in interpreter
-  state, so a procedure defined in one submission can be called from
-  later ones (needed at the Mikro-Logo command line and by the broader
-  Logo REPL alike).
+- **Done:** Mikro expression grammar (infix `+ - * / ^`, comparisons,
+  parentheses, `tlf`), numeric truth (`0` false), default-zero
+  variables.
+- **Done:** command-line semantics for one line executed whole on
+  Return, `;` between statements, ESC cancel, and rejection of
+  procedure definitions at the prompt.
+- **Done:** assignment `variabel := udtryk` and `variabel = udtryk`.
+- **Done:** parse Mikro calls against procedures already in interpreter
+  state, so editor-defined procedures can be called from later lines.
+- **Remaining:** erase mode for `SLET` (currently pen-up), `UDPORT`,
+  command-line cursor editing and F1 recall, and the input sentences.
 - English dialect keeps `TO`/`END`, bracket lists, `MAKE`/`THING` and
-  remains the default until the Mikro mode is complete.
+  remains the default.
 
 ## v0.3 — procedure editor and screen parity
 
-- Modal procedure editor invoked by `LÆR` (F5), `RET` (F6) and `LAV`;
-  it occupies the drawing area, so the current drawing is hidden while
-  editing.
-- Cursor editing with the Piccoline key set; `A1` delete rest of line,
-  `A2` delete line, `A3` insert blank line, `A4` compile/save, ESC
-  abandon.
-- Editor rules from the manual: one statement per line, at most 21
-  lines (header + 19 statements + `SLUT`), at most 6 parameters,
-  procedure names starting with a letter, automatic `SLUT`,
-  automatic indentation, compile errors in the top message line, and
-  no procedure execution until the error is fixed.
-- Piccoline screen model: top status/message line, drawing area, bottom
-  command line.
-- Procedure administration: `LIST` (F2), `PLIST`, `HVILKE` (F3),
-  `GLEM` (F4), `KOPI` (F7), `FORTRYD` (F8), `TEGNIGEN`, `STATUS`,
-  `FARVEL`.
+**LÆR/RET slice done; administration and `LAV` remain.**
+
+- **Done:** modal procedure editor invoked by `LÆR` (F5) and `RET`
+  (F6); it replaces the drawing area while editing. Bare `RET`/F6
+  prompts for a procedure name.
+- **Done:** cursor editing with the manual's semantics; modern
+  equivalents are `C-k` (A1 delete rest of line), `C-d` (A2 delete
+  line), `C-o` (A3 insert blank line), `C-s` (A4 compile/save), ESC
+  abandon, and Return on the last line = A4.
+- **Done:** editor rules: one statement per line, at most 21 lines
+  (header + 19 statements + `SLUT`), at most 6 parameters, names
+  starting with a letter, automatic `SLUT`, automatic three-space
+  indentation, compile errors in the top message line, draft retention,
+  and no procedure execution until the error is fixed.
+- **Done:** source retention and canonical `RET` round-trip for
+  editor-defined procedures.
+- **Partial:** Piccoline screen model: top message line, drawing area,
+  bottom command line. The editor page and status line are in place.
+- **Remaining:** `LAV`, `LIST` (F2), `PLIST`, `HVILKE` (F3), `GLEM`
+  (F4), `KOPI` (F7), `FORTRYD` (F8), `TEGNIGEN`, `STATUS`, and physical
+  A1–A4 key support where a terminal can report it.
 
 ## v0.4 — disk, hardware and messages
 

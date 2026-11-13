@@ -11,16 +11,138 @@ One shared core, two dialects:
 
 - **`logo`** (English, documented below) — the UCBLogo-style dialect
   this document specifies. It remains first-class and keeps growing.
-- **`mikro`** — complete RC759 Mikro-Logo from Regnecentralen's April
-  1985 manual ([PDF](PICCOLINE_Mikro-Logo_Brugervejledning_apr1985.pdf)):
+- **`mikro`** — RC759 Mikro-Logo from Regnecentralen's April 1985
+  manual ([PDF](PICCOLINE_Mikro-Logo_Brugervejledning_apr1985.pdf)):
   Danish vocabulary, the `;`-separated single-line command line, the
-  modal `LÆR`/`RET` procedure editor, `:=` assignment, disk commands
-  and the manual's messages and limits. Using it should feel like
-  sitting at a Piccoline.
+  modal `LÆR`/`RET` procedure editor, `:=` assignment, and the manual's
+  expression and procedure rules. Using it should feel like sitting at a
+  Piccoline.
 
-The Mikro-Logo mode is not implemented yet; [ROADMAP.md](ROADMAP.md)
-tracks its completion separately from broader Logo support. The manual
-is authoritative for `mikro`; this file is authoritative for `logo`.
+The shared parser/interpreter/canvas core serves both. `mikro` lowers
+its surface syntax into the same AST, so procedure calls, recursion and
+turtle state behave the same. Start it with `logo --mikro` or
+`logo --dialect mikro`. [ROADMAP.md](ROADMAP.md) tracks the remaining
+Mikro work separately from broader Logo support. The manual is
+authoritative for `mikro`; this file is authoritative for `logo`.
+
+## Mikro-Logo dialect
+
+### Command line
+
+The command line is one line, executed whole on Return (manual §3).
+Several statements are separated with `;`:
+
+```
+frem 100; venstre 90; frem 100
+```
+
+Procedure definitions are not allowed on the command line;
+`sætning/begynd/slut er ikke tilladt` (appendix E.2.1). Use the editor.
+
+### Procedures
+
+```
+begynd polygon side antal
+   gentag antal
+      frem side
+      venstre 360/antal
+   hertil
+slut
+```
+
+- One statement per line; `;` is not allowed inside a procedure.
+- Header `begynd name [param ...]`; at most 6 parameters; names start
+  with a letter and are at most 16 characters.
+- At most 21 lines total: header + at most 19 statement lines + `slut`.
+- `slut` is optional when writing in the editor; A4 inserts it when
+  there is room.
+- The compiler stores canonical source with three spaces of indentation
+  per nesting level. `RET` shows that canonical source.
+- A procedure with the same name replaces the old one on a successful
+  A4.
+
+### Expressions
+
+Mikro expressions are integer-only and infix. The manual forbids spaces
+inside an expression; this implementation accepts them too, which is a
+deliberate relaxation.
+
+| Operators                  | Precedence                             |
+| -------------------------- | -------------------------------------- |
+| `(` … `)`                  | grouping                               |
+| `^`                        | power, right-associative               |
+| `*` `/`                    | multiplication, division               |
+| `+` `-`                    | addition, subtraction, unary sign      |
+| `=` `<` `>` `<=` `>=` `<>` | one relational operator; yields 1 or 0 |
+
+Examples: `360/antal`, `side+2`, `x<10`, `(antal<10)*(side>20)`.
+Relational operators yield `1`/`0`, `0` is false, and an unbound
+variable reads as `0` (manual §4.1).
+
+`tlf(expr)` is the random function (`RANDOM`).
+
+### Statements and commands
+
+| Mikro                          | English core            | Notes                                 |
+| ------------------------------ | ----------------------- | ------------------------------------- |
+| `frem` / `fr`                  | `FD`                    |                                       |
+| `tilbage` / `tb`               | `BK`                    |                                       |
+| `venstre` / `ve`               | `LT`                    |                                       |
+| `højre` / `hø`                 | `RT`                    |                                       |
+| `tegn`                         | `PD`                    |                                       |
+| `slet`                         | `PU`                    | pen-up; erase mode is not implemented |
+| `løft`                         | `PU`                    |                                       |
+| `start`                        | clear + home + pen down |                                       |
+| `viskud`                       | `CS`                    | keeps position                        |
+| `hjem`                         | `HOME`                  |                                       |
+| `sætxy`                        | move to x, y            |                                       |
+| `sætx` / `sæty`                | `SETX` / `SETY`         |                                       |
+| `drejtil`                      | `SETH`                  |                                       |
+| `hvor x y h`                   | assigns x, y, heading   |                                       |
+| `pilind` / `pilud`             | show/hide turtle flag   | not drawn                             |
+| `skriv expr`                   | `PRINT`                 | writes to the transcript              |
+| `sætning text`                 | `PRINT` text            | writes to the transcript              |
+| `x := expr`, `x = expr`        | assignment              |                                       |
+| `stop`                         | `STOP`                  |                                       |
+| `hvis` / `ellers` / `sluthvis` | `IF` / `IFELSE`         |                                       |
+| `gentag` / `hertil`            | `REPEAT`                |                                       |
+
+Known deviations while the rest of the manual is implemented:
+
+- `slet` lifts the pen instead of selecting erase mode; the canvas has
+  no erase operation yet.
+- `skriv`/`sætning` go to the transcript, not the RC759 top message
+  line.
+- `udport`, input sentences, disk commands, `lav`, `list`, `hvilke`,
+  `glem`, `kopi`, `fortryd`, `tegnigen`, `status`, `hjælp` and `farvel`
+  from the manual are not implemented yet (`farvel` quits the TUI).
+- Physical A1–A4 keys do not exist on modern terminals; the editor uses
+  `C-k`, `C-d`, `C-o`, `C-s` as equivalents (see below).
+
+### The LÆR/RET editor
+
+`lær` (F5) opens a blank 21-line page with `begynd` on the first line.
+`ret name` (F6) opens an existing procedure; bare `ret` asks for a name.
+The editor replaces the drawing area; ESC abandons the edit.
+
+| Key                   | Action                                                                                                                             |
+| --------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| `←` / `→` / `↑` / `↓` | move the block cursor; left at column 0 goes to the previous line's last character, right from the last character to the next line |
+| Return                | move to the start of the next line; on the last line, A4                                                                           |
+| Backspace / Delete    | delete left / under the cursor; join lines at the boundaries                                                                       |
+| Insert                | insert one blank at the cursor                                                                                                     |
+| `C-k`                 | A1: delete rest of line                                                                                                            |
+| `C-d`                 | A2: delete line                                                                                                                    |
+| `C-o`                 | A3: insert blank line                                                                                                              |
+| `C-s`                 | A4: compile and save                                                                                                               |
+| `ESC`                 | abandon                                                                                                                            |
+
+A4 inserts `slut` when needed, indents the source, and compiles it. A
+compile error appears in the top message line; the editor closes, the
+draft is kept, and no user procedure runs until the error is fixed.
+`ret name` reopens the failed draft, and `ESC` keeps the previous
+definition intact. Limits and messages follow manual §4.4.4/§5.1.1 and
+appendix E.
 
 ## Coordinates and heading
 
@@ -98,12 +220,13 @@ See `examples/`: `square.logo`, `house.logo`, `spiral.logo`,
 
 ## Not yet implemented (planned)
 
-- **Mikro-Logo (`mikro`) dialect** — the complete RC759 system: Danish
-  vocabulary (`FREM`, `HØJRE`, `BEGYND`/`SLUT`, …), `;`-separated
-  command lines, the modal `LÆR`/`RET` editor, `:=` assignment, disk
-  commands and the manual's messages and limits. See
-  [ROADMAP.md](ROADMAP.md) and the
-  [manual](PICCOLINE_Mikro-Logo_Brugervejledning_apr1985.pdf).
+- **Remaining Mikro-Logo** — erase mode for `slet`, input sentences
+  (`henttal`, `henttast`, `læstast`), `udport`, disk and procedure
+  administration (`gem`, `hent`, `tilføj`, `fjern`, `disk`, `lav`,
+  `list`, `plist`, `hvilke`, `glem`, `kopi`, `fortryd`, `tegnigen`,
+  `status`, `hjælp`), the full appendix E message catalogue, and the
+  remaining Piccoline screen chrome. See [ROADMAP.md](ROADMAP.md) and
+  the [manual](PICCOLINE_Mikro-Logo_Brugervejledning_apr1985.pdf).
 - Broader Logo: `SEED`/`RANDOM` seeding from Logo, `LABEL`/`GPRINT`,
   text output on the canvas (`SETPC` is recorded but not yet rendered
   per-colour), multi-turtle, `BYE`.

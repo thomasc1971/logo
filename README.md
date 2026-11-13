@@ -52,6 +52,7 @@ Ditty's library search path (XDG data dirs, `DITTY_LISP_PATH`) then resolves
 
 ```sh
 bin/logo                              # interactive TUI
+bin/logo --mikro                      # RC759 Mikro-Logo mode
 bin/logo examples/star.logo           # run a program, print the picture
 bin/logo -e 'REPEAT 4 [FD 80 RT 90]'  # one-liner
 bin/logo --backend sixel examples/star.logo   # sixel bitmap (portty)
@@ -64,20 +65,27 @@ The interactive TUI (Tapestry Elm application):
 - picture pane (Braille canvas, boxed) · transcript pane (PRINT output
   and errors) · `? ` prompt line with history (`↑`/`↓`)
 - type Logo commands, press Enter; `q` or Esc on an empty line quits
+  (English dialect)
 - UTF-8 input: a non-ASCII letter such as `å` in `PRINT "blåbær"` arrives
   as one character and backspaces as one (needs a Ditty after v0.9.0)
-- single-line input: `MAKE` variables and turtle state persist across
-  lines, but a `TO ... END` definition must be called in the same
-  submission (procedure definitions in earlier submissions are not yet
-  visible to the parser; see [docs/ROADMAP.md](docs/ROADMAP.md))
+- `--mikro` switches to the Danish dialect: `frem`, `venstre`,
+  `gentag`/`hertil`, `hvis`/`ellers`/`sluthvis`, infix expressions
+  (`venstre 360/antal`), `;`-separated command lines, and the modal
+  `lær`/`ret` procedure editor (F5/F6). `farvel` quits.
+- single-line command input: `MAKE` variables and turtle state persist
+  across lines. In English, a `TO ... END` definition must be called in
+  the same submission (procedure definitions in earlier submissions are
+  not yet visible to the parser; see [docs/ROADMAP.md](docs/ROADMAP.md)).
+  In Mikro mode, editor-defined procedures are visible to later lines.
 
 ## What it is
 
 - **Interpreter** (`lisp/logo/`): tokenizer + arity-driven parser,
   evaluator with procedures, `REPEAT`/`IF`/`RUN`, `MAKE`/`THING`,
   recursion via `OUTPUT`/`STOP`. One shared core serves two dialects:
-  the English `logo` dialect and a planned, complete RC759
-  `mikro` dialect. Pure Lisp on Ditty — no C code.
+  the English `logo` dialect and the RC759 `mikro` dialect (Danish
+  vocabulary, line-oriented infix expressions and control blocks).
+  Pure Lisp on Ditty — no C code.
 - **Turtle + canvas**: pure functional turtle state; a backend-
   independent canvas (segment list) rasterized by Bresenham.
 - **Graphics backends** (`graphics.lisp`): `canvas` (Braille U+2800,
@@ -85,9 +93,11 @@ The interactive TUI (Tapestry Elm application):
   coffer), `kitty` / `iterm2` (planned — Ditty 0.8 provides
   `base64-encode`; see [docs/UPSTREAM.md](docs/UPSTREAM.md)).
 - **TUI** (`tui.lisp`): Tapestry Elm app mirroring the Piccoline's
-  split screen — picture above, work area below. The modal
-  `lær`/`ret` procedure editor and the rest of the Piccoline screen
-  behaviour are roadmap goals, not optional polish.
+  split screen — picture above, work area below. Mikro mode includes the
+  modal `lær`/`ret` procedure editor: a 21-line page, cursor editing,
+  A1–A4 equivalents, automatic `slut` and three-space indentation, and
+  the compile-error/retry loop. The rest of the Piccoline screen
+  behaviour remains a roadmap goal.
 
 The `logo` dialect is documented in
 [docs/LANGUAGE.md](docs/LANGUAGE.md); the April 1985 manual is the
@@ -108,8 +118,11 @@ lisp/logo/
   canvas.lisp         segment canvas, Bresenham rasterizer, Braille output
   turtle.lisp         pure turtle state and motion
   primitives.lisp     command + value-primitive registries
-  parser.lisp         tokenizer, two-pass arity-driven parser
+  parser.lisp         English tokenizer, two-pass arity-driven parser
+  mikro.lisp          Mikro-Logo front end and procedure compiler
   interpreter.lisp    evaluator (TO/OUTPUT/STOP as explicit signal values)
+  repl.lisp           headless one-line REPL evaluation
+  editor.lisp         headless 21-line procedure-editor buffer
   graphics.lisp       capability detection, canvas + sixel backends
   tui.lisp            Tapestry Elm application
 examples/*.logo       square, house, spiral, star, circle

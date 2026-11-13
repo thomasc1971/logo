@@ -2,11 +2,15 @@
 ;;
 ;; The interpreter threads a state value through evaluation:
 ;;
-;;   state = ((turtle . T) (globals . HASH) (procs . HASH) (locals . FRAMES))
+;;   state = ((turtle . T) (globals . HASH) (procs . HASH) (locals . FRAMES)
+;;            (sources . HASH) (blocked . NIL-or-STRING))
 ;;
 ;;   globals: MAKE variables, hash NAME -> value
 ;;   procs:   TO definitions, hash NAME -> (PARAMS BODY)
 ;;   locals:  stack of alists for procedure parameters and LOCAL bindings
+;;   sources: procedure name -> canonical source lines (editor/LIST)
+;;   blocked: when a Mikro procedure failed to compile, the message that
+;;            prevents any user procedure from running until it is fixed
 ;;
 ;; Every eval function returns (NEW-STATE . VALUE). OUTPUT and STOP are
 ;; explicit signal VALUES, not exceptions: (logo-output STATE . VALUE) and
@@ -24,7 +28,9 @@
   (list (cons 'turtle (turtle-make width height))
    (cons 'globals (make-hash-table))
    (cons 'procs (make-hash-table))
-   (cons 'locals nil)))
+   (cons 'locals nil)
+   (cons 'sources (make-hash-table))
+   (cons 'blocked nil)))
 
 (defun logo-interp-turtle (s) (cdr (assoc 'turtle s)))
 
@@ -34,19 +40,58 @@
 
 (defun logo-interp-locals (s) (cdr (assoc 'locals s)))
 
+(defun logo-interp-sources (s) (cdr (assoc 'sources s)))
+
+(defun logo-interp-blocked (s) (cdr (assoc 'blocked s)))
+
 (defun logo-interp-with-turtle (s turtle)
   "Return state S with its turtle replaced by TURTLE."
   (list (cons 'turtle turtle)
    (cons 'globals (logo-interp-globals s))
    (cons 'procs (logo-interp-procs s))
-   (cons 'locals (logo-interp-locals s))))
+   (cons 'locals (logo-interp-locals s))
+   (cons 'sources (logo-interp-sources s))
+   (cons 'blocked (logo-interp-blocked s))))
 
 (defun logo-interp-with-locals (s locals)
   "Return state S with its locals stack replaced by LOCALS."
   (list (cons 'turtle (logo-interp-turtle s))
    (cons 'globals (logo-interp-globals s))
    (cons 'procs (logo-interp-procs s))
-   (cons 'locals locals)))
+   (cons 'locals locals)
+   (cons 'sources (logo-interp-sources s))
+   (cons 'blocked (logo-interp-blocked s))))
+
+(defun logo-interp-with-blocked (s message)
+  "Return state S with the procedure-execution block set to MESSAGE (or nil)."
+  (list (cons 'turtle (logo-interp-turtle s))
+   (cons 'globals (logo-interp-globals s))
+   (cons 'procs (logo-interp-procs s))
+   (cons 'locals (logo-interp-locals s))
+   (cons 'sources (logo-interp-sources s))
+   (cons 'blocked message)))
+
+(defun logo-interp-define-procedure (s name params body source-lines)
+  "Install procedure NAME in state S, remember SOURCE-LINES, clear any block."
+  (hash-set! (logo-interp-procs s) name (cons params body))
+  (hash-set! (logo-interp-sources s) name source-lines)
+  (logo-interp-with-blocked s nil))
+
+(defun logo-interp-procedure-source (s name)
+  "Return the stored source lines for NAME, or nil."
+  (hash-ref (logo-interp-sources s) name))
+
+(defun logo-interp-procedure-arities (s)
+  "Return a hash NAME -> arity for every procedure in state S."
+  (let* ((table (make-hash-table)))
+    (let loop ((entries (hash-entries (logo-interp-procs s))))
+      (if (null? entries)
+        table
+        (let* ((entry (car entries))
+               (name (car entry))
+               (proc (cdr entry)))
+          (hash-set! table name (length (car proc)))
+          (loop (cdr entries)))))))
 
 (defun logo-truthy? (v)
   "Logo truthiness: only #f (and nil) is false."
@@ -89,19 +134,26 @@
 ;; ---------------------------------------------------------------------------
 ;; Program evaluation
 ;; ---------------------------------------------------------------------------
-(defun logo-run (source &optional width height)
-  "Parse and run Logo SOURCE. Returns the final interpreter state,
-   or an error object if parsing/evaluation fails. Handlers return the
-   error object itself so it can be error?-checked as a value (see
+(defun logo-run (source &optional width height dialect mode)
+  "Parse and run Logo SOURCE. DIALECT is 'logo (default) or 'mikro.
+   MODE is the Mikro parse mode ('procedure by default, or
+   'command-line for -e). Returns the final interpreter state, or an
+   error object if parsing/evaluation fails. Handlers return the error
+   object itself so it can be error?-checked as a value (see
    logo-repl-eval for why condition-case handlers must not produce
    data that flows into destructuring code)."
   (let* ((s (logo-interp-make (or width 200) (or height 200)))
-         (parsed (condition-case err (logo-parse source) (error err))))
+         (parsed
+          (condition-case err
+            (if (eq? dialect 'mikro)
+              (logo-mikro-parse source (if (null? mode) 'procedure mode))
+              (logo-parse source))
+            (error err))))
     (if (error? parsed)
       parsed
       (condition-case err (logo-eval-program s parsed) (error err)))))
 
-(defun logo-run-file (path &optional width height)
+(defun logo-run-file (path &optional width height dialect)
   "Read PATH and run it. Returns the final interpreter state, or an
    error object if PATH cannot be read (missing file, permissions...).
    Like logo-run, the handler returns the error object itself so callers
@@ -109,7 +161,7 @@
   (let* ((source (condition-case err (read-file-raw path) (error err))))
     (if (error? source)
       source
-      (logo-run source width height))))
+      (logo-run source width height dialect))))
 
 (defun logo-eval-program (s instructions)
   "Evaluate top-level INSTRUCTIONS. OUTPUT/STOP at top level end the program.
@@ -159,6 +211,15 @@
      (let* ((names (logo-local-names (cadr instr))))
        (logo-interp-with-locals
         s (cons (map (lambda (n) (cons n nil)) names) (logo-interp-locals s)))))
+    ((eq? (car instr) 'hvor)
+     ;; Mikro HVOR: assign x, y and heading to three variables.
+     (let* ((t (logo-interp-turtle s))
+            (names (cdr instr)))
+       (logo-set-var
+        (logo-set-var (logo-set-var s (car names) (turtle-x t))
+         (cadr names) (turtle-y t))
+        (caddr names)
+        (turtle-heading t))))
     ((eq? (car instr) 'if)
      (let* ((result (logo-eval-expr s (cadr instr))))
        (if (error? result)
@@ -230,6 +291,10 @@
     ((not (pair? expr)) (cons s expr))
     ((eq? (car expr) ':string) (cons s (cadr expr)))
     ((eq? (car expr) ':var) (cons s (logo-lookup s (cadr expr))))
+    ((eq? (car expr) ':mikro-var)
+     ;; Mikro variables are numeric and read as 0 before assignment.
+     (let* ((value (logo-lookup s (cadr expr))))
+       (cons s (if (null? value) 0 value))))
     ((eq? (car expr) ':thing)
      ;; THING with a name expression: THING :X, THING "X, THING X, or a
      ;; computed name (evaluated, then used as the variable name).
@@ -298,6 +363,13 @@
       (logo-call-procedure s name arg-exprs))))
 
 (defun logo-call-procedure (s name arg-exprs)
+  "Call procedure NAME with argument expressions. Returns (state . value)."
+  (let* ((blocked (logo-interp-blocked s)))
+    (if (not (null? blocked))
+      (error blocked)
+      (logo-call-procedure-1 s name arg-exprs))))
+
+(defun logo-call-procedure-1 (s name arg-exprs)
   "Call procedure NAME with argument expressions. Returns (state . value)."
   (let* ((proc (hash-ref (logo-interp-procs s) name)))
     (if (null? proc)
