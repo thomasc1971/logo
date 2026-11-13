@@ -64,6 +64,8 @@ The interactive TUI (Tapestry Elm application):
 - picture pane (Braille canvas, boxed) · transcript pane (PRINT output
   and errors) · `? ` prompt line with history (`↑`/`↓`)
 - type Logo commands, press Enter; `q` or Esc on an empty line quits
+- UTF-8 input: a non-ASCII letter such as `å` in `PRINT "blåbær"` arrives
+  as one character and backspaces as one (needs a Ditty after v0.9.0)
 - single-line input: `MAKE` variables and turtle state persist across
   lines, but a `TO ... END` definition must be called in the same
   submission (procedure definitions in earlier submissions are not yet

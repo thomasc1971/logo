@@ -4,8 +4,9 @@ Features this project needs from Ditty, portty, and coffer, with the
 workaround in use today. When one lands upstream, the workaround
 should be removed and the entry struck through.
 
-Last reviewed against Ditty v0.9.0. Entry numbers are stable (other
-docs cite them), so withdrawn and landed entries keep their number.
+Last reviewed against Ditty v0.9.0.6 (post-v0.9.0 master). Entry
+numbers are stable (other docs cite them), so withdrawn and landed
+entries keep their number.
 
 ## Ditty
 
@@ -112,21 +113,23 @@ not reproduce on v0.7.4 (repo build or installed binary). Logo may use
 `string-prefix?` normally; the `substring` workaround in
 `tests/test-graphics.lisp` is unnecessary.
 
-### 10. Multi-byte (UTF-8) keyboard input in `terminal-read-event`
+### ~~10. Multi-byte (UTF-8) keyboard input in `terminal-read-event`~~ (landed after v0.9.0)
 
-**Need:** Logo's TUI input line accepts any one-character key _name_ as
-typed text (`(and (= (length key) 1) …)`), so a non-ASCII letter such
-as the `å` in `PRINT "blåbær` should arrive as one key named by that
-character.
-**Today:** `terminal-read-event` decodes input one byte at a time, so a
-UTF-8 sequence arrives as several one-byte key events and the letter
-inserts as two or three wrong characters. Workaround: none; the TUI
-input line is ASCII-only. (On Windows, `read-byte` additionally
-truncates wide characters.)
-**Ideal:** the event parser assembles UTF-8 continuation bytes into a
-single key whose name is the decoded character, so Logo's "one-character
-key name means typed text" rule keeps working. Tracked in Ditty's
-`TODO.md` under "Terminal input" ("Decode UTF-8 in the event parser").
+**Was:** Logo's TUI input line accepts any one-character key _name_ as
+typed text (`(and (= (length key) 1) …)`), but `terminal-read-event`
+decoded input one byte at a time: a non-ASCII letter such as the `å` in
+`PRINT "blåbær` arrived as several one-byte key events and inserted as
+two or three wrong characters. Workaround: none; the TUI input line was
+ASCII-only. (On Windows, `read-byte` additionally truncated wide
+characters.)
+**Now:** the event parser feeds bytes through an incremental UTF-8
+decoder (`terminal-make-decoder`); decoder state can be carried across
+calls, so a sequence split between reads still yields one key whose name
+is the decoded code point. `read-byte` is byte-exact on Windows too.
+Logo's rule "one-character key name means typed text" (`PRINT "blåbær"`)
+needs no change, and Ditty's `length`/`substring`/`string-ref` are
+UTF-8-aware, so typing and backspacing `å` act on one character.
+`tests/test-tui.lisp` covers both.
 
 ## portty / coffer
 

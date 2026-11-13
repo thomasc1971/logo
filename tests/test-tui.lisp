@@ -87,6 +87,26 @@
         (logo-tui-update m2 (list (cons 'type 'key) (cons 'key "backspace")))))
   (assert-equal "FD" (logo-model-input m3) "backspace deletes last char"))
 
+;; Ditty decodes multi-byte input in the event parser, so a non-ASCII
+;; letter arrives as a one-character key name and types as one character.
+(let* ((m (logo-model-with (logo-model-make) 'input ""))
+       (m2 (logo-tui-update m (list (cons 'type 'key) (cons 'key "å"))))
+       (m3 (logo-tui-update m2 (list (cons 'type 'key) (cons 'key "b"))))
+       (m4
+        (logo-tui-update m3 (list (cons 'type 'key) (cons 'key "backspace")))))
+  (assert-equal "å" (logo-model-input m2) "multi-byte key types one char")
+  (assert-equal "åb" (logo-model-input m3)
+   "typing after a multi-byte char appends")
+  (assert-equal "å" (logo-model-input m4)
+   "backspace deletes the whole multi-byte char"))
+
+;; Submitting non-ASCII text evaluates it unchanged
+(let* ((m
+        (logo-model-with (logo-model-make) 'input "PRINT \"blåbær\""))
+       (m2 (logo-tui-update m (list (cons 'type 'key) (cons 'key "return")))))
+  (assert-true (member "blåbær" (logo-model-transcript m2))
+   "submit prints non-ASCII text"))
+
 ;; Return submits: input executed, transcript updated, input cleared
 (let* ((m (logo-model-make))
        (m2 (logo-model-with m 'input "FD 50 PRINT \"tui\""))

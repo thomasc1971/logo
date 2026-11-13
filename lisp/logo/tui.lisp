@@ -133,6 +133,8 @@
          ((and (equal? key "escape") (equal? (logo-model-input model) ""))
           (tapestry:app-quit)
           model)
+         ;; Ditty names a key by its decoded UTF-8 code point, so a
+         ;; non-ASCII letter is a one-character name and types as text.
          ((and (= (length key) 1) (>= (char-code (string-ref key 0)) 32))
           (logo-model-with model 'input (concat (logo-model-input model) key)))
          (#t model))))
