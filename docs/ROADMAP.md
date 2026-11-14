@@ -74,8 +74,13 @@ syntax into the shared AST; the English dialect is unchanged.
   and no procedure execution until the error is fixed.
 - **Done:** source retention and canonical `RET` round-trip for
   editor-defined procedures.
-- **Partial:** Piccoline screen model: top message line, drawing area,
-  bottom command line. The editor page and status line are in place.
+- **Done:** Piccoline screen model: top message line, drawing area,
+  bottom command line (manual §3). The layout is responsive rather than
+  fixed at 80x25: the message and command lines keep one row each and
+  the drawing area takes every row in between. In Mikro mode the top
+  line shows the latest `skriv`/`sætning` output or error, the editor
+  page replaces the drawing area, and its A1–A4 legend is the line just
+  above the command line (manual §5.1.1, fig. 12).
 - **Remaining:** `LAV`, `LIST` (F2), `PLIST`, `HVILKE` (F3), `GLEM`
   (F4), `KOPI` (F7), `FORTRYD` (F8), `TEGNIGEN`, `STATUS`, and physical
   A1–A4 key support where a terminal can report it.

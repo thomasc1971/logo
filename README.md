@@ -64,22 +64,29 @@ make check                            # run the test suite
 
 The interactive TUI (Tapestry Elm application):
 
-- picture pane (Braille canvas, boxed) · transcript pane (PRINT output
-  and errors) · `? ` prompt line with history (`↑`/`↓`); in Mikro mode
-  the prompt is `LOGO>`, with a movable block cursor instead
+- three-field Piccoline screen (manual §3): a top message line, a
+  drawing area that takes every row the terminal has to spare, and the
+  command line at the bottom. The 80x25 RC759 is the reference, not a
+  requirement: larger terminals get a larger picture, shorter ones keep
+  the message and command lines and give the picture the rows in
+  between. In English the transcript tail shares the bottom of the
+  drawing area; in Mikro the top line carries the latest `skriv` output
+  or error, as on the RC759
+- the English prompt is `? ` with history (`↑`/`↓`); in Mikro mode it is
+  `LOGO>`, with a movable block cursor instead
 - Tapestry repaints only the rows that changed, in one synchronized
   write, so typing does not clear and redraw the whole screen
 - type Logo commands, press Enter; `q` or Esc on an empty line quits
   (English dialect)
 - UTF-8 input: a non-ASCII letter such as `å` in `PRINT "blåbær"` arrives
   as one character and backspaces as one (needs a Ditty after v0.9.0)
-- `--mikro` switches to the Danish dialect: `frem`, `venstre`,
-  `gentag`/`hertil`, `hvis`/`ellers`/`sluthvis`, infix expressions
-  (`venstre 360/antal`), `;`-separated command lines, and the modal
-  `lær`/`ret` procedure editor (F5/F6). `farvel` quits. The command line
-  follows the manual's editing keys: `←`/`→`, `↑`/`↓` for start/end,
-  Insert, Delete, Backspace, and F1 to recall the previous sentence
-  line.
+- `--mikro` switches to the Danish dialect and Danish interface text
+  (`frem`, `venstre`, `gentag`/`hertil`, `hvis`/`ellers`/`sluthvis`,
+  infix expressions, `;`-separated command lines, `Fejl:` messages, and
+  the modal `lær`/`ret` procedure editor with its Danish A-key legend).
+  `farvel` quits. The command line follows the manual's editing keys:
+  `←`/`→`, `↑`/`↓` for start/end, Insert, Delete, Backspace, and F1 to
+  recall the previous sentence line.
 - single-line command input: `MAKE` variables and turtle state persist
   across lines. In English, a `TO ... END` definition must be called in
   the same submission (procedure definitions in earlier submissions are
@@ -100,13 +107,15 @@ The interactive TUI (Tapestry Elm application):
   works in every terminal), `sixel` (DCS bitmap, decoded by portty via
   coffer), `kitty` / `iterm2` (planned — Ditty 0.8 provides
   `base64-encode`; see [docs/UPSTREAM.md](docs/UPSTREAM.md)).
-- **TUI** (`tui.lisp`): Tapestry Elm app mirroring the Piccoline's
-  split screen — picture above, work area below. Mikro mode includes the
-  `LOGO>` command line with a block cursor and the manual's editing keys
-  (including F1 recall), and the modal `lær`/`ret` procedure editor: a
-  21-line page, cursor editing, A1–A4 equivalents, automatic `slut` and
-  three-space indentation, and the compile-error/retry loop. The rest of
-  the Piccoline screen behaviour remains a roadmap goal.
+- **TUI** (`tui.lisp`): Tapestry Elm app implementing the Piccoline's
+  three-field screen — message line, drawing area, command line — with
+  the drawing area sized from the terminal instead of a hard-coded
+  80x25. Mikro mode uses Danish interface text and includes the `LOGO>`
+  command line with a block cursor and the manual's editing keys
+  (including F1 recall), plus the modal `lær`/`ret` procedure editor: a
+  21-line page, cursor editing, the A1–A4 legend above the command line,
+  automatic `slut` and three-space indentation, and the
+  compile-error/retry loop.
 
 The `logo` dialect is documented in
 [docs/LANGUAGE.md](docs/LANGUAGE.md); the April 1985 manual is the

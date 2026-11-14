@@ -40,7 +40,7 @@ Tapestry view — both thin.
 | `lisp/logo/editor.lisp`       | Headless 21-line procedure-editor buffer and cursor/line operations; no Tapestry or terminal dependency.    |
 | `lisp/logo/command-line.lisp` | Headless command-line buffer (text + cursor) and the manual §3 editing operations; no Tapestry dependency.  |
 | `lisp/logo/graphics.lisp`     | Capability helpers over Ditty's `terminal` alist, canvas + sixel encoders.                                  |
-| `lisp/logo/tui.lisp`          | Tapestry Elm app: model/update/view mirroring the RC759 split screen, key mapping, editor view.             |
+| `lisp/logo/tui.lisp`          | Tapestry Elm app: model/update/view for the RC759 three-field screen, key mapping, editor view.             |
 | `logo-main.lisp`              | CLI dispatch on `*command-line-args*` (TUI / file / `-e`, `--dialect`).                                     |
 
 ## Key design decisions
@@ -142,10 +142,17 @@ The interactive app is an Elm Architecture program (`model/update/view`)
 on Tapestry's `app-run`: raw terminal, alt screen, mouse/focus/paste
 management, resize handling, and row-diff rendering belong to Tapestry.
 Logo owns only the model (interpreter state + input + transcript) and
-the view layout. Tapestry symbols are referenced qualified
-(`tapestry:...`) because `use-package` inside a function body does not
-reliably extend the defining package; and the CLI requires Tapestry
-_before_ Logo on the interactive path because Ditty resolves
+the view layout. The view follows the manual's three fields (message
+line, drawing area, command line) but sizes itself from
+`app-screen-size` rather than the RC759's fixed 80x25: the message and
+command lines keep one row each and the drawing area takes the rest,
+re-rendering the canvas at the new Braille resolution on resize. In
+Mikro mode the top line shows the latest `skriv`/`sætning` output or
+error (manual §3); the English dialect keeps its transcript in the
+bottom rows of the drawing area. Tapestry symbols are referenced
+qualified (`tapestry:...`) because `use-package` inside a function body
+does not reliably extend the defining package; and the CLI requires
+Tapestry _before_ Logo on the interactive path because Ditty resolves
 `pkg:symbol` against packages existing at read time.
 
 ## Graphics backends and portty

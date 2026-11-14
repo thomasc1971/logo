@@ -120,19 +120,29 @@ variable reads as `0` (manual §4.1).
 | `drejtil`                      | `SETH`                  |                                       |
 | `hvor x y h`                   | assigns x, y, heading   |                                       |
 | `pilind` / `pilud`             | show/hide turtle flag   | not drawn                             |
-| `skriv expr`                   | `PRINT`                 | writes to the transcript              |
-| `sætning text`                 | `PRINT` text            | writes to the transcript              |
+| `skriv expr`                   | `PRINT`                 | writes to the top message line        |
+| `sætning text`                 | `PRINT` text            | writes to the top message line        |
 | `x := expr`, `x = expr`        | assignment              |                                       |
 | `stop`                         | `STOP`                  |                                       |
 | `hvis` / `ellers` / `sluthvis` | `IF` / `IFELSE`         |                                       |
 | `gentag` / `hertil`            | `REPEAT`                |                                       |
 
+### The screen
+
+The TUI follows the manual's three fields (manual §3): a top message
+line, the drawing area, and the bottom `LOGO>` command line. The layout
+is responsive — the message and command lines keep one row each and the
+drawing area takes every row in between — so the same program works in
+an 80x25 terminal and in a much larger one. `skriv` and `sætning` write
+to the top message line, as do compile errors and prompts; the interface
+text in Mikro mode is Danish and errors are prefixed `Fejl:`. The
+English dialect keeps its transcript, shown at the bottom of the drawing
+area.
+
 Known deviations while the rest of the manual is implemented:
 
 - `slet` lifts the pen instead of selecting erase mode; the canvas has
   no erase operation yet.
-- `skriv`/`sætning` go to the transcript, not the RC759 top message
-  line.
 - `udport`, input sentences, disk commands, `lav`, `list`, `hvilke`,
   `glem`, `kopi`, `fortryd`, `tegnigen`, `status`, `hjælp` and `farvel`
   from the manual are not implemented yet (`farvel` quits the TUI).

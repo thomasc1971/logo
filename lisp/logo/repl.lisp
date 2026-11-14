@@ -9,6 +9,12 @@
 ;; ---------------------------------------------------------------------------
 ;; REPL evaluation (shared by the TUI and headless callers)
 ;; ---------------------------------------------------------------------------
+(defun logo-repl-error-prefix (dialect)
+  "Return the transcript prefix for an error in DIALECT.
+   Mikro-Logo's messages are Danish (manual appendix E), so the top message
+   line says Fejl; the English dialect keeps Error."
+  (if (eq? dialect 'mikro) "Fejl: " "Error: "))
+
 (defun logo-repl-eval (state source &optional dialect)
   "Evaluate one Logo SOURCE string in interpreter STATE.
    DIALECT is 'logo (default) or 'mikro. Returns (NEW-STATE . RESULT-LINES):
@@ -27,11 +33,16 @@
               (logo-parse source))
             (error err))))
     (if (error? parsed)
-      (cons state (list (format nil "Error: ~a" (error-message parsed))))
+      (cons state
+       (list
+        (concat (logo-repl-error-prefix dialect) (error-message parsed))))
       (let* ((new-state
               (condition-case err (logo-eval-program state parsed) (error err))))
         (if (error? new-state)
-          (cons state (list (format nil "Error: ~a" (error-message new-state))))
+          (cons state
+           (list
+            (concat (logo-repl-error-prefix dialect)
+             (error-message new-state))))
           (cons new-state
            (logo-new-output-lines state new-state)))))))
 

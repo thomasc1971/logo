@@ -133,16 +133,24 @@
   (assert-equal "FD 20" (logo-model-input m4) "history down gives newer")
   (assert-equal "" (logo-model-input m5) "history down past newest clears"))
 
-;; View renders a list of lines without error (headless: app-screen-size is nil)
-(let ((lines (logo-tui-view (logo-model-make))))
-  (assert-true (> (length lines) 5) "view returns lines")
-  (assert-true (string-contains? (car lines) "Logo") "view header names Logo"))
+;; View renders the Piccoline's three fields: message line, drawing area,
+;; command line. The headless fallback is 80x25, the real screen size comes
+;; from Tapestry and updates on resize.
+(let* ((lines (logo-tui-view (logo-model-make))))
+  (assert-equal 25 (length lines) "view fills the default 25-row screen")
+  (assert-true (string-contains? (car lines) "Logo") "top line names Logo")
+  (assert-equal 80 (tapestry:display-width (car lines))
+   "the message line fills the screen width")
+  (assert-equal 80 (tapestry:display-width (list-ref lines 1))
+   "the drawing area starts directly below the message line")
+  (assert-true
+   (string-prefix? "? " (tapestry:strip-ansi (car (reverse lines))))
+   "the command line is the last view row"))
 
-;; The view follows Tapestry's row contract: no embedded newlines, every
-;; row fits the screen width, and the command line stays the last row even
-;; when the screen is too short for the usual transcript. Tapestry drops
-;; rows past the bottom and repaints only the rows that changed.
+;; The three-field contract holds at every terminal size: exactly the
+;; screen's rows, no embedded newlines, and the command line stays last.
 (let ((lines (logo-tui-view (logo-model-make) (cons 24 80))))
+  (assert-equal 24 (length lines) "a 24-row terminal gets 24 view rows")
   (assert-equal 0
    (length (filter (lambda (line) (string-contains? line "\n")) lines))
    "view rows contain no newlines")
@@ -154,11 +162,25 @@
    (string-prefix? "? " (tapestry:strip-ansi (car (reverse lines))))
    "the command line is the last view row"))
 (let ((lines (logo-tui-view (logo-model-make) (cons 10 40))))
-  (assert-true (<= (length lines) 10)
+  (assert-equal 10 (length lines)
    "a short screen keeps every view row on screen")
   (assert-true
    (string-prefix? "? " (tapestry:strip-ansi (car (reverse lines))))
    "a short screen keeps the command line"))
+
+(let* ((mikro (logo-model-make 'mikro))
+       (piccoline (logo-tui-view mikro (cons 25 80)))
+       (tall (logo-tui-view mikro (cons 40 100))))
+  (assert-equal 25 (length piccoline) "Mikro fills an 80x25 screen")
+  (assert-equal 40 (length tall) "a taller terminal gets a taller drawing area")
+  (assert-equal 100 (tapestry:display-width (list-ref tall 1))
+   "the drawing area uses the full terminal width")
+  (assert-true (string-contains? (car piccoline) "Mikro-Logo")
+   "the Mikro top line opens with Danish text")
+  (assert-true
+   (string-prefix? "LOGO> "
+    (tapestry:strip-ansi (car (reverse piccoline))))
+   "the Mikro command line is the last row"))
 
 ;; ---------------------------------------------------------------------------
 ;; Mikro-Logo editor
@@ -286,6 +308,42 @@
   (assert-true (string-contains? logo-line (tapestry:reverse-video))
    "the English command line renders a block cursor"))
 
+;; In Mikro mode SKRIV output goes to the top message line (manual §3,
+;; §4.3.3); the drawing area stays free of transcript text.
+(let* ((m (tui-enter (logo-model-make 'mikro) "skriv 13*13"))
+       (view (logo-tui-view m (cons 25 80))))
+  (assert-true (string-contains? (car view) "169")
+   "Mikro SKRIV output appears in the top message line")
+  (assert-equal 0
+   (length
+    (filter (lambda (line) (string-contains? line "169"))
+     (cdr (reverse (cdr view)))))
+   "the Mikro drawing area does not show the transcript"))
+
+;; Mikro errors are Danish on the message line; English keeps Error.
+(let* ((m (tui-enter (logo-model-make 'mikro) "frem"))
+       (line (car (reverse (logo-model-transcript m)))))
+  (assert-true (string-prefix? "Fejl: " line)
+   "Mikro errors use the Danish Fejl prefix")
+  (assert-true
+   (string-contains? (car (logo-tui-view m (cons 25 80))) line)
+   "the Mikro error appears in the top message line"))
+(let* ((m (tui-enter (logo-model-make 'logo) "WIBBLE"))
+       (line (car (reverse (logo-model-transcript m)))))
+  (assert-true (string-prefix? "Error: " line)
+   "English errors keep the Error prefix"))
+
+;; The English transcript shares the bottom of the drawing area with the
+;; canvas, which always keeps at least three rows for the picture.
+(let* ((m (tui-enter (logo-model-make 'logo) "PRINT \"hej\""))
+       (view (logo-tui-view m (cons 25 80))))
+  (assert-true (string-contains? (join view "\n") "hej")
+   "the English transcript is visible in the drawing area"))
+(let* ((m (logo-model-make 'logo))
+       (lines (logo-tui-view m (cons 4 40))))
+  (assert-equal 4 (length lines)
+   "a very short screen still gives the picture a row"))
+
 ;; Long input scrolls so the block cursor stays visible.
 (let* ((long (make-string 40 #\x))
        (m (logo-model-with-input (logo-model-make 'mikro) long))
@@ -308,13 +366,38 @@
   (assert-true (not (null? editor)) "F5 opens the editor in Mikro mode")
   (assert-equal "begynd " (car (logo-editor-lines editor))
    "LÆR starts with BEGYND")
-  (assert-equal 24 (length (logo-tui-view m1))
-   "editor view fills a 24-row screen")
-  (assert-true
-   (string-contains? (list-ref (logo-tui-view m1) 22) "A4")
-   "editor status line names A4")
-  (let ((short (logo-tui-view m1 (cons 10 40))))
-    (assert-equal 10 (length short) "editor view fills a short screen")
+  (let* ((piccoline (logo-tui-view m1 (cons 25 80)))
+         (compact (logo-tui-view m1 (cons 24 80)))
+         (medium (logo-tui-view m1 (cons 15 60)))
+         (short (logo-tui-view m1 (cons 10 40))))
+    (assert-equal 25 (length piccoline)
+     "the editor fills a Piccoline-sized screen")
+    (assert-equal 24 (length compact)
+     "the editor fills a 24-row screen")
+    (assert-equal 15 (length medium)
+     "the editor fills a 60-column screen")
+    (assert-equal 10 (length short) "the editor fills a short screen")
+    (assert-equal 0
+     (length
+      (filter (lambda (line) (> (tapestry:display-width line) 40))
+       short))
+     "the editor rows fit a narrow screen")
+    (assert-true (string-contains? (list-ref piccoline 22) "Sidste linie")
+     "the last-line note fits above the legend on 25 rows")
+    (assert-true
+     (not (string-contains? (join compact "\n") "Sidste linie"))
+     "the last-line note gives way on 24 rows")
+    (assert-true (string-contains? (list-ref piccoline 23) "A4")
+     "the A-key legend is the line above the command line")
+    (assert-true
+     (string-contains? (list-ref piccoline 23) "slet rest af linie")
+     "the editor legend uses the manual's Danish wording")
+    (assert-true (string-contains? (list-ref medium 13) "A4")
+     "A4 stays visible in the compact legend")
+    (assert-true (string-contains? (list-ref short 8) "A1")
+     "the legend stays above the command line on a short screen")
+    (assert-true (string-contains? (list-ref short 8) "A4")
+     "A4 stays visible in the tiny legend")
     (assert-true
      (string-prefix? "LOGO> " (tapestry:strip-ansi (car (reverse short))))
      "the editor keeps its command line")))
@@ -375,6 +458,10 @@
    "failed compile returns to the command line")
   (assert-equal "Navn eller tal mangler" (logo-model-message m11)
    "failed compile reports in the message line")
+  (assert-true
+   (string-contains? (car (logo-tui-view m11 (cons 25 80)))
+    "Navn eller tal mangler")
+   "the failed compile message is in the top message line")
   (assert-true (not (null? (logo-interp-blocked (logo-model-state m11))))
    "failed compile blocks procedure execution")
   (assert-true (not (null? (logo-model-draft m11)))
@@ -386,7 +473,7 @@
     (assert-equal 0 (length (canvas-segments (turtle-canvas turtle)))
      "blocked procedures do not run")
     (assert-true
-     (member "Error: Navn eller tal mangler" (logo-model-transcript m12))
+     (member "Fejl: Navn eller tal mangler" (logo-model-transcript m12))
      "blocked execution reports the compile error"))
   (let* ((m12 (tui-enter (logo-model-with-input m11 "") "ret polygon"))
          (editor (logo-model-editor m12)))

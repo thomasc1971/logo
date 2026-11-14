@@ -54,13 +54,19 @@
     "  logo --help           This message\n"
     "  logo --version        Print version\n")))
 
-(defun logo-render-and-print (state backend)
+(defun logo-render-and-print (state backend &optional dialect)
   "Render STATE's canvas with BACKEND and print picture + transcript.
    STATE may be an error object (parse/eval/file errors arrive as
    values); report it cleanly and exit non-zero instead of crashing
-   while destructuring it as a state."
+   while destructuring it as a state. DIALECT selects the error prefix
+   (Fejl for Mikro-Logo, Error otherwise)."
   (if (error? state)
-    (progn (princ (format nil "Error: ~a~%" (error-message state))) (exit 1))
+    (progn
+      (princ
+       (format nil "~a: ~a~%"
+        (if (eq? dialect 'mikro) "Fejl" "Error")
+        (error-message state)))
+      (exit 1))
     (logo-render-state state backend)))
 
 (defun logo-render-state (state backend)
@@ -103,10 +109,10 @@
              (code
               (logo-render-and-print
                (logo-run code nil nil dialect 'command-line)
-               backend))
+               backend dialect))
              ((not (null? files))
               (let ((state (logo-run-file (car files) nil nil dialect)))
-                (logo-render-and-print state backend)))
+                (logo-render-and-print state backend dialect)))
              ((not (eq? dialect 'logo)) (logo-tui-main dialect))
              (#t (progn (logo-usage) (exit 1))))
            (let ((arg (car rest)))

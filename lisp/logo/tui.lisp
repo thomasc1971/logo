@@ -1,22 +1,29 @@
 ;; tui.lisp - Interactive Logo TUI (Tapestry Elm application)
 ;;
-;; Layout (inspired by the RC759 Piccoline's split screen: picture above,
-;; work area below):
+;; Layout follows the RC759 Piccoline's three fields (manual §3):
 ;;
 ;;   +------------------------------------------------------------+
-;;   | Logo - turtle graphics                                     |
+;;   | message line: messages, prompts, SKRIV output and errors   |
 ;;   +------------------------------------------------------------+
-;;   |  <braille canvas>                                          |
+;;   |                                                            |
+;;   | drawing area: the Braille canvas, scaled to fit            |
+;;   | (the editor page replaces it in LÆR/RET)                   |
+;;   |                                                            |
 ;;   +------------------------------------------------------------+
-;;   |  <transcript: PRINT output and errors>                     |
+;;   | LOGO> <input line>                                         |
 ;;   +------------------------------------------------------------+
-;;   | ? <input line>                                             |
-;;   +------------------------------------------------------------+
-;;   | FD 100  RT 90  REPEAT 4 [...]  q quit  up/down history     |
-;;   +------------------------------------------------------------+
+;;
+;; The Piccoline screen is 80x25, but terminals are not: the message and
+;; command lines keep one row each and the drawing area takes every row
+;; in between, so a taller terminal gets a taller picture. In the English
+;; dialect the tail of the transcript shares the drawing area with the
+;; canvas, giving way to the picture on short screens. In Mikro mode the
+;; top line carries the latest SKRIV output or error, as on the RC759.
 ;;
 ;; In Mikro mode the same model drives the modal LÆR/RET procedure editor:
-;; the editor replaces the drawing area, and A4 compiles the 21-line page.
+;; the editor page replaces the drawing area, the A-key legend sits just
+;; above the command line (manual §5.1.1, fig. 12), and A4 compiles the
+;; 21-line page.
 ;;
 ;; The model is an alist; the interpreter state lives inside it so TO
 ;; definitions and MAKE variables survive across REPL lines.
@@ -33,6 +40,12 @@
 ;; ---------------------------------------------------------------------------
 ;; Model
 ;; ---------------------------------------------------------------------------
+(defun logo-tui-welcome (dialect)
+  "Return the opening transcript line for DIALECT."
+  (if (eq? dialect 'mikro)
+    "Mikro-Logo klar. Skriv f.eks. frem 100; venstre 90; frem 100"
+    "Type Logo commands, e.g. FD 100 RT 90 FD 100"))
+
 (defun logo-model-make (&optional dialect)
   "Create the initial TUI model for DIALECT ('logo or 'mikro).
    CAPS comes from Ditty's env-only fallback (no I/O, no query); the app
@@ -43,7 +56,7 @@
      (cons 'input (logo-command-line-make))
      (cons 'history nil)
      (cons 'hist-index nil)
-     (cons 'transcript (list "Type Logo commands, e.g. FD 100 RT 90 FD 100"))
+     (cons 'transcript (list (logo-tui-welcome dialect)))
      (cons 'caps caps)
      (cons 'backend (logo-graphics-backend-from caps))
      (cons 'error nil)
@@ -99,14 +112,17 @@
   "Return M with TEXT on the command line and the cursor at its end."
   (logo-model-with-command-line m (logo-command-line-make text)))
 
+(defun logo-tui-tail (items n)
+  "Return the last N items of ITEMS (all of them when N exceeds its length)."
+  (if (<= n 0)
+    nil
+    (let drop ((rest items))
+      (if (> (length rest) n) (drop (cdr rest)) rest))))
+
 (defun logo-model-append-transcript (m lines)
   "Append LINES (list of strings) to the transcript, keeping the last 32."
   (let* ((all (append (logo-model-transcript m) lines)))
-    (logo-model-with m 'transcript
-     (if (> (length all) 32)
-       (let drop ((rest all))
-         (if (> (length rest) 32) (drop (cdr rest)) rest))
-       all))))
+    (logo-model-with m 'transcript (logo-tui-tail all 32))))
 
 ;; ---------------------------------------------------------------------------
 ;; Mikro commands
@@ -511,118 +527,190 @@
          (left (if (>= col (- width 2)) (- col (- width 2)) 0)))
     (logo-tui-cursor-line text col width left)))
 
-(defun logo-tui-editor-view (model &optional size)
-  "Full-screen editor view: message, 21-line page, status, command line.
-   SIZE is (rows . cols), defaulting to Tapestry's current screen size."
-  (let* ((size (or size (tapestry:app-screen-size)))
-         (width (if size (cdr size) 80))
-         (height (if size (car size) 24))
-         (editor (logo-model-editor model))
-         (row (logo-editor-row editor))
-         (col (logo-editor-col editor))
-         (body-rows (min *logo-editor-lines* (max 0 (- height 3))))
-         (top0 (logo-editor-top editor))
-         (top
+(define *logo-tui-default-size* (cons 25 80))
+
+(define *logo-tui-editor-legend*
+  "A1 = slet rest af linie/ A2 = slet linie/ A3 = indsæt blank linie/ A4 = færdig")
+
+(define *logo-tui-editor-legend-compact*
+  "A1 slet rest / A2 slet linie / A3 indsæt linie / A4 færdig")
+
+(define *logo-tui-editor-legend-tiny* "A1-A4: slet/linie/indsæt/færdig")
+
+(define *logo-tui-editor-last-line-note* "!!! Sidste linie herover !!!")
+
+(defun logo-tui-editor-legend (width)
+  "Return the longest A-key legend that fits WIDTH columns.
+   The manual's wording (fig. 12) fits 80 columns; narrower terminals get
+   shorter forms so A4 (finish) stays visible."
+  (cond
+    ((>= width (length *logo-tui-editor-legend*)) *logo-tui-editor-legend*)
+    ((>= width (length *logo-tui-editor-legend-compact*))
+     *logo-tui-editor-legend-compact*)
+    (#t *logo-tui-editor-legend-tiny*)))
+
+(defun logo-tui-screen-size (size)
+  "Return (ROWS . COLS) for SIZE, falling back to Tapestry's current screen
+   size and then to the Piccoline's 80x25."
+  (let* ((size (or size (tapestry:app-screen-size))))
+    (if size size *logo-tui-default-size*)))
+
+(defun logo-tui-pad-line (text width)
+  "Return TEXT clipped or padded to exactly WIDTH columns."
+  (tapestry:pad-right (tapestry:truncate-to-width text width) width))
+
+(defun logo-tui-blank-lines (n)
+  "Return N empty strings."
+  (let loop ((n n)
+             (out nil))
+    (if (<= n 0) out (loop (- n 1) (cons "" out)))))
+
+(defun logo-tui-status-line (model)
+  "Return the English dialect's default top line."
+  (let* ((turtle (logo-interp-turtle (logo-model-state model)))
+         (backend (cdr (assoc 'backend model))))
+    (format nil
+     "Logo - turtle graphics   backend: ~a   turtle: (~a, ~a) heading ~a"
+     backend
+     (floor (turtle-x turtle))
+     (floor (turtle-y turtle))
+     (floor (turtle-heading turtle)))))
+
+(defun logo-tui-message-line (model width)
+  "Render the top message line.
+   A model message wins. In Mikro mode the line otherwise carries the latest
+   transcript line, because the RC759 writes SKRIV output and errors to the
+   top line (manual §3); the English dialect keeps its status line there."
+  (let* ((message (logo-model-message model))
+         (text
           (cond
-            ((< row top0) row)
-            ((>= row (+ top0 body-rows)) (- (+ row 1) body-rows))
-            (#t top0)))
-         (left (if (>= col (- width 2)) (- col (- width 2)) 0))
-         (message
-          (if (not (null? (logo-model-message model)))
-            (logo-model-message model)
-            (if (not (null? (logo-editor-error editor)))
-              (logo-editor-error editor)
-              "")))
-         (page
-          (let loop ((i top)
-                     (n 0)
-                     (out nil))
-            (if (or (>= i *logo-editor-lines*) (>= n body-rows))
-              (reverse out)
-              (let* ((text (logo-editor-line editor i))
-                     (line
-                      (if (= i row)
-                        (logo-tui-cursor-line text col width left)
-                        (tapestry:pad-right
-                         (tapestry:truncate-to-width
-                          (logo-tui-slice text left width) width)
-                         width))))
-                (loop (+ i 1) (+ n 1) (cons line out))))))
-         (status
-          (tapestry:pad-right
-           (tapestry:truncate-to-width
-            "A1=C-k slet rest / A2=C-d slet linie / A3=C-o indsæt linie / A4=C-s færdig"
-            width)
-           width)))
-    (append
-     (list
-      (tapestry:pad-right (tapestry:truncate-to-width message width) width))
-     page (list status)
-     (list (logo-tui-command-line-view model width)))))
+            ((not (null? message)) message)
+            ((eq? (logo-model-dialect model) 'mikro)
+             (let* ((transcript (logo-model-transcript model)))
+               (if (null? transcript) "" (car (reverse transcript)))))
+            (#t (logo-tui-status-line model)))))
+    (logo-tui-pad-line text width)))
+
+(defun logo-tui-transcript-rows (model rows)
+  "Rows of the drawing area used by the English transcript.
+   Mikro mode has none, and the transcript never takes more than four rows
+   or leaves the picture fewer than three."
+  (if (eq? (logo-model-dialect model) 'mikro)
+    0
+    (min 4 (length (logo-model-transcript model)) (max 0 (- rows 3)))))
+
+(defun logo-tui-drawing-lines (model width rows)
+  "Render exactly ROWS drawing-area lines.
+   The canvas gets every row the transcript does not need, so a taller
+   terminal draws a larger picture; the English transcript sits at the
+   bottom of the area."
+  (if (<= rows 0)
+    nil
+    (let* ((transcript (logo-model-transcript model))
+           (transcript-rows (logo-tui-transcript-rows model rows))
+           (canvas-rows (max 1 (- rows transcript-rows)))
+           (canvas
+            (turtle-canvas (logo-interp-turtle (logo-model-state model))))
+           (canvas-lines (canvas->braille-lines canvas width canvas-rows))
+           (shown (logo-tui-tail transcript transcript-rows)))
+      (append canvas-lines
+       (map (lambda (line) (logo-tui-pad-line line width)) shown)))))
+
+(defun logo-tui-screen-view (model height width)
+  "Three-field view: message line, responsive drawing area, command line."
+  (let* ((command (logo-tui-command-line-view model width)))
+    (cond
+      ((<= height 0) nil)
+      ((= height 1) (list command))
+      (#t
+       (let* ((rows (- height 2))
+              (message (logo-tui-message-line model width))
+              (drawing (logo-tui-drawing-lines model width rows)))
+         (append (list message) drawing (list command)))))))
+
+(defun logo-tui-editor-message (model)
+  "The editor's top-line text: a model message, else the editor error."
+  (let* ((message (logo-model-message model))
+         (editor (logo-model-editor model)))
+    (cond
+      ((not (null? message)) message)
+      ((not (null? (logo-editor-error editor))) (logo-editor-error editor))
+      (#t ""))))
+
+(defun logo-tui-editor-view (model &optional size)
+  "View the LÆR/RET page: message line, page, A-key legend, command line.
+   The page scrolls when the terminal is shorter than 21 lines. On a
+   Piccoline-sized screen the last-line note fits between the page and the
+   legend (manual §5.1.1, fig. 12); the legend is the line just above the
+   command line (manual §5.1.1, side 62)."
+  (let* ((size (logo-tui-screen-size size))
+         (height (car size))
+         (width (cdr size)))
+    (if (<= height 0)
+      nil
+      (let* ((editor (logo-model-editor model))
+             (row (logo-editor-row editor))
+             (col (logo-editor-col editor))
+             (message-rows (if (>= height 3) 1 0))
+             (legend-rows (if (>= height 2) 1 0))
+             (center-rows (max 0 (- height message-rows legend-rows 1)))
+             (page-rows (min *logo-editor-lines* center-rows))
+             (top0 (logo-editor-top editor))
+             (top
+              (cond
+                ((<= page-rows 0) 0)
+                ((< row top0) row)
+                ((>= row (+ top0 page-rows)) (- (+ row 1) page-rows))
+                (#t top0)))
+             (left (if (>= col (- width 2)) (- col (- width 2)) 0))
+             (page
+              (let loop ((i top)
+                         (n 0)
+                         (out nil))
+                (if (or (>= i *logo-editor-lines*) (>= n page-rows))
+                  (reverse out)
+                  (let* ((text (logo-editor-line editor i))
+                         (line
+                          (if (= i row)
+                            (logo-tui-cursor-line text col width left)
+                            (logo-tui-pad-line
+                             (logo-tui-slice text left width) width))))
+                    (loop (+ i 1) (+ n 1) (cons line out))))))
+             (note?
+              (and (> page-rows 0) (>= (+ top page-rows) *logo-editor-lines*)
+                   (> center-rows page-rows)))
+             (center
+              (append page
+               (if note?
+                 (list
+                  (logo-tui-pad-line *logo-tui-editor-last-line-note* width))
+                 nil)
+               (logo-tui-blank-lines
+                (- center-rows (length page) (if note? 1 0)))))
+             (message
+              (logo-tui-pad-line (logo-tui-editor-message model) width))
+             (legend
+              (logo-tui-pad-line (logo-tui-editor-legend width) width))
+             (command (logo-tui-command-line-view model width)))
+        (append
+         (if (= message-rows 1) (list message) nil)
+         center
+         (if (= legend-rows 1) (list legend) nil)
+         (list command))))))
 
 (defun logo-tui-view (model &optional size)
   "Elm view function: returns a list of lines for the terminal.
    SIZE is (rows . cols), defaulting to Tapestry's current screen size.
-   Tapestry repaints only the rows that changed and drops rows past the
-   bottom of the screen, so the view keeps the command line as its last
-   row and gives the transcript only the rows that are left over."
-  (if (not (null? (logo-model-editor model)))
-    (logo-tui-editor-view model size)
-    (let* ((size (or size (tapestry:app-screen-size)))
-           (width (if size (cdr size) 80))
-           (height (if size (car size) 24))
-           (canvas-cols (- width 4))
-           (canvas-rows (max 3 (- height 12)))
-           (turtle (logo-interp-turtle (logo-model-state model)))
-           (canvas-lines
-            (canvas->braille-lines (turtle-canvas turtle)
-             canvas-cols canvas-rows))
-           (transcript (logo-model-transcript model))
-           (message (logo-model-message model))
-           ;; Header (2), box bottom + turtle status (2), rule + command
-           ;; line (2); the message, when present, takes one more. The
-           ;; transcript gets what is left, up to four lines, so a short
-           ;; screen loses transcript lines rather than the command line.
-           (transcript-rows
-            (max 0 (- height canvas-rows 6 (if (null? message) 0 1))))
-           (shown-count (min 4 (length transcript) transcript-rows))
-           (shown
-            (if (> (length transcript) shown-count)
-              (let drop ((rest transcript))
-                (if (> (length rest) shown-count) (drop (cdr rest)) rest))
-              transcript))
-           (backend (cdr (assoc 'backend model))))
-      (let* ((body
-              (append
-               (list
-                (tapestry:box-line "Logo - turtle graphics" width "single"
-                 "center")
-                (tapestry:box-top width "single"))
-               (map
-                (lambda (line)
-                  (concat "│ " (tapestry:pad-right line (- width 4)) " │"))
-                canvas-lines)
-               (list (tapestry:box-bottom width "single")
-                (tapestry:center
-                 (format nil "backend: ~a   turtle: (~a, ~a) heading ~a"
-                  backend
-                  (floor (turtle-x turtle))
-                  (floor (turtle-y turtle))
-                  (floor (turtle-heading turtle)))
-                 width))
-               (map
-                (lambda (line)
-                  (tapestry:pad-right
-                   (tapestry:truncate-to-width line width) width))
-                shown)
-               (list (tapestry:hr width)
-                (logo-tui-command-line-view model width)))))
-        (if (null? message)
-          body
-          (cons
-           (tapestry:pad-right (tapestry:truncate-to-width message width) width)
-           body))))))
+   The layout follows the Piccoline's three fields (manual §3): one message
+   line, a drawing area taking every remaining row, and the command line
+   last. Tapestry repaints only changed rows and drops rows past the bottom,
+   so the command line always stays on screen."
+  (let* ((size (logo-tui-screen-size size))
+         (height (car size))
+         (width (cdr size)))
+    (if (not (null? (logo-model-editor model)))
+      (logo-tui-editor-view model size)
+      (logo-tui-screen-view model height width))))
 
 ;; ---------------------------------------------------------------------------
 ;; Entry point
