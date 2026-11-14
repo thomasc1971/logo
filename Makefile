@@ -13,11 +13,12 @@
 #   *.lisp (+ logo-main.lisp)  Ditty's lisp-fmt (ships with Ditty)
 #   emacs/*.el                 Emacs indent-region (batch)
 #   bin/logo                   shfmt (extensionless shell script)
-#   *.md, docs/*.md            prettier
+#   *.md, docs/*.md            dprint (Markdown plugin; see dprint.json)
 # Each tool is optional: if it is not installed, that type is skipped
 # with a warning (format-check likewise skips what it cannot verify).
 
 DITTY ?= ditty
+DPRINT ?= dprint
 ROOT := $(shell pwd)
 
 # Library search path: this repo's lisp/, plus whatever the caller put
@@ -85,11 +86,11 @@ format: ## Format all sources in place (per-type formatters)
 	else \
 		echo "shfmt not found - skipping shell script formatting." >&2; \
 	fi
-	@if command -v prettier >/dev/null 2>&1; then \
-		echo "Formatting Markdown with prettier..."; \
-		prettier --write $(MD_SOURCES) >/dev/null; \
+	@if command -v $(DPRINT) >/dev/null 2>&1; then \
+		echo "Formatting Markdown with dprint..."; \
+		$(DPRINT) fmt $(MD_SOURCES) >/dev/null; \
 	else \
-		echo "prettier not found - skipping Markdown formatting." >&2; \
+		echo "dprint not found - skipping Markdown formatting." >&2; \
 	fi
 
 format-check: ## Verify all sources are formatter-clean (no changes)
@@ -121,10 +122,10 @@ format-check: ## Verify all sources are formatter-clean (no changes)
 	else \
 		echo "shfmt not found - skipping shell script check." >&2; \
 	fi; \
-	if command -v prettier >/dev/null 2>&1; then \
-		prettier --check $(MD_SOURCES) >/dev/null 2>&1 || { echo "NOT FORMATTED: some Markdown (run: make format)"; status=1; }; \
+	if command -v $(DPRINT) >/dev/null 2>&1; then \
+		$(DPRINT) check $(MD_SOURCES) || { echo "NOT FORMATTED: some Markdown (run: make format)"; status=1; }; \
 	else \
-		echo "prettier not found - skipping Markdown check." >&2; \
+		echo "dprint not found - skipping Markdown check." >&2; \
 	fi; \
 	if [ $$status -eq 0 ]; then echo "All sources are formatter-clean."; fi; \
 	exit $$status

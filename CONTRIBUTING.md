@@ -83,13 +83,16 @@ DITTY_LISP_PATH="$PWD/lisp" ditty tests/test-parser.lisp
   return the error object; callers check). See ARCHITECTURE.md.
 - **Formatting**: `make format` formats in place, per file type (as in
   ditty/tapestry): Ditty Lisp with `lisp-fmt` (ships with Ditty,
-  installed under `~/.local/share/ditty/lisp/`; `make format
-LISP_FMT=/path/to/lisp-fmt.lisp` overrides), `emacs/*.el` with Emacs
-  `indent-region`, `bin/logo` with `shfmt`, and Markdown with
-  `prettier`. A missing tool skips that type with a warning.
-  `make format-check` verifies cleanliness without modifying files —
-  PRs must pass it. 2-space indent, kebab-case names, `logo-` prefix
-  for module internals, public API exported from `lisp/logo.lisp`.
+  installed under `~/.local/share/ditty/lisp/`; override with
+  `make format LISP_FMT=/path/to/lisp-fmt.lisp`), `emacs/*.el` with
+  Emacs `indent-region`, `bin/logo` with `shfmt`, and Markdown with
+  `dprint` (config in `dprint.json`; install from
+  <https://dprint.dev/install/>). The Markdown config keeps the author's
+  line breaks (`textWrap: maintain`) and never splits inline code spans
+  (`wrapCodeSpans: false`). A missing tool skips that type with a
+  warning. `make format-check` verifies cleanliness without modifying
+  files — PRs must pass it. 2-space indent, kebab-case names, `logo-`
+  prefix for module internals, public API exported from `lisp/logo.lisp`.
 - **Parens**: if Ditty reports "Unclosed list", bisect by loading
   defun-by-defun (extract with `sed -n 'A,Bp'`); don't trust external
   paren counters around char literals (`#\(`) and docstrings.
